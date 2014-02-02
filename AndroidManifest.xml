@@ -22,10 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="cs2340.bobzilla.bobs_wallet.LoginActivity"
             android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.category.VIEW"/>
+                <category android:name="android.intent.category.LOGIN_ACTIVITY_INTENT" />
+            </intent-filter>
         </activity>
+        
     </application>
 
 </manifest>

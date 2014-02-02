@@ -9,8 +9,6 @@ import android.widget.Toast;
 public class WelcomeActivity extends Activity {
 	Button mSigninButton;
 	Button mRegisterButton;
-
-    // testing commit -JC
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

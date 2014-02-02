@@ -33,7 +33,8 @@ public class WelcomeActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(WelcomeActivity.this, "Register", Toast.LENGTH_SHORT);
+				Toast.makeText(WelcomeActivity.this, "Register", Toast.LENGTH_SHORT)
+				.show();
 				
 			}
 		});

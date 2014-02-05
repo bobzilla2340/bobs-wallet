@@ -12,5 +12,10 @@
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_name">Login</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="registration_username_hint">Username</string>
+    <string name="registration_password_hint">Password</string>
+    <string name="registration_email_hint">Email Address</string>
+    <string name="registration_register_button_text">Register!</string>
 
 </resources>

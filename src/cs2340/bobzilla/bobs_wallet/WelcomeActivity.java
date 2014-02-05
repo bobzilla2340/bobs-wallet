@@ -15,7 +15,6 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
-		
 		mSigninButton = (Button)findViewById(R.id.signin);
 		mSigninButton.setOnClickListener(new View.OnClickListener() {
 			

@@ -7,12 +7,12 @@
         Please register or log in.</string>
     <string name="login">Log In</string>
     <string name="register">Register</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login</string>
     <string name="hello_world">Hello world!</string>
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_name">Login</string>
-    <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="title_activity_registration">Register</string>
     <string name="registration_username_hint">Username</string>
     <string name="registration_password_hint">Password</string>
     <string name="registration_email_hint">Email Address</string>

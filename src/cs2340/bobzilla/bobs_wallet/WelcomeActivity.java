@@ -35,7 +35,8 @@ public class WelcomeActivity extends Activity {
 			public void onClick(View v) {
 				Toast.makeText(WelcomeActivity.this, "Register", Toast.LENGTH_SHORT)
 				.show();
-				
+				Intent registerIntent = new Intent(WelcomeActivity.this, RegistrationActivity.class);
+				startActivity(registerIntent);
 			}
 		});
 	}

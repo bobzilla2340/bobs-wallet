@@ -13,7 +13,7 @@ import cs2340.bobzilla.bobs_wallet.model.User;
 public class WelcomeActivity extends Activity {
 	private Button mSigninButton;
 	private Button mRegisterButton;
-	public final static String USERLIST_MESSAGE = "cs2340.bobzilla.bobs_wallet.LoginActivity.USERLIST_MESSAGE";
+	public final static String USER_LIST_MESSAGE = "cs2340.bobzilla.bobs_wallet.LoginActivity.USER_LIST_MESSAGE";
 	private UserList userList;
 	
 	
@@ -33,7 +33,7 @@ public class WelcomeActivity extends Activity {
 				Toast.makeText(WelcomeActivity.this, "Sign In", Toast.LENGTH_SHORT)
 				.show();
 				Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
-				loginIntent.putExtra(USERLIST_MESSAGE, userList);
+				loginIntent.putExtra(USER_LIST_MESSAGE, userList);
 				startActivity(loginIntent);
 			}
 		});

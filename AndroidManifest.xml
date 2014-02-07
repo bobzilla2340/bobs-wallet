@@ -13,6 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="cs2340.bobzilla.bobs_wallet.WelcomeActivity"
             android:label="@string/app_name" >
@@ -24,11 +25,12 @@
         
         <activity
             android:name="cs2340.bobzilla.bobs_wallet.LoginActivity"
-            android:label="@string/title_activity_login" 
-            android:parentActivityName="cs2340.bobzilla.bobs_wallet.WelcomeActivity">
+            android:label="@string/title_activity_login"
+            android:parentActivityName="cs2340.bobzilla.bobs_wallet.WelcomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cs2340.bobzilla.bobs_wallet.WelcomeActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.category.VIEW" />
                 <category android:name="android.intent.category.LOGIN_ACTIVITY_INTENT" />
@@ -42,11 +44,27 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cs2340.bobzilla.bobs_wallet.WelcomeActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.REGISTRATION_ACTIVITY_INTENT" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="cs2340.bobzilla.bobs_wallet.UserAccountActivity"
+            android:label="@string/title_activity_user_account"
+            android:parentActivityName="cs2340.bobzilla.bobs_wallet.LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cs2340.bobzilla.bobs_wallet.LoginActivity" />
+            
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.USER_ACCOUNT_ACTIVITY_INTENT" />
+            </intent-filter>
+        </activity>
+        
     </application>
 
 </manifest>

@@ -7,17 +7,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import cs2340.bobzilla.bobs_wallet.model.UserList;
+import cs2340.bobzilla.bobs_wallet.model.User;
+
 public class WelcomeActivity extends Activity {
-	Button mSigninButton;
-	Button mRegisterButton;
+	private Button mSigninButton;
+	private Button mRegisterButton;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 		mSigninButton = (Button)findViewById(R.id.signin);
+		UserList userList = new UserList();
+		userList.addUser(new User("admin", "admin", "admin", "pass123", "user@verylolz.com"));
 		mSigninButton.setOnClickListener(new View.OnClickListener() {
-			
+		
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(WelcomeActivity.this, "Sign In", Toast.LENGTH_SHORT)

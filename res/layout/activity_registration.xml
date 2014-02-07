@@ -18,10 +18,26 @@
         android:hint="@string/registration_username_hint" />
     
     <EditText
+        android:id="@+id/firstNameRegistrationEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernameRegistrationEditText"
+        android:inputType="textCapWords"
+        android:hint="@string/registration_firstName_hint" />
+    
+    <EditText
+        android:id="@+id/lastNameRegistrationEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstNameRegistrationEditText"
+        android:inputType="textCapWords"
+        android:hint="@string/registration_lastName_hint" />
+    
+    <EditText
         android:id="@+id/passwordRegistrationEditText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/usernameRegistrationEditText" 
+        android:layout_below="@+id/lastNameRegistrationEditText" 
         android:inputType="textPassword"
         android:hint="@string/registration_password_hint"/>
     

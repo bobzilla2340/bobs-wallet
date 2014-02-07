@@ -26,8 +26,12 @@ public class UserList implements Parcelable{
 		userList.remove(user);
 	}
 	
-	public boolean isUser(User user) {
+	public boolean isInUserList(User user) {
 		return userList.contains(user);
+	}
+	
+	public List<User> getUserList() {
+		return userList;
 	}
 	
 	@Override

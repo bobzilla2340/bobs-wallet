@@ -9,7 +9,7 @@
     tools:context=".RegistrationActivity" >
 
     <EditText
-        android:id="@+id/usernameRegistrationEditText"
+        android:id="@+id/userNameRegistrationEditText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -21,7 +21,7 @@
         android:id="@+id/firstNameRegistrationEditText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/usernameRegistrationEditText"
+        android:layout_below="@+id/userNameRegistrationEditText"
         android:inputType="textCapWords"
         android:hint="@string/registration_firstName_hint" />
     

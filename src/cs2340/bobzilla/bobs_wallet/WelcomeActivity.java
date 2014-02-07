@@ -13,6 +13,8 @@ import cs2340.bobzilla.bobs_wallet.model.User;
 public class WelcomeActivity extends Activity {
 	private Button mSigninButton;
 	private Button mRegisterButton;
+	public final static String USERLIST_MESSAGE = "cs2340.bobzilla.bobs_wallet.LoginActivity.USERLIST_MESSAGE";
+	private UserList userList;
 	
 	
 	@Override
@@ -20,8 +22,10 @@ public class WelcomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 		mSigninButton = (Button)findViewById(R.id.signin);
-		UserList userList = new UserList();
+		
+		userList = new UserList();
 		userList.addUser(new User("admin", "admin", "admin", "pass123", "user@verylolz.com"));
+		
 		mSigninButton.setOnClickListener(new View.OnClickListener() {
 		
 			@Override
@@ -29,6 +33,7 @@ public class WelcomeActivity extends Activity {
 				Toast.makeText(WelcomeActivity.this, "Sign In", Toast.LENGTH_SHORT)
 				.show();
 				Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
+				loginIntent.putExtra(USERLIST_MESSAGE, userList);
 				startActivity(loginIntent);
 			}
 		});

@@ -9,7 +9,7 @@
     tools:context=".LoginActivity" >
 
   	<EditText
-        android:id="@+id/editText1"
+        android:id="@+id/userNameLoginEditText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,19 +18,18 @@
         android:hint="@string/login_username_hint" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/passwordLoginEditTet"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/userNameLoginEditText"
         android:inputType="textPassword" 
         android:hint="@string/login_password_hint"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/loginButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/passwordLoginEditTet"
         android:layout_centerHorizontal="true"
         android:text="@string/login_button_name" />
 

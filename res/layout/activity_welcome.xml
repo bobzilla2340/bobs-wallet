@@ -29,7 +29,6 @@
 	    android:layout_alignParentLeft="true"
 	    android:text="@string/welcome_message_prompt"
 	    android:gravity="center"
-	    android:textSize="20sp"
-	    android:textColor="#0AFF00" />
+	    android:textSize="20sp" />
 
 </RelativeLayout>

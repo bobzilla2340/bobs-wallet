@@ -146,5 +146,10 @@ public class User implements Parcelable{
 			return new User[size];
 		}
 	};
+	
+	@Override
+	public int hashCode() {
+		return userName.hashCode() + firstName.hashCode() + lastName.hashCode() + email.hashCode();
+	}
 
 }

@@ -3,7 +3,7 @@
 
     <string name="app_name">Bob\'s Wallet</string>
     <string name="action_settings">Settings</string>
-    <string name="welcome_message_prompt">Welcome! Please Login or Register.</string>
+    <string name="welcome_message_prompt">Welcome!</string>
     <string name="welcome_login_button_hint">Log In</string>
     <string name="welcome_register_button_hint">Register</string>
     

@@ -22,7 +22,7 @@ public class UserList implements Parcelable{
 		userList = new HashMap<String, User>();
 		
 		for(int i = 0; i < numElements; i++) {
-			userList.put(in.readString(), (User)in.readParcelable(null));
+			userList.put(in.readString(), (User)in.readParcelable(User.class.getClassLoader()));
 		}
 	}
 	
@@ -44,6 +44,10 @@ public class UserList implements Parcelable{
 	
 	public boolean isInUserListByUserName(String user) {
 		return userList.containsKey(user);
+	}
+	
+	public int size() {
+		return userList.size();
 	}
 	
 	@Override

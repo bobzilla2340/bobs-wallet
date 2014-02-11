@@ -8,15 +8,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import cs2340.bobzilla.bobs_wallet.R;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
 import cs2340.bobzilla.bobs_wallet.model.User;
+import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 
 public class WelcomeActivity extends Activity {
 	private Button mSigninButton;
-	private Button mRegisterButton;
-	public final static String USER_LIST_MESSAGE = "cs2340.bobzilla.bobs_wallet.activites.LoginActivity.USER_LIST_MESSAGE";
-	private UserList userList;
-	
+	private Button mRegisterButton;	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +21,15 @@ public class WelcomeActivity extends Activity {
 		setContentView(R.layout.activity_welcome);
 		mSigninButton = (Button)findViewById(R.id.loginButtonWelcomeActivity);
 		
-		userList = new UserList();
-		userList.addUser(new User("admin", "admin", "admin", "pass123", "user@verylolz.com"));
+		UserListSingleton.getInstance().getUserList().addUser(new User("admin", "admin", "admin", "pass123", "user@verylolz.com"));
 		
 		mSigninButton.setOnClickListener(new View.OnClickListener() {
 		
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(WelcomeActivity.this, "Sign In", Toast.LENGTH_SHORT)
-				.show();
+				Toast.makeText(WelcomeActivity.this, "Sign In", Toast.LENGTH_SHORT).show();
 				Intent loginIntent = new Intent(WelcomeActivity.this, LoginActivity.class);
-				loginIntent.putExtra(USER_LIST_MESSAGE, userList);
+				//loginIntent.putExtra(USER_LIST_MESSAGE, userList);
 				startActivity(loginIntent);
 			}
 		});
@@ -44,9 +39,9 @@ public class WelcomeActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(WelcomeActivity.this, "Register", Toast.LENGTH_SHORT)
-				.show();
+				Toast.makeText(WelcomeActivity.this, "Register", Toast.LENGTH_SHORT).show();
 				Intent registerIntent = new Intent(WelcomeActivity.this, RegistrationActivity.class);
+				//registerIntent.putExtra(USER_LIST_MESSAGE, userList);
 				startActivity(registerIntent);
 			}
 		});

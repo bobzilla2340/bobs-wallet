@@ -18,8 +18,10 @@
     <string name="registration_firstName_hint">First Name</string>
     <string name="registration_lastName_hint">Last Name</string>
     <string name="registration_password_hint">Password</string>
+    <string name="registration_confirmation_hint">Confirm Password</string>
     <string name="registration_email_hint">Email Address</string>
     <string name="registration_register_button_text">Register!</string>
+    
     
     <string name="title_activity_user_account">User Account</string>
 	<string name="user_account_welcome_message">Welcome</string>

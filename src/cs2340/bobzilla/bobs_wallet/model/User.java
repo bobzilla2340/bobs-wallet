@@ -1,8 +1,5 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * This class provides a template for any user of Bob's Wallet.
  * It allows you to query and set for basic information about 
@@ -12,7 +9,7 @@ import android.os.Parcelable;
  * @author Sai
  *
  */
-public class User implements Parcelable{
+public class User  {
 	
 	private String userName;
 	private String firstName;
@@ -34,15 +31,6 @@ public class User implements Parcelable{
 		this.lastName = lastName;
 		this.password = password;
 		this.email = email;
-	}
-	
-	public User(Parcel in) {
-		String[] userData = in.createStringArray();
-		userName = userData[0];
-		firstName = userData[1];
-		lastName = userData[2];
-		password = userData[3];
-		email = userData[4];
 	}
 	
 	/**
@@ -124,28 +112,6 @@ public class User implements Parcelable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-	
-	@Override
-	public void writeToParcel(Parcel out, int flags) {
-		out.writeStringArray(new String[]{userName, firstName, lastName, password, email});
-	}
-	
-	public static final Parcelable.Creator<User> CREATOR = 
-			new Parcelable.Creator<User>() {
-		
-		public User createFromParcel(Parcel in) {
-			return new User(in);
-		}
-		
-		public User[] newArray(int size) {
-			return new User[size];
-		}
-	};
 	
 	@Override
 	public int hashCode() {

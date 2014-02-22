@@ -12,20 +12,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.model.LoginVerifier;
-import cs2340.bobzilla.bobs_wallet.model.User;
 import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 
 public class LoginActivity extends Activity {
 
-	public static final String LOGIN_USER_ACCOUNT = "cs2340.bobzilla.bobs_wallet.LoginActivity.LOGIN_USER_ACCOUNT";
+	public static final String LOGIN_USER_NAME = "cs2340.bobzilla.bobs_wallet.LoginActivity.LOGIN_USER_ACCOUNT";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
-		//Intent loginIntent = getIntent();
-		//userList = (UserList)loginIntent.getParcelableExtra(WelcomeActivity.USER_LIST_MESSAGE);
 	}
 
 	@Override
@@ -67,10 +63,8 @@ public class LoginActivity extends Activity {
 		else {
 			Toast.makeText(LoginActivity.this, "Welcome User " + userName + "!", Toast.LENGTH_SHORT).show();
 			
-			User user = UserListSingleton.getInstance().getUserList().getUser(userName);
-			
 			Intent userAccountActivityIntent = new Intent(LoginActivity.this, UserAccountActivity.class);
-			userAccountActivityIntent.putExtra(LoginActivity.LOGIN_USER_ACCOUNT, user);
+			userAccountActivityIntent.putExtra(LoginActivity.LOGIN_USER_NAME, userName);
 			startActivity(userAccountActivityIntent);
 		}
 	}

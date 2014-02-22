@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.model.User;
+import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 
 public class UserAccountActivity extends Activity {
 
@@ -24,7 +26,14 @@ public class UserAccountActivity extends Activity {
 		setupActionBar();
 		
 		Intent userAccountIntent = getIntent();
-		user = (User)userAccountIntent.getParcelableExtra(LoginActivity.LOGIN_USER_ACCOUNT);
+		String userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);
+		Log.d("debugging message", "user name passed in is: " + userName);
+		user = UserListSingleton.getInstance().getUserList().getUser(userName);
+		int length = UserListSingleton.getInstance().getUserList().size();
+		
+		Log.d("debugging message", "user @ virtual address: " + user);
+		Log.d("debugging message", "user list length: " + length);
+		
 		setUpUserAccountScreen();
 	}
 	

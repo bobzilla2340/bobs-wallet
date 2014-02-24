@@ -33,4 +33,5 @@
     <string name="user_account_alert_dialog_account_create_hint">Account Name</string>
     
     <string name="title_activity_user_finance_account">UserFinanceAccountActivity</string>
+    <string name="user_finance_account_activity_account_name">Account Name: </string>
 </resources>

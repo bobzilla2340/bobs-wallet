@@ -9,8 +9,9 @@
     tools:context=".UserFinanceAccountActivity" >
 
     <TextView
+        android:id="@+id/userFinanceAccountActivityAccountNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="@string/user_finance_account_activity_account_name" />
 
 </RelativeLayout>

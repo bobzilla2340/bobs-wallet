@@ -1,11 +1,11 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
-import cs2340.bobzilla.bobs_wallet.R;
-import cs2340.bobzilla.bobs_wallet.R.layout;
-import cs2340.bobzilla.bobs_wallet.R.menu;
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
+import cs2340.bobzilla.bobs_wallet.R;
 
 public class UserFinanceAccountActivity extends Activity {
 
@@ -13,6 +13,13 @@ public class UserFinanceAccountActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_finance_account);
+		
+		Intent userFinanceAccountActivity = getIntent();
+		String financeAccountName = userFinanceAccountActivity.getStringExtra(UserAccountActivity.USER_FINANCE_ACCOUNT_NAME);
+		
+		TextView accountName = (TextView)findViewById(R.id.userFinanceAccountActivityAccountNameTextView);
+		
+		accountName.append(financeAccountName);
 	}
 
 	@Override

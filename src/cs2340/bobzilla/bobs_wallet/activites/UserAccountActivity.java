@@ -13,7 +13,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
@@ -23,6 +27,9 @@ import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 public class UserAccountActivity extends Activity {
 
 	private User user;
+	private ListView listView;
+	private ArrayAdapter<String> arrayAdapter;
+	public static final String USER_FINANCE_ACCOUNT_NAME="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserFinanceAccountName";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +40,29 @@ public class UserAccountActivity extends Activity {
 		
 		Intent userAccountIntent = getIntent();
 		String userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);
-		user = UserListSingleton.getInstance().getUserList().getUser(userName);			
+		user = UserListSingleton.getInstance().getUserList().getUser(userName);		
+		
+		listView = (ListView)findViewById(R.id.userFinanceAccountList);
+		arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.user_finance_account_list_text_view);
+		listView.setAdapter(arrayAdapter);
+		
 		setUpUserAccountScreen();
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int arg0, long arg1) {
+				TextView clickedText = (TextView)view.findViewById(R.id.userFinanceAccountListTextView);
+				String clickedString = clickedText.getText().toString();
+				Toast.makeText(UserAccountActivity.this, "You clicked " + clickedString, Toast.LENGTH_SHORT).show();
+				Intent userFinanceAccountActivityIntent = new Intent(UserAccountActivity.this, UserFinanceAccountActivity.class);
+				userFinanceAccountActivityIntent.putExtra(USER_FINANCE_ACCOUNT_NAME, clickedString);
+				startActivity(userFinanceAccountActivityIntent);
+			}
+		});
 	}
 	
 	private void setUpUserAccountScreen() {
+		
 		TextView welcome = (TextView)findViewById(R.id.userAccountWelcomeMessage);
 		TextView userName = (TextView)findViewById(R.id.userAccountUserNamePrompt);
 		TextView firstName = (TextView)findViewById(R.id.userAccountFirstNamePrompt);
@@ -49,6 +74,13 @@ public class UserAccountActivity extends Activity {
 		firstName.append(" " + user.getFirstName());
 		lastName.append(" " + user.getLastName());
 		email.append(" " + user.getEmail());
+		
+		
+		
+		for(String account: user.getFinanceAccountList().keySet()) {
+			arrayAdapter.add(account);
+		}
+		
 	}
 
 	/**
@@ -106,11 +138,14 @@ public class UserAccountActivity extends Activity {
 				else {
 					user.addFinanceAccount(account);
 					Toast.makeText(UserAccountActivity.this, "Account successfully created!", Toast.LENGTH_SHORT).show();
+					arrayAdapter.add(account);
 				}
 			}
 		})
 		.setView(alertDialogView)
 		.show();
+		
+		
 		
 		
 	}

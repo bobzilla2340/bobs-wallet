@@ -1,5 +1,8 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class provides a template for any user of Bob's Wallet.
  * It allows you to query and set for basic information about 
@@ -9,13 +12,14 @@ package cs2340.bobzilla.bobs_wallet.model;
  * @author Sai
  *
  */
-public class User  {
+public class User {
 	
 	private String userName;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String email;
+	private Map<String, FinanceAccount> accountMap;
 
 	/**
 	 * 
@@ -31,6 +35,7 @@ public class User  {
 		this.lastName = lastName;
 		this.password = password;
 		this.email = email;
+		this.accountMap = new HashMap<String, FinanceAccount>();
 	}
 	
 	/**
@@ -73,6 +78,10 @@ public class User  {
 		return email;
 	}
 	
+	public Map<String, FinanceAccount> getFinanceAccountList() {
+		return accountMap;
+	}
+	
 	/**
 	 * This method allows you to set the user's user name.
 	 * @param userName The desired user name for the user.
@@ -80,6 +89,7 @@ public class User  {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
 	
 	/**
 	 * This method allows you to set the user's first name.
@@ -113,9 +123,17 @@ public class User  {
 		this.email = email;
 	}
 	
+	public void addFinanceAccount(String accountName) {
+		accountMap.put(accountName, new FinanceAccount(accountName));
+	}
+	
+	public void removeFinanceAccount(String accountName) {
+		accountMap.remove(accountName);
+	}
+	
 	@Override
 	public int hashCode() {
 		return userName.hashCode() + firstName.hashCode() + lastName.hashCode() + email.hashCode();
 	}
-
+	
 }

@@ -43,4 +43,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/userAccountLastNamePrompt"
         android:text="@string/user_account_email_prompt" />
+
+    <Button
+        android:id="@+id/userAccountFinanceAccountCreateButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/userAccountEMailPrompt"
+        android:layout_below="@+id/userAccountEMailPrompt"
+        android:onClick="onClick"
+        android:text="@string/user_account_finance_account_create_button" />
+    
 </RelativeLayout>

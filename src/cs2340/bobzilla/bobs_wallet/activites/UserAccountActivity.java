@@ -2,14 +2,20 @@ package cs2340.bobzilla.bobs_wallet.activites;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.model.User;
 import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
@@ -27,13 +33,7 @@ public class UserAccountActivity extends Activity {
 		
 		Intent userAccountIntent = getIntent();
 		String userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);
-		Log.d("debugging message", "user name passed in is: " + userName);
-		user = UserListSingleton.getInstance().getUserList().getUser(userName);
-		int length = UserListSingleton.getInstance().getUserList().size();
-		
-		Log.d("debugging message", "user @ virtual address: " + user);
-		Log.d("debugging message", "user list length: " + length);
-		
+		user = UserListSingleton.getInstance().getUserList().getUser(userName);			
 		setUpUserAccountScreen();
 	}
 	
@@ -84,5 +84,35 @@ public class UserAccountActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
+	public void onClick(View view) {
+		
+		LayoutInflater inflater = UserAccountActivity.this.getLayoutInflater();
+		final View alertDialogView = inflater.inflate(R.layout.alert_dialog_user_account_finance_account_create, null);
+		new AlertDialog.Builder(this)
+		.setTitle(R.string.user_account_finance_account_create_dialog_box)
+		.setNegativeButton("Quit", null)
+		.setPositiveButton("Make Account", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				EditText accountName = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountNameEditText);
+				Log.d("debugging message", "edit text: " + accountName);
+				String account = accountName.getText().toString();
+				if(account.equals("")) {
+					Toast.makeText(UserAccountActivity.this, "Please enter a valid account name!", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					user.addFinanceAccount(account);
+					Toast.makeText(UserAccountActivity.this, "Account successfully created!", Toast.LENGTH_SHORT).show();
+				}
+			}
+		})
+		.setView(alertDialogView)
+		.show();
+		
+		
+	}
+	
 }

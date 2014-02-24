@@ -6,9 +6,9 @@
     <string name="welcome_message_prompt">Welcome!</string>
     <string name="welcome_login_button_hint">Log In</string>
     <string name="welcome_register_button_hint">Register</string>
-    
+
     <string name="title_activity_login">Login</string>
-    <string name="hello_world">Hello world!</string>   
+    <string name="hello_world">Hello world!</string>
     <string name="login_username_hint">Username</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button_name">Login</string>
@@ -22,11 +22,15 @@
     <string name="registration_email_hint">Email Address</string>
     <string name="registration_register_button_text">Register!</string>
     
-    
     <string name="title_activity_user_account">User Account</string>
-	<string name="user_account_welcome_message">Welcome</string>
-	<string name="user_account_user_name_prompt">Username:</string>
-	<string name="user_account_first_name_prompt">First Name:</string>
-	<string name="user_account_last_name_prompt">Last Name:</string>
-	<string name="user_account_email_prompt">E-Mail:</string>
+    <string name="user_account_welcome_message">Welcome</string>
+    <string name="user_account_user_name_prompt">Username:</string>
+    <string name="user_account_first_name_prompt">First Name:</string>
+    <string name="user_account_last_name_prompt">Last Name:</string>
+    <string name="user_account_email_prompt">E-Mail:</string>
+    <string name="user_account_finance_account_create_button">Create Account</string>
+    <string name="user_account_finance_account_create_dialog_box">Make an Account</string>
+    <string name="user_account_alert_dialog_account_create_hint">Account Name</string>
+    
+    <string name="title_activity_user_finance_account">UserFinanceAccountActivity</string>
 </resources>

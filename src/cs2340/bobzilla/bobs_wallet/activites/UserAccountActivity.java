@@ -37,6 +37,7 @@ public class UserAccountActivity extends Activity {
 		setContentView(R.layout.activity_user_account);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		Log.e("CRITICAL", "UPDATE YOUR SD CARD");
 		
 		Intent userAccountIntent = getIntent();
 		String userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);
@@ -130,13 +131,22 @@ public class UserAccountActivity extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				
 				EditText accountName = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountNameEditText);
+				EditText interestRate = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountIntrestRateEditText);
 				Log.d("debugging message", "edit text: " + accountName);
 				String account = accountName.getText().toString();
+				double interest;
 				if(account.equals("")) {
 					Toast.makeText(UserAccountActivity.this, "Please enter a valid account name!", Toast.LENGTH_SHORT).show();
 				}
+				else if(interestRate.getText().toString().equals("")) {
+					Toast.makeText(UserAccountActivity.this, "Please enter a valid interest rate!", Toast.LENGTH_SHORT);
+				}
+				else if(Double.parseDouble(interestRate.getText().toString()) <= 0) {
+					Toast.makeText(UserAccountActivity.this, "Please enter a valid interest rate!", Toast.LENGTH_SHORT);
+				}
 				else {
-					user.addFinanceAccount(account);
+					interest = Double.parseDouble(interestRate.getText().toString());
+					user.addFinanceAccount(account, interest);
 					Toast.makeText(UserAccountActivity.this, "Account successfully created!", Toast.LENGTH_SHORT).show();
 					arrayAdapter.add(account);
 				}

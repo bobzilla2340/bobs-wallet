@@ -18,7 +18,7 @@
         android:hint="@string/login_username_hint" />
 
     <EditText
-        android:id="@+id/passwordLoginEditTet"
+        android:id="@+id/passwordLoginEditText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/userNameLoginEditText"
@@ -29,7 +29,7 @@
         android:id="@+id/loginButtonLoginActivity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordLoginEditTet"
+        android:layout_below="@+id/passwordLoginEditText"
         android:layout_centerHorizontal="true"
         android:text="@string/login_button_name"
         android:onClick="handleUserLogin" />

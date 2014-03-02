@@ -123,8 +123,8 @@ public class User {
 		this.email = email;
 	}
 	
-	public void addFinanceAccount(String accountName) {
-		accountMap.put(accountName, new FinanceAccount(accountName));
+	public void addFinanceAccount(String accountName, double interest) {
+		accountMap.put(accountName, new FinanceAccount(accountName, interest));
 	}
 	
 	public void removeFinanceAccount(String accountName) {

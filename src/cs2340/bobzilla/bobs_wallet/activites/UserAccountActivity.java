@@ -26,11 +26,30 @@ import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 
 public class UserAccountActivity extends Activity {
 
+	// before we even get started, make sure this class
+	// implements the UserAccountAcitivityView interface!!!
+	// be sure to implement the appropriate methods... from
+	// the interface... I leave this for you to ponder.
+	
+	// Allright, we need to make this into MVP
+	// First, get all the UI elements here.
+	// Get rid of user. you should not be directly
+	// interacting with a model element. Instead,
+	// modify the presenter code to get the list of
+	// already made FinanceAccount objects.
+	
+	// MAKE THE USERACCOUNTACTIVITYPRESENTER AN INSTANCE FIELD!!!
+	
 	private User user;
 	private ListView listView;
 	private ArrayAdapter<String> arrayAdapter;
 	public static final String USER_FINANCE_ACCOUNT_NAME="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserFinanceAccountName";
 	
+	
+	//in here, you can just set the UI elements to the proper
+	//reference. Also, make a private inner class for the
+	// OnItemClickListener - this makes the code SO MUCH CLEANER!!
+	// in here, you should also initialize the presenter.
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -118,6 +137,10 @@ public class UserAccountActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	// pls completely refactor this method... you
+	// should make a private innner class that
+	// implements the DialogInterface.OnClickListener()
+	// interface.
 	public void onClick(View view) {
 		
 		LayoutInflater inflater = UserAccountActivity.this.getLayoutInflater();
@@ -157,6 +180,19 @@ public class UserAccountActivity extends Activity {
 		
 		
 		
+		
+	}
+	
+	// I would like to use this private inner class instead of the anonymous class.
+	// Make it so!
+	// Ideally, you should be making a call to the presenter here.
+	private class AlertDialogClickListener implements DialogInterface.OnClickListener {
+
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 	

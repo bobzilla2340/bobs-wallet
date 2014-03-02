@@ -45,9 +45,14 @@ public class RegistrationActivityPresenter implements ClickListener {
 			throw new InvalidRegistrationException("Please enter a vaid email!");
 		}
 		else {
-			User newUser = new User(userName, firstName, lastName, password, email);
-			userList.addUser(newUser);
+			createUser(userList, userName, firstName, lastName, password, email);
 			return;
 		}
+	}
+	
+	private void createUser(UserList userList, String userName, String firstName,
+			String lastName, String password, String email) {
+		User newUser = new User(userName, firstName, lastName, password, email);
+		userList.addUser(newUser);
 	}
 }

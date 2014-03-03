@@ -13,5 +13,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_finance_account_activity_account_name" />
+    
+    <TextView
+        android:id="@+id/userFinanceAccountActivityAccountBalanceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userFinanceAccountActivityAccountNameTextView"
+        android:text="@string/user_finance_account_activity_account_balance" />
+    
+    <TextView
+        android:id="@+id/userFinanceAccountActivityBalanceValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/userFinanceAccountActivityAccountBalanceTextView"
+        android:layout_below="@id/userFinanceAccountActivityAccountNameTextView" 
+        android:text="@string/user_finance_account_activity_balance_amount" />
+        
+    <Button
+        android:id="@+id/userFinanceAccountTransactionCreateButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/userFinanceAccountActivityAccountBalanceTextView"
+        android:layout_below="@+id/userFinanceAccountActivityAccountBalanceTextView"
+        android:onClick="onClick"
+        android:text="@string/user_account_finance_transaction_create_button" />
+    
+	<ListView 
+	        android:id="@+id/userTransactionAccountList"
+	        android:layout_below="@id/userFinanceAccountTransactionCreateButton"
+	        android:layout_height="fill_parent"
+	        android:layout_width="fill_parent" />
 
 </RelativeLayout>

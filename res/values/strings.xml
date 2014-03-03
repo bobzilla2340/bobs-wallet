@@ -29,9 +29,14 @@
     <string name="user_account_last_name_prompt">Last Name:</string>
     <string name="user_account_email_prompt">E-Mail:</string>
     <string name="user_account_finance_account_create_button">Create Account</string>
-    <string name="user_account_finance_account_create_dialog_box">Make an Account</string>
-    <string name="user_account_alert_dialog_account_create_hint">Account Name</string>
-    <string name="user_account_alert_dialog_interest_rate_hint">Interest Rate</string>
+    <string name="user_account_finance_account_create_dialog_box">Make An Account</string>
+    <string name="user_account_alert_dialog_account_create_hint">account name</string>
+    <string name="user_account_alert_dialog_interest_rate_hint">interest rate (%)</string>
     <string name="title_activity_user_finance_account">UserFinanceAccountActivity</string>
     <string name="user_finance_account_activity_account_name">Account Name: </string>
+    <string name="user_finance_account_activity_account_balance">Account Balance: </string>
+    <string name="user_account_alert_dialog_transaction_hint">amount</string>
+    <string name="user_account_finance_transaction_create_button">Add Transaction</string>
+    <string name="user_account_finance_transaction_create_dialog_box">Transaction</string>
+    <string name="user_finance_account_activity_balance_amount"></string>
 </resources>

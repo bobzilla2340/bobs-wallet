@@ -37,6 +37,8 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 	private ListView listView;
 	private ArrayAdapter<String> arrayAdapter;
 	public static final String USER_FINANCE_ACCOUNT_NAME="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserFinanceAccountName";
+	public static final String USER_NAME="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserName";
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +73,10 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 				long arg1) {
 			TextView clickedText = (TextView)view.findViewById(R.id.userFinanceAccountListTextView);
 			String clickedString = clickedText.getText().toString();
-			Toast.makeText(UserAccountActivity.this, "You clicked " + clickedString, Toast.LENGTH_SHORT).show();
+			Toast.makeText(UserAccountActivity.this, "Viewing " + clickedString + "...", Toast.LENGTH_SHORT).show();
 			Intent userFinanceAccountActivityIntent = new Intent(UserAccountActivity.this, UserFinanceAccountActivity.class);
 			userFinanceAccountActivityIntent.putExtra(USER_FINANCE_ACCOUNT_NAME, clickedString);
+			userFinanceAccountActivityIntent.putExtra(USER_NAME, userName);
 			startActivity(userFinanceAccountActivityIntent);			
 		}
 		
@@ -118,13 +121,12 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 		final View alertDialogView = inflater.inflate(R.layout.alert_dialog_user_account_finance_account_create, null);
 		new AlertDialog.Builder(this)
 		.setTitle(R.string.user_account_finance_account_create_dialog_box)
-		.setNegativeButton("Quit", null)
+		.setNegativeButton("Cancel", null)
 		.setPositiveButton("Make Account", new AlertDialogClickListener())
 		.setView(alertDialogView)
 		.show();
 		accountNameEditText = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountNameEditText);
 		interestRateEditText = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountIntrestRateEditText);
-
 	}
 	
 	private class AlertDialogClickListener implements DialogInterface.OnClickListener {

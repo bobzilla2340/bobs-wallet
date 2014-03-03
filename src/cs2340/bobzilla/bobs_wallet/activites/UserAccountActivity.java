@@ -141,11 +141,6 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 			}
 		}
 	}
-
-	@Override
-	public String getWelcome() {
-		return welcomeTextView.toString();
-	}
 	
 	@Override
 	public String getUserName() {

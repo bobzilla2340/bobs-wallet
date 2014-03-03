@@ -1,5 +1,13 @@
 package cs2340.bobzilla.bobs_wallet.presenter;
 
+import java.util.Map;
+import java.util.Set;
+
+import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
+import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
+import cs2340.bobzilla.bobs_wallet.model.User;
+import cs2340.bobzilla.bobs_wallet.model.UserList;
+import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
@@ -10,19 +18,36 @@ public class UserAccountActivityPresenter implements ClickListener {
 		userAccountActivityView = view;
 	}
 	
+	public Set<String> getFinanceAccountNames(String userName) {
+		UserList userList = UserListSingleton.getInstance().getUserList();
+		User user = userList.getUser(userName);
+		Map<String, FinanceAccount> financeAccounts = user.getFinanceAccountList();
+		return financeAccounts.keySet();
+	}
+	
 	@Override
-	public void onClick() {
-		// In this method, handle the user's interaction with the 
-		// dialog box's create account button! You should call this
-		// method within the AlertDialogClickListener private inner
-		// class. Move all the input clensing code here! You should
-		// literally be calling just this method...
-		// By the way, it will behoove you to make an exception for
-		// when the finance account creation goes wrong. This way,
-		// you can wrap your call to onClick() around  a try-catch
-		// block. If the input is invalid you should throw your
-		// custom exception. Look at the other two I made and
-		// follow suit.
+	public void onClick() throws InvalidAccountCreationException {
+		String account = userAccountActivityView.getAccountName();
+		String interestRate = userAccountActivityView.getInterestRate();
+		String userName = userAccountActivityView.getUserName();
+		
+		UserList userList = UserListSingleton.getInstance().getUserList();
+		User user = userList.getUser(userName);
+		
+		double interest;
+		if(account.equals("")) {
+			throw new InvalidAccountCreationException("Please enter a valid account name!");
+		}
+		else if(interestRate.equals("")) {
+			throw new InvalidAccountCreationException("Please enter a valid interest rate!");
+		}
+		else if(Double.parseDouble(interestRate) <= 0) {
+			throw new InvalidAccountCreationException("Please enter a valid interest rate!");
+		}
+		else {
+			interest = Double.parseDouble(interestRate);
+			user.addFinanceAccount(account, interest);
+		}			
 	}
 	
 }

@@ -50,7 +50,7 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 		
 		welcomeTextView = (TextView)findViewById(R.id.userAccountWelcomeMessage);
 		listView = (ListView)findViewById(R.id.userFinanceAccountList);
-		welcomeTextView.append("Welcome " + userName + "!");
+		welcomeTextView.append(" " + userName + "!");
 		
 		arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.user_finance_account_list_text_view);
 		listView.setAdapter(arrayAdapter);
@@ -123,7 +123,7 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 		.setView(alertDialogView)
 		.show();
 		accountNameEditText = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountNameEditText);
-		interestRateEditText = (EditText)view.findViewById(R.id.alertDialogUserFinanceAccountIntrestRateEditText);
+		interestRateEditText = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountIntrestRateEditText);
 
 	}
 	
@@ -140,7 +140,6 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 				Toast.makeText(UserAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
 			}
 		}
-		
 	}
 
 	@Override
@@ -148,6 +147,7 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 		return welcomeTextView.toString();
 	}
 	
+	@Override
 	public String getUserName() {
 		return userName;
 	}

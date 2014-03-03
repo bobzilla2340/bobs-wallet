@@ -66,7 +66,13 @@
         </activity>
         <activity
             android:name="cs2340.bobzilla.bobs_wallet.activites.UserFinanceAccountActivity"
-            android:label="@string/title_activity_user_finance_account" >
+            android:label="@string/title_activity_user_finance_account" 
+            android:parentActivityName="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            
+                <category android:name="android.intent.category.USER_FINANCE_ACCOUNT_ACTIVITY_INTENT" />
+            </intent-filter>
         </activity>
     </application>
 

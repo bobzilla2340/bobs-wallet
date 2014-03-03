@@ -10,4 +10,11 @@ public interface UserAccountActivityView {
 	
 	public String getUserName();
 
+	public String getAccountName();
+	
+	public String getUserName();
+	
+	public String getInterestRate();
+	
+	
 }

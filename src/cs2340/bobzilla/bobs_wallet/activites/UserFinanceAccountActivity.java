@@ -1,8 +1,5 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,9 +34,7 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 	
 	private String financeAccountName;
 	private String userName;
-	
-	private static final DecimalFormat df = new DecimalFormat("$###,##0.00");
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,13 +50,14 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 		accountNameTextView = (TextView)findViewById(R.id.userFinanceAccountActivityAccountNameTextView);
 		accountBalanceTextView = (TextView)findViewById(R.id.userFinanceAccountActivityBalanceValueTextView);
 		accountNameTextView.append(" " + financeAccountName);
-		accountBalanceTextView.append(" " + df.format(financeAccountPresenter.getCurrentAccountBalance(financeAccountName)));
+		accountBalanceTextView.append(" " + financeAccountPresenter
+				.getFormattedCurrentAccountBalance(financeAccountName));
 
 		arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.user_finance_account_list_text_view);
 		listView.setAdapter(arrayAdapter);
 		
-		for (Double value : financeAccountPresenter.getTransactions(userName, financeAccountName)) {
-			arrayAdapter.add(value.toString());
+		for (String transactions : financeAccountPresenter.getFormattedTransactions(userName, financeAccountName)) {
+			arrayAdapter.add(transactions);
 		}
 	}
 
@@ -95,9 +91,9 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 			
 			try {
 				financeAccountPresenter.onClickWithdrawal();
-				arrayAdapter.add("Withdrawal: \t -" + transactionAmountEditText.getText().toString());
-				accountBalanceTextView.setText(" " + df.format(
-						financeAccountPresenter.getCurrentAccountBalance(financeAccountName)));
+				arrayAdapter.add("W \t -$" + transactionAmountEditText.getText().toString() + "\t \t just now");
+				accountBalanceTextView.setText(" " + financeAccountPresenter
+						.getFormattedCurrentAccountBalance(financeAccountName));
 				Toast.makeText(UserFinanceAccountActivity.this, "Withdrawal successfully added!", 
 						Toast.LENGTH_SHORT).show();
 			} catch (InvalidTransactionCreationException e) {
@@ -113,9 +109,9 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 		public void onClick(DialogInterface dialog, int which) {
 			try {
 				financeAccountPresenter.onClick();
-				arrayAdapter.add("Deposit: \t +" + transactionAmountEditText.getText().toString());
-				accountBalanceTextView.setText(" " + df.format(
-						financeAccountPresenter.getCurrentAccountBalance(financeAccountName)));
+				arrayAdapter.add("D \t +$" + transactionAmountEditText.getText().toString() + "\t\t just now");
+				accountBalanceTextView.setText(" " + financeAccountPresenter
+						.getFormattedCurrentAccountBalance(financeAccountName));
 				Toast.makeText(UserFinanceAccountActivity.this, "Deposit successfully added!", 
 						Toast.LENGTH_SHORT).show();
 			} catch (InvalidTransactionCreationException e) {

@@ -1,5 +1,6 @@
 package cs2340.bobzilla.bobs_wallet.presenter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -7,6 +8,8 @@ import android.util.Log;
 
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidTransactionCreationException;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
+import cs2340.bobzilla.bobs_wallet.model.Transaction;
+import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 import cs2340.bobzilla.bobs_wallet.model.User;
 import cs2340.bobzilla.bobs_wallet.model.UserList;
 import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
@@ -22,6 +25,8 @@ import cs2340.bobzilla.bobs_wallet.view.UserFinanceAccountActivityView;
 public class UserFinanceAccountActivityPresenter implements ClickListener {
 
 	private UserFinanceAccountActivityView view;
+	private final DecimalFormat df = new DecimalFormat("$###,##0.00");
+
 	
 	public UserFinanceAccountActivityPresenter(UserFinanceAccountActivityView view) {
 		this.view = view;
@@ -43,7 +48,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 		} else if (Double.parseDouble(transactionAmount) <= 0) {
 			throw new InvalidTransactionCreationException("Transaction amounts cannot be negative or zero.");
 		} else {
-			account.addTransaction(Double.parseDouble(transactionAmount));
+			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.DEPOSIT);
 			account.addDeposit(Double.parseDouble(transactionAmount));
 			account.setCurrentBalance(Double.parseDouble(transactionAmount) + account.getCurrentBalance());
 		}
@@ -66,7 +71,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 		} else if (Double.parseDouble(transactionAmount) <= 0) {
 			throw new InvalidTransactionCreationException("Transaction amounts cannot be negative or zero.");
 		} else {
-			account.addTransaction(Double.parseDouble(transactionAmount));
+			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.WITHDRAWAL);
 			account.addWithdrawal(Double.parseDouble(transactionAmount));
 			account.setCurrentBalance(account.getCurrentBalance() - Double.parseDouble(transactionAmount));
 		}
@@ -80,12 +85,25 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 	 * @param financeAccountName
 	 * @return
 	 */
-	public ArrayList<Double> getTransactions(String userName, String financeAccountName) {
+	public ArrayList<String> getFormattedTransactions(String userName, String financeAccountName) {
 		UserList userList = UserListSingleton.getInstance().getUserList();
 		User user = userList.getUser(userName);
 		Map<String, FinanceAccount> financeAccounts = user.getFinanceAccountList();
 		FinanceAccount account = financeAccounts.get(financeAccountName);
-		return account.getTransactions();
+		ArrayList<Transaction> transactions = account.getTransactions();
+		ArrayList<String> formatted = new ArrayList<String>();
+
+		for (Transaction t : transactions) {
+			String display = "";
+			if (t.getTransactionType().equals(TransactionType.WITHDRAWAL)) {
+				display = display + "W \t -";
+			} else {
+				display = display + "D \t +";
+			}
+			display = display + df.format(t.getAmount()) + "\t\t" + t.getTransactionDate();
+			formatted.add(display);
+		}
+		return formatted;
 	}
 
 	/**
@@ -94,8 +112,8 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 	 * @param accountName
 	 * @return
 	 */
-	public double getCurrentAccountBalance(String accountName) {
+	public String getFormattedCurrentAccountBalance(String accountName) {
 		User user = UserListSingleton.getInstance().getUserList().getUser(view.getUsername());
-		return user.getFinanceAccountList().get(accountName).getCurrentBalance();
+		return df.format(user.getFinanceAccountList().get(accountName).getCurrentBalance());
 	}
 }

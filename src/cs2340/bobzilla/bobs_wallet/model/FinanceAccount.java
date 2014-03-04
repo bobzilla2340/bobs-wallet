@@ -7,17 +7,17 @@ public class FinanceAccount {
 	private double interestRate;
 	private double currentBalance;
 	
-	private ArrayList<Double> withdrawals;
-	private ArrayList<Double> deposits;
-	private ArrayList<Double> transactions;
+	private ArrayList<Transaction> withdrawals;
+	private ArrayList<Transaction> deposits;
+	private ArrayList<Transaction> transactions;
 	
 	public FinanceAccount(String accountName, double interest) {
 		this.accountName = accountName;
 		this.interestRate = interest;
 		this.currentBalance = 0;
-		withdrawals = new ArrayList<Double>();
-		deposits = new ArrayList<Double>();
-		transactions = new ArrayList<Double>();
+		withdrawals = new ArrayList<Transaction>();
+		deposits = new ArrayList<Transaction>();
+		transactions = new ArrayList<Transaction>();
 	}
 	
 	public String getAccountName() {
@@ -37,27 +37,27 @@ public class FinanceAccount {
 		return accountName + "::" + currentBalance;
 	}
 	
-	public void addTransaction(double amount) {
-		transactions.add(amount);
+	public void addTransaction(double amount, TransactionType type) {
+		transactions.add(new Transaction(amount, type));
 	}
 	
 	public void addWithdrawal(double amount) {
-		withdrawals.add(amount);
+		withdrawals.add(new Transaction(amount, TransactionType.WITHDRAWAL));
 	}
 	
 	public void addDeposit(double amount) {
-		deposits.add(amount);
+		deposits.add(new Transaction(amount, TransactionType.DEPOSIT));
 	}
 	
-	public ArrayList<Double> getTransactions() {
+	public ArrayList<Transaction> getTransactions() {
 		return transactions;
 	}
 	
-	public ArrayList<Double> getWithdrawals() {
+	public ArrayList<Transaction> getWithdrawals() {
 		return withdrawals;
 	}
 	
-	public ArrayList<Double> getDeposits() {
+	public ArrayList<Transaction> getDeposits() {
 		return deposits;
 	}
 	

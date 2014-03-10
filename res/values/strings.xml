@@ -39,4 +39,27 @@
     <string name="user_account_finance_transaction_create_button">Add Transaction</string>
     <string name="user_account_finance_transaction_create_dialog_box">Transaction</string>
     <string name="user_finance_account_activity_balance_amount"></string>
+    
+    <string name="title_activity_report">Report</string>
+    <string name="create_report">Create Report</string>
+    <string name="report_type_prompt">Select a Report Type</string>
+    <string-array name="report_types">
+        <item>Spending Category Report</item>
+    </string-array>
+    <string name="date_picker_start_date_title">Pick a Start Date for the Report:</string>
+    <string name="date_picker_end_date_title">Pick a End Date for the Report:</string>
+    <string name="cancel">Cancel</string>
+    
+    <string-array name="deposit_categories">
+        <item>Salary</item>
+        <item>Birthday</item>
+        <item>Parents</item>
+        <item>Scholarship</item>
+    </string-array>
+    <string-array name="withdrawal_categories">
+        <item>Food</item>
+        <item>Rent</item>
+        <item>Entertainment</item>
+        <item>Clothing</item>
+    </string-array>
 </resources>

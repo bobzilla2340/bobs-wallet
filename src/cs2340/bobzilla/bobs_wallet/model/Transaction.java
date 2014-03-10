@@ -10,12 +10,14 @@ public class Transaction {
 	private String date;
 	public static final String DATE_FORMAT_PATTERN = "MM/dd/yy h:mm a";
 	private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN);
+	private String mCategory;
 
 	
-	public Transaction(double amount, TransactionType type) {
+	public Transaction(double amount, TransactionType type, String category) {
 		this.amount = amount;
 		this.type = type;
 		this.date = sdf.format(new Date());
+		this.mCategory = category;
 	}
 	
 	public TransactionType getTransactionType() {
@@ -28,5 +30,9 @@ public class Transaction {
 	
 	public double getAmount() {
 		return amount;
+	}
+	
+	public String getCategory() {
+		return mCategory;
 	}
 }

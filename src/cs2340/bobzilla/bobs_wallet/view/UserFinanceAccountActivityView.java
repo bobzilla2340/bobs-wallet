@@ -8,4 +8,6 @@ public interface UserFinanceAccountActivityView {
 	
 	public String getUsername();
 	
+	public String getCategory();
+	
 }

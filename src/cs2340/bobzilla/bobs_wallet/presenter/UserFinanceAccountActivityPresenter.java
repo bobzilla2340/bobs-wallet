@@ -41,6 +41,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 		String transactionAmount = view.getTransactionAmount();
 		String userName = view.getUsername();
 		User user = UserListSingleton.getInstance().getUserList().getUser(userName);
+		String category = view.getCategory();
 
 		FinanceAccount account = user.getFinanceAccountList().get(accountName);
 		if (transactionAmount.equals("")) {
@@ -48,8 +49,8 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 		} else if (Double.parseDouble(transactionAmount) <= 0) {
 			throw new InvalidTransactionCreationException("Transaction amounts cannot be negative or zero.");
 		} else {
-			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.DEPOSIT);
-			account.addDeposit(Double.parseDouble(transactionAmount));
+			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.DEPOSIT, category);
+			account.addDeposit(Double.parseDouble(transactionAmount), category);
 			account.setCurrentBalance(Double.parseDouble(transactionAmount) + account.getCurrentBalance());
 		}
 		
@@ -64,6 +65,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 		String accountName = view.getAccountName();
 		String transactionAmount = view.getTransactionAmount();
 		User user = UserListSingleton.getInstance().getUserList().getUser(view.getUsername());
+		String category = view.getCategory();
 		
 		FinanceAccount account = user.getFinanceAccountList().get(accountName);
 		if (transactionAmount.equals("")) {
@@ -71,8 +73,8 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 		} else if (Double.parseDouble(transactionAmount) <= 0) {
 			throw new InvalidTransactionCreationException("Transaction amounts cannot be negative or zero.");
 		} else {
-			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.WITHDRAWAL);
-			account.addWithdrawal(Double.parseDouble(transactionAmount));
+			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.WITHDRAWAL, category);
+			account.addWithdrawal(Double.parseDouble(transactionAmount), category);
 			account.setCurrentBalance(account.getCurrentBalance() - Double.parseDouble(transactionAmount));
 		}
 	}
@@ -100,7 +102,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 			} else {
 				display = display + "D \t +";
 			}
-			display = display + df.format(t.getAmount()) + "\t\t" + t.getTransactionDate();
+			display = display + df.format(t.getAmount()) + "\t\t" + t.getCategory() + "\t\t" + t.getTransactionDate();
 			formatted.add(display);
 		}
 		return formatted;

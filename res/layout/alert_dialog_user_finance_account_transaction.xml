@@ -9,5 +9,33 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/user_account_alert_dialog_transaction_hint" />
+    
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/selectTransactionTypeRadioGroup"
+        android:layout_below="@id/alertDialogUserFinanceAccountTransactionEditText">
+        
+	    <RadioButton
+	        android:id="@+id/createDepositRadioButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onTransactionTypeClicked"
+	        android:text="Deposit" />
+	    <RadioButton
+	        android:id="@+id/createWithdrawalRadioButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="onTransactionTypeClicked"
+	        android:text="Withdraw"/>
+	    
+    </RadioGroup>
+    <Spinner 
+        android:id="@+id/categories_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectTransactionTypeRadioGroup"
+        android:entries="@array/deposit_categories" />
 
 </RelativeLayout>

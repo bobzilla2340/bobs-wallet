@@ -1,5 +1,7 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
+import java.util.Date;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,18 +9,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidTransactionCreationException;
+import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 import cs2340.bobzilla.bobs_wallet.presenter.UserFinanceAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserFinanceAccountActivityView;
 
@@ -34,6 +36,13 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 	
 	private String financeAccountName;
 	private String userName;
+	
+	private TransactionType mTransactionType;
+	private Spinner mSpinner;
+	private String mSelectedCategory;
+	
+	public Date startDate;
+	public Date endDate;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,52 +83,94 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 	public void onClick(View view) {
 		LayoutInflater inflater = UserFinanceAccountActivity.this.getLayoutInflater();
 		final View alertDialogView = inflater.inflate(R.layout.alert_dialog_user_finance_account_transaction, null);
-		new AlertDialog.Builder(this)
+		AlertDialog.Builder alert = new AlertDialog.Builder(this)
 		.setTitle(R.string.user_account_finance_transaction_create_dialog_box)
 		.setNegativeButton("Cancel", null)
-		.setNeutralButton("Withdraw", new AlertDialogWithdrawalClickListener())
-		.setPositiveButton("Deposit", new AlertDialogDepositClickListener())
-		.setView(alertDialogView)
-		.show();
+		.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int id) {
+				mSelectedCategory = mSpinner.getSelectedItem().toString();
+				switch (mTransactionType) {
+				case DEPOSIT:
+					createDeposit();
+					break;
+				case WITHDRAWAL:
+					createWithdrawal();
+					break;
+				}
+			}
+		})
+		.setView(alertDialogView);
+		
+		mSpinner = (Spinner) alertDialogView.findViewById(R.id.categories_spinner);
+		mSpinner.setAdapter(createAdapter(TransactionType.DEPOSIT));
+		
+		alert.show();
 		transactionAmountEditText = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountTransactionEditText);
 	}
 	
-	private class AlertDialogWithdrawalClickListener implements DialogInterface.OnClickListener {
-
-		@Override
-		public void onClick(DialogInterface arg0, int arg1) {
-			
-			try {
-				financeAccountPresenter.onClickWithdrawal();
-				arrayAdapter.add("W \t -$" + transactionAmountEditText.getText().toString() + "\t \t just now");
-				accountBalanceTextView.setText(" " + financeAccountPresenter
-						.getFormattedCurrentAccountBalance(financeAccountName));
-				Toast.makeText(UserFinanceAccountActivity.this, "Withdrawal successfully added!", 
-						Toast.LENGTH_SHORT).show();
-			} catch (InvalidTransactionCreationException e) {
-				String toastMessage = e.getMessage();
-				Toast.makeText(UserFinanceAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
+	public void onTransactionTypeClicked(View view) {
+		boolean checked = ((RadioButton) view).isChecked();
+		
+		switch(view.getId()) {
+		case R.id.createDepositRadioButton:
+			if(checked) {
+				mTransactionType = TransactionType.DEPOSIT;
+				mSpinner.setAdapter(createAdapter(TransactionType.DEPOSIT));
 			}
+			break;
+		case R.id.createWithdrawalRadioButton:
+			if(checked) {
+				mTransactionType = TransactionType.WITHDRAWAL;
+				mSpinner.setAdapter(createAdapter(TransactionType.WITHDRAWAL));
+			}
+			break;
+		}
+	}
+	public ArrayAdapter<CharSequence> createAdapter(TransactionType type) {
+		ArrayAdapter<CharSequence> adapter = null;
+		switch(type) {
+		case DEPOSIT:
+			adapter = ArrayAdapter.createFromResource(this, R.array.deposit_categories, android.R.layout.simple_spinner_item);
+			break;
+		case WITHDRAWAL:
+			adapter = ArrayAdapter.createFromResource(this, R.array.withdrawal_categories, android.R.layout.simple_spinner_item);
+			break;
+		}
+		return adapter;
+	}
+	
+	public void createDeposit() {
+		try {
+			financeAccountPresenter.onClick();
+			arrayAdapter.add("D \t +$" + transactionAmountEditText.getText().toString() + "\t\t" 
+					+ mSelectedCategory + "\t\t just now");
+			accountBalanceTextView.setText(" " + financeAccountPresenter
+					.getFormattedCurrentAccountBalance(financeAccountName));
+			Toast.makeText(UserFinanceAccountActivity.this, "Deposit successfully added!", 
+					Toast.LENGTH_SHORT).show();
+		} catch (InvalidTransactionCreationException e) {
+			String toastMessage = e.getMessage();
+			Toast.makeText(UserFinanceAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
 		}
 	}
 	
-	private class AlertDialogDepositClickListener implements DialogInterface.OnClickListener {
-		
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			try {
-				financeAccountPresenter.onClick();
-				arrayAdapter.add("D \t +$" + transactionAmountEditText.getText().toString() + "\t\t just now");
-				accountBalanceTextView.setText(" " + financeAccountPresenter
-						.getFormattedCurrentAccountBalance(financeAccountName));
-				Toast.makeText(UserFinanceAccountActivity.this, "Deposit successfully added!", 
-						Toast.LENGTH_SHORT).show();
-			} catch (InvalidTransactionCreationException e) {
-				String toastMessage = e.getMessage();
-				Toast.makeText(UserFinanceAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
-			}
+	public void createWithdrawal() {
+		try {
+			financeAccountPresenter.onClickWithdrawal();
+			arrayAdapter.add("W \t -$" + transactionAmountEditText.getText().toString() + "\t\t" 
+					+ mSelectedCategory + "\t\t just now");
+			accountBalanceTextView.setText(" " + financeAccountPresenter
+					.getFormattedCurrentAccountBalance(financeAccountName));
+			Toast.makeText(UserFinanceAccountActivity.this, "Withdrawal successfully added!", 
+					Toast.LENGTH_SHORT).show();
+		} catch (InvalidTransactionCreationException e) {
+			String toastMessage = e.getMessage();
+			Toast.makeText(UserFinanceAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
 		}
 	}
+	
+	
 	
 	@Override
 	public String getUsername() {
@@ -134,6 +185,11 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 	@Override
 	public String getAccountName() {
 		return financeAccountName;
+	}
+	
+	@Override
+	public String getCategory() {
+		return mSelectedCategory;
 	}
 
 }

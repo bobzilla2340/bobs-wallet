@@ -74,6 +74,19 @@
                 <category android:name="android.intent.category.USER_FINANCE_ACCOUNT_ACTIVITY_INTENT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="cs2340.bobzilla.bobs_wallet.activites.ReportActivity"
+            android:label="@string/title_activity_report" 
+            android:parentActivityName="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cs2340.bobzilla.bobs_wallet.UserAccountActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            
+                <category android:name="android.intent.category.USER_FINANCE_ACCOUNT_ACTIVITY_INTENT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

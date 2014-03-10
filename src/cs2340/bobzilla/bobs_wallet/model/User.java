@@ -1,5 +1,6 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,6 +135,10 @@ public class User {
 	@Override
 	public int hashCode() {
 		return userName.hashCode() + firstName.hashCode() + lastName.hashCode() + email.hashCode();
+	}
+	
+	public Collection<FinanceAccount> getAccounts() {
+		return accountMap.values();
 	}
 	
 }

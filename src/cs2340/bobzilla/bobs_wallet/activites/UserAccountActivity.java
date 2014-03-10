@@ -1,12 +1,16 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
+import java.util.Date;
+
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,12 +25,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
+import cs2340.bobzilla.bobs_wallet.activites.DatePickerFragment.OnDateChangeListener;
+import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
-import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
+import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
 
-public class UserAccountActivity extends Activity implements UserAccountActivityView {
+public class UserAccountActivity extends FragmentActivity implements UserAccountActivityView, OnDateChangeListener {
 	
 	private TextView welcomeTextView;
 	private EditText accountNameEditText;
@@ -38,6 +44,12 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 	private ArrayAdapter<String> arrayAdapter;
 	public static final String USER_FINANCE_ACCOUNT_NAME="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserFinanceAccountName";
 	public static final String USER_NAME="cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserName";
+	
+	private static final String DIALOG_DATE = "date";
+	public static final String EXTRA_DATETYPE = "dateType";
+	private ReportType mReportType;
+	private Date mReportStartDate;
+	private Date mReportEndDate;
 
 	
 	@Override
@@ -112,6 +124,40 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		case R.id.create_report:
+			Toast.makeText(UserAccountActivity.this, "Clicked on create report.", Toast.LENGTH_SHORT).show();
+			
+			/*
+			 * Dialog to select report type
+			 */
+			AlertDialog.Builder reportTypeBuilder = new AlertDialog.Builder(UserAccountActivity.this);
+			// Add list options
+			reportTypeBuilder.setTitle(R.string.report_type_prompt)
+				.setItems(R.array.report_types, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (which == 0) mReportType = ReportType.SPENDINGCATEGORY;
+						FragmentManager fm = UserAccountActivity.this.getSupportFragmentManager();
+						DatePickerFragment startDateDialog = new DatePickerFragment();
+						
+						Bundle args = new Bundle();
+						args.putString(EXTRA_DATETYPE, "start");
+						startDateDialog.setArguments(args);
+						startDateDialog.show(fm, DIALOG_DATE);
+					}
+				})
+				// Add cancel button
+				.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Toast.makeText(UserAccountActivity.this, "User exited dialog.", Toast.LENGTH_SHORT).show();
+						dialog.dismiss();
+					}
+				})
+				.create().show();
+			
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -157,6 +203,36 @@ public class UserAccountActivity extends Activity implements UserAccountActivity
 	@Override
 	public String getInterestRate() {
 		return interestRateEditText.getText().toString();
+	}
+	
+	public void showDatePickerDialog(View v) {
+		DialogFragment newFragment = new DatePickerFragment();
+		newFragment.show(getSupportFragmentManager(), "datePicker");
+	}
+	
+	public void onDateChange(Date date, String dateType) {
+		if (dateType.equals("start")) {
+			mReportStartDate = date;
+			Log.e("UserAccountActivity", "startDate: " + mReportStartDate.toString());
+			FragmentManager fm = UserAccountActivity.this.getSupportFragmentManager();
+			DatePickerFragment endDateDialog = new DatePickerFragment();
+			
+			Bundle args = new Bundle();
+			args.putString(EXTRA_DATETYPE, "end");
+			endDateDialog.setArguments(args);
+			endDateDialog.show(fm, DIALOG_DATE);
+		}
+		else {
+			mReportEndDate = date;
+			Log.e("UserAccountActivity", "endDate: " + mReportEndDate.toString());
+			
+			Intent reportActivityIntent = new Intent(UserAccountActivity.this, ReportActivity.class);
+			reportActivityIntent.putExtra(ReportActivity.EXTRA_TYPE, mReportType);
+			reportActivityIntent.putExtra(ReportActivity.EXTRA_USERNAME, userName);
+			reportActivityIntent.putExtra(ReportActivity.EXTRA_STARTDATE, mReportStartDate);
+			reportActivityIntent.putExtra(ReportActivity.EXTRA_ENDDATE, mReportEndDate);
+			startActivity(reportActivityIntent);
+		}
 	}
 
 }

@@ -37,16 +37,16 @@ public class FinanceAccount {
 		return accountName + "::" + currentBalance;
 	}
 	
-	public void addTransaction(double amount, TransactionType type) {
-		transactions.add(new Transaction(amount, type));
+	public void addTransaction(double amount, TransactionType type, String category) {
+		transactions.add(new Transaction(amount, type, category));
 	}
 	
-	public void addWithdrawal(double amount) {
-		withdrawals.add(new Transaction(amount, TransactionType.WITHDRAWAL));
+	public void addWithdrawal(double amount, String category) {
+		withdrawals.add(new Transaction(amount, TransactionType.WITHDRAWAL, category));
 	}
 	
-	public void addDeposit(double amount) {
-		deposits.add(new Transaction(amount, TransactionType.DEPOSIT));
+	public void addDeposit(double amount, String category) {
+		deposits.add(new Transaction(amount, TransactionType.DEPOSIT, category));
 	}
 	
 	public ArrayList<Transaction> getTransactions() {

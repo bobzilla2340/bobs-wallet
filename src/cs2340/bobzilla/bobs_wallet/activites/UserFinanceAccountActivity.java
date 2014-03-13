@@ -90,14 +90,7 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 			
 			public void onClick(DialogInterface dialog, int id) {
 				mSelectedCategory = mSpinner.getSelectedItem().toString();
-				switch (mTransactionType) {
-				case DEPOSIT:
-					createDeposit();
-					break;
-				case WITHDRAWAL:
-					createWithdrawal();
-					break;
-				}
+				createTransaction(mTransactionType);
 			}
 		})
 		.setView(alertDialogView);
@@ -109,6 +102,12 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 		transactionAmountEditText = (EditText)alertDialogView.findViewById(R.id.alertDialogUserFinanceAccountTransactionEditText);
 	}
 	
+	/**
+	 * Based on the type of transaction chosen (withdrawal or deposit),
+	 * the category choices for the transaction (viewable and selectable
+	 * through the spinner) is changed.
+	 * @param view
+	 */
 	public void onTransactionTypeClicked(View view) {
 		boolean checked = ((RadioButton) view).isChecked();
 		
@@ -127,6 +126,13 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 			break;
 		}
 	}
+	
+	/**
+	 * ArrayAdapter created based on the transaction type
+	 * Used in onTransactionTypeClicked method
+	 * @param type
+	 * @return
+	 */
 	public ArrayAdapter<CharSequence> createAdapter(TransactionType type) {
 		ArrayAdapter<CharSequence> adapter = null;
 		switch(type) {
@@ -140,37 +146,39 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 		return adapter;
 	}
 	
-	public void createDeposit() {
+	/*
+	 * Adds a transaction based on the type (Withdrawal/Deposit) passed in.
+	 */
+	public void createTransaction(TransactionType type) {
+		String typeSymbol = "";
+		String transactionName = "";
+		
+		switch (type) {
+		case DEPOSIT:
+			typeSymbol = "D";
+			transactionName = "Deposit";
+			break;
+		case WITHDRAWAL:
+			typeSymbol = "W";
+			transactionName = "Withdrawal";
+			break;
+		}
 		try {
+			// Calls presenter's onClick method to make proper changes to model
 			financeAccountPresenter.onClick();
-			arrayAdapter.add("D \t +$" + transactionAmountEditText.getText().toString() + "\t\t" 
+			
+			// Modifies screen to show updated information
+			arrayAdapter.add(typeSymbol + " \t +$" + transactionAmountEditText.getText().toString() + "\t\t" 
 					+ mSelectedCategory + "\t\t just now");
 			accountBalanceTextView.setText(" " + financeAccountPresenter
 					.getFormattedCurrentAccountBalance(financeAccountName));
-			Toast.makeText(UserFinanceAccountActivity.this, "Deposit successfully added!", 
+			Toast.makeText(UserFinanceAccountActivity.this, transactionName + " successfully added!", 
 					Toast.LENGTH_SHORT).show();
 		} catch (InvalidTransactionCreationException e) {
 			String toastMessage = e.getMessage();
 			Toast.makeText(UserFinanceAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
 		}
 	}
-	
-	public void createWithdrawal() {
-		try {
-			financeAccountPresenter.onClickWithdrawal();
-			arrayAdapter.add("W \t -$" + transactionAmountEditText.getText().toString() + "\t\t" 
-					+ mSelectedCategory + "\t\t just now");
-			accountBalanceTextView.setText(" " + financeAccountPresenter
-					.getFormattedCurrentAccountBalance(financeAccountName));
-			Toast.makeText(UserFinanceAccountActivity.this, "Withdrawal successfully added!", 
-					Toast.LENGTH_SHORT).show();
-		} catch (InvalidTransactionCreationException e) {
-			String toastMessage = e.getMessage();
-			Toast.makeText(UserFinanceAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
-		}
-	}
-	
-	
 	
 	@Override
 	public String getUsername() {
@@ -190,6 +198,11 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 	@Override
 	public String getCategory() {
 		return mSelectedCategory;
+	}
+	
+	@Override
+	public TransactionType getTransactionType() {
+		return mTransactionType;
 	}
 
 }

@@ -141,6 +141,8 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 						FragmentManager fm = UserAccountActivity.this.getSupportFragmentManager();
 						DatePickerFragment startDateDialog = new DatePickerFragment();
 						
+						// Starts DatePickerDialogs to get user input for the
+						// date range of the report
 						Bundle args = new Bundle();
 						args.putString(EXTRA_DATETYPE, "start");
 						startDateDialog.setArguments(args);
@@ -152,7 +154,6 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Toast.makeText(UserAccountActivity.this, "User exited dialog.", Toast.LENGTH_SHORT).show();
 						dialog.dismiss();
 					}
 				})
@@ -205,15 +206,25 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		return interestRateEditText.getText().toString();
 	}
 	
+	/**
+	 * Creates and displays a fragment that hosts a datepicker dialog
+	 * @param v
+	 */
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
 	
+	/**
+	 * Implementation of the method from the interface defined in ReportActivity
+	 * The start date is first retrieved from the DatePickerFragment.
+	 * A new DatePickerFragment is started with "end" as an argument for date type.
+	 * When this method is called for the second time, this activity now has
+	 * both dates needed to pass on to the ReportActivity.
+	 */
 	public void onDateChange(Date date, String dateType) {
 		if (dateType.equals("start")) {
 			mReportStartDate = date;
-			Log.e("UserAccountActivity", "startDate: " + mReportStartDate.toString());
 			FragmentManager fm = UserAccountActivity.this.getSupportFragmentManager();
 			DatePickerFragment endDateDialog = new DatePickerFragment();
 			
@@ -224,7 +235,6 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		}
 		else {
 			mReportEndDate = date;
-			Log.e("UserAccountActivity", "endDate: " + mReportEndDate.toString());
 			
 			Intent reportActivityIntent = new Intent(UserAccountActivity.this, ReportActivity.class);
 			reportActivityIntent.putExtra(ReportActivity.EXTRA_TYPE, mReportType);

@@ -7,10 +7,10 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import android.util.Log;
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.activites.ReportActivity;
 import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
@@ -28,6 +28,10 @@ public class ReportActivityPresenter {
 	private Date mEndDate;
 	private User mUser;
 	
+	/**
+	 * Retrieves all the needed information from the view
+	 * @param view
+	 */
 	public ReportActivityPresenter(ReportActivityView view) {
 		reportActivityView = view;
 		mUserName = reportActivityView.getUserName();
@@ -36,13 +40,14 @@ public class ReportActivityPresenter {
 		mEndDate = reportActivityView.getEndDate();
 		mUser = UserListSingleton.getInstance().getUserList()
 				.getUser(mUserName);
-		Log.e("ReportActivityPresenter", "ReportActivityPresenter instantiated.");
-		Log.e("ReportActivityPresenter", mStartDate.toString());
-		Log.e("ReportActivityPresenter", mEndDate.toString());
-		Log.e("ReportActivityPresenter", mUserName);
 	}
 	
-	public Map<String, Double> getCategoryTotals() {
+	/**
+	 * Returns a map containing category names as keys and the category
+	 * amounts as values
+	 * @return
+	 */
+	private Map<String, Double> getCategoryTotals() {
 		Collection<FinanceAccount> accounts = mUser.getAccounts();
 		String[] categories = ((ReportActivity) reportActivityView).getResources()
 				.getStringArray(R.array.withdrawal_categories);
@@ -51,15 +56,12 @@ public class ReportActivityPresenter {
 		for (String category : categories) {
 			totals.put(category, (double) 0);
 		}
+		
+		//Adds all the withdrawal amounts for each category across all the accounts of the user
 		for (FinanceAccount account: accounts) {
-			Log.e("ReportActivityPresenter", "Account name: " + account.getAccountName());
 			ArrayList<Transaction> withdrawals = account.getWithdrawals();
-			Log.e("ReportActivityPresenter", "Number of Withdrawals: " + withdrawals.size());
 			for (Transaction t : withdrawals) {
-				Log.e("ReportActivityPresenter", "Transaction: " + t.getCategory() + " " + t.getAmount());
-				Log.e("ReportActivityPresenter", "Date of transaction: " + t.getTransactionDate());
 				if (isValidDate(t.getTransactionDate())) {
-					Log.e("ReportActivityPresenter", "Date is valid.");
 					double currentCategoryTotal = totals.get(t.getCategory());
 					currentCategoryTotal += Math.abs(t.getAmount());
 					totals.put(t.getCategory(), currentCategoryTotal);
@@ -67,7 +69,7 @@ public class ReportActivityPresenter {
 			}
 		}
 		
-		// Put "Total" and total withdrawal amount
+		// Adds the total withdrawal amount as a category to display to the user
 		double totalWithdrawalAmount = 0;
 		for (Double val : totals.values()) {
 			totalWithdrawalAmount += val;
@@ -76,13 +78,21 @@ public class ReportActivityPresenter {
 		return totals;
 	}
 	
+	/**
+	 * Constructs a customized title for the user.
+	 * @return
+	 */
 	public String getTitle() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy");
 		return "Spending Category Report for " + mUser.getFirstName() + " " + mUser.getLastName() + "\n"
 				+ sdf.format(mStartDate) + " to " + sdf.format(mEndDate);
 	}
 	
-	public ArrayList<String> getFormattedTotals() {
+	/**
+	 * Returns a list of formatted categories and category totals
+	 * @return
+	 */
+	public List<String> getFormattedTotals() {
 		ArrayList<String> result = new ArrayList<String>();
 		
 		Map<String, Double> totalsMap = getCategoryTotals();
@@ -93,6 +103,11 @@ public class ReportActivityPresenter {
 		return result;
 	}
 	
+	/**
+	 * Helper method used to determine whether a transaction is within a date range
+	 * @param stringDate
+	 * @return
+	 */
 	public boolean isValidDate(String stringDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat(Transaction.DATE_FORMAT_PATTERN);
 		Date date;
@@ -107,6 +122,13 @@ public class ReportActivityPresenter {
 		if (isSameDay(date, mStartDate) || isSameDay(date, mEndDate)) return true;
 		else return !date.before(mStartDate) && !date.after(mEndDate);
 	}
+	
+	/**
+	 * Helper method to determine whether 2 dates of (Date type) have the same day
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
 	private boolean isSameDay(Date date1, Date date2) {
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(date1);

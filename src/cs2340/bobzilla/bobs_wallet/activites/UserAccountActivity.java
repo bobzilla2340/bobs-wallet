@@ -28,6 +28,8 @@ import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.activites.DatePickerFragment.OnDateChangeListener;
 import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
+import cs2340.bobzilla.bobs_wallet.exceptions.InvalidReportCreationException;
+import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
@@ -236,6 +238,21 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		else {
 			mReportEndDate = date;
 			
+			try {
+				startReport();
+			} catch (InvalidReportCreationException e) {
+				String toastMessage = e.getMessage();
+				Toast.makeText(UserAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	private void startReport() throws InvalidReportCreationException {
+		if (!ReportActivityPresenter.isSameDay(mReportStartDate, mReportEndDate)
+				&& mReportStartDate.after(mReportEndDate)) {
+			throw new InvalidReportCreationException("Please enter a valid date range! The end date should not be before the start date.");
+		}
+		else {
 			Intent reportActivityIntent = new Intent(UserAccountActivity.this, ReportActivity.class);
 			reportActivityIntent.putExtra(ReportActivity.EXTRA_TYPE, mReportType);
 			reportActivityIntent.putExtra(ReportActivity.EXTRA_USERNAME, userName);

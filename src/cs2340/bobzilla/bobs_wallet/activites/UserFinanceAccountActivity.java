@@ -9,7 +9,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -79,6 +82,18 @@ public class UserFinanceAccountActivity extends Activity implements UserFinanceA
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case android.R.id.home:
+			Log.e("ReportActivity", "About to navigate up.");
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 	
 	public void onClick(View view) {
 		LayoutInflater inflater = UserFinanceAccountActivity.this.getLayoutInflater();

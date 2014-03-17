@@ -60,7 +60,7 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		setContentView(R.layout.activity_user_account);
 		setupActionBar();
 		Log.e("CRITICAL", "UPDATE YOUR SD CARD");
-
+		
 		Intent userAccountIntent = getIntent();
 		userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);
 		

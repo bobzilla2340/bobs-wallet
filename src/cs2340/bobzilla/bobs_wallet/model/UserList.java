@@ -1,12 +1,12 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
-public class UserList implements UserListModel {
-	
-	//public List<User> userList;
-	public Map<String, User> userList;
+public class UserList implements UserListModel, Serializable {
+
+	private static final long serialVersionUID = -2882484650116333101L;
+	private HashMap<String, User> userList;
 	
 	public UserList() {
 		userList = new HashMap<String, User>();

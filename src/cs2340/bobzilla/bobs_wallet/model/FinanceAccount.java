@@ -1,8 +1,11 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FinanceAccount {
+public class FinanceAccount implements Serializable {
+
+	private static final long serialVersionUID = 8934355754572806709L;
 	private String accountName;
 	private double interestRate;
 	private double currentBalance;

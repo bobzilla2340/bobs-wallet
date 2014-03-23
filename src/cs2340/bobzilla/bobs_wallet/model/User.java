@@ -1,5 +1,6 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +14,9 @@ import java.util.Map;
  * @author Sai
  *
  */
-public class User {
+public class User implements Serializable {
 	
+	private static final long serialVersionUID = -2202715094107986888L;
 	private String userName;
 	private String firstName;
 	private String lastName;

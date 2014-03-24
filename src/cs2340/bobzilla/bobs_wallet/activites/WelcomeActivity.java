@@ -1,6 +1,5 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -36,14 +35,20 @@ public class WelcomeActivity extends Activity {
 		
 		//// Read in the user list ////
 		try {
-			Log.d("in on create", "trying to load in object");
+			Log.e("in on create", "trying to load in object");
 			FileInputStream fileIn = this.getApplicationContext().openFileInput("save.ser");
 			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-			list = (UserList) objectIn.readObject();
+			UserList serialized = (UserList) objectIn.readObject();
 			objectIn.close();
+			fileIn.close();
+			for(User u : serialized.getUserSet()) {
+				if(!u.getFirstName().equals("admin")) {
+					list.addUser(u);
+				}
+			}
 		}
 		catch (Exception e) {
-			Log.d("in on create", "getting exception when I load in object");
+			Log.e("in on create", "getting exception when I load in object");
 		}
 		
 		mSigninButton.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +75,7 @@ public class WelcomeActivity extends Activity {
 	}
 	
 	@Override
-	protected void onDestroy() {
+	protected void onPause() {
 		//// Save the user list ////
 		super.onDestroy();
 		UserList list = UserListSingleton.getInstance().getUserList();
@@ -79,13 +84,14 @@ public class WelcomeActivity extends Activity {
 		ObjectOutputStream objectOut;
 		
 		try {
-			Log.d("in on destroy", "trying to save object");
+			Log.e("in on pause", "trying to save object");
 			fileOut = this.getApplicationContext().openFileOutput("save.ser", Context.MODE_PRIVATE);
 			objectOut = new ObjectOutputStream(fileOut);
 			objectOut.writeObject(list);
 			objectOut.close();
+			fileOut.close();
 		} catch (Exception e) {
-			Log.d("in on destroy", "got an exception when trying to save" + e.toString());
+			Log.e("in on pause", "got an exception when trying to save" + e.toString());
 		}
 		
 	}

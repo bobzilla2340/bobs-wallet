@@ -2,6 +2,9 @@ package cs2340.bobzilla.bobs_wallet.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Map.Entry;
 
 public class UserList implements UserListModel, Serializable {
 
@@ -42,4 +45,11 @@ public class UserList implements UserListModel, Serializable {
 		return userList.size();
 	}
 	
+	public List<User> getUserSet() {
+		List<User> returnList = new LinkedList<User>();
+		for(Entry<String, User> entry: userList.entrySet()) {
+			returnList.add(entry.getValue());
+		}
+		return returnList;
+	}
 }

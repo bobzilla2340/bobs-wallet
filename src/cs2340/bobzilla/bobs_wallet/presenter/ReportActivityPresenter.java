@@ -20,17 +20,27 @@ import cs2340.bobzilla.bobs_wallet.model.User;
 import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ReportActivityView;
 
+/**
+ * This is the presenter that interfaces between the
+ * ReportActivity and the applicaition model. It
+ * contains various methods that are invoked by 
+ * interfaces to the android activities.
+ * @author sai
+ *
+ */
 public class ReportActivityPresenter {
+	
 	private ReportActivityView reportActivityView;
 	private String mUserName;
 	private ReportType mReportType;
 	private Date mStartDate;
 	private Date mEndDate;
 	private User mUser;
+
 	
 	/**
 	 * Retrieves all the needed information from the view
-	 * @param view
+	 * @param view the class that implements the ReportActivityView
 	 */
 	public ReportActivityPresenter(ReportActivityView view) {
 		reportActivityView = view;
@@ -45,7 +55,7 @@ public class ReportActivityPresenter {
 	/**
 	 * Returns a map containing category names as keys and the category
 	 * amounts as values
-	 * @return
+	 * @return a mapping between the category names and the amounts.
 	 */
 	private Map<String, Double> getCategoryTotals() {
 		Collection<FinanceAccount> accounts = mUser.getAccounts();
@@ -80,7 +90,7 @@ public class ReportActivityPresenter {
 	
 	/**
 	 * Constructs a customized title for the user.
-	 * @return
+	 * @return the title of the report.
 	 */
 	public String getTitle() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy");
@@ -90,7 +100,7 @@ public class ReportActivityPresenter {
 	
 	/**
 	 * Returns a list of formatted categories and category totals
-	 * @return
+	 * @return a list of totals in string format.
 	 */
 	public List<String> getFormattedTotals() {
 		ArrayList<String> result = new ArrayList<String>();
@@ -106,7 +116,7 @@ public class ReportActivityPresenter {
 	/**
 	 * Helper method used to determine whether a transaction is within a date range
 	 * @param stringDate
-	 * @return
+	 * @return returns true if the date is valid or not.
 	 */
 	public boolean isValidDate(String stringDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat(Transaction.DATE_FORMAT_PATTERN);
@@ -125,9 +135,9 @@ public class ReportActivityPresenter {
 	
 	/**
 	 * Helper method to determine whether 2 dates of (Date type) have the same day
-	 * @param date1
-	 * @param date2
-	 * @return
+	 * @param date1 This is the beginning date of the report.
+	 * @param date2 This is the end date of the report.
+	 * @return returns true if date 1 and date 2 happen on the same day.
 	 */
 	public static boolean isSameDay(Date date1, Date date2) {
 		Calendar cal1 = Calendar.getInstance();

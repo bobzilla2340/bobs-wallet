@@ -1,5 +1,12 @@
 package cs2340.bobzilla.bobs_wallet.exceptions;
 
+/**
+ * This class is the exception that is thrown
+ * by the presenter when the user makes an
+ * error while making an account.
+ * @author sai
+ *
+ */
 public class InvalidAccountCreationException extends Exception {
 
 	/**
@@ -7,18 +14,39 @@ public class InvalidAccountCreationException extends Exception {
 	 */
 	private static final long serialVersionUID = 2179074268783002229L;
 
+	/**
+	 * This is the constructor for the
+	 * Invalid Account Creation Exception.
+	 */
 	public InvalidAccountCreationException() {
 		super();
 	}
 
+	/**
+	 * This constructor takes in a message that the
+	 * programmer can access via the getMessage()
+	 * method.
+	 * @param detailMessage
+	 */
 	public InvalidAccountCreationException(String detailMessage) {
 		super(detailMessage);
 	}
 
+	/**
+	 * This constructor takes in a throwable so that exceptions
+	 * can be propagated via. this exception.
+	 * @param throwable
+	 */
 	public InvalidAccountCreationException(Throwable throwable) {
 		super(throwable);
 	}
 
+	/**
+	 * This constructor takes both a throwable and a message
+	 * so tha tthe user 
+	 * @param detailMessage
+	 * @param throwable
+	 */
 	public InvalidAccountCreationException(String detailMessage,
 			Throwable throwable) {
 		super(detailMessage, throwable);

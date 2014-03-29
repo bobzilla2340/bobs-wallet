@@ -29,6 +29,8 @@ import cs2340.bobzilla.bobs_wallet.activites.DatePickerFragment.OnDateChangeList
 import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidReportCreationException;
+import cs2340.bobzilla.bobs_wallet.model.UserList;
+import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
@@ -61,8 +63,10 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		setupActionBar();
 		Log.e("CRITICAL", "UPDATE YOUR SD CARD");
 		
+		
+		
 		Intent userAccountIntent = getIntent();
-		userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);
+		userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);		
 		
 		welcomeTextView = (TextView)findViewById(R.id.userAccountWelcomeMessage);
 		listView = (ListView)findViewById(R.id.userFinanceAccountList);
@@ -73,9 +77,11 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		
 		userAccountActivityPresenter = new UserAccountActivityPresenter(this);
 
+		Log.e("in user account activity" , "size of account set is " + userAccountActivityPresenter.getFinanceAccountNames(userName).size());
 		for(String account: userAccountActivityPresenter.getFinanceAccountNames(userName)) {
 			arrayAdapter.add(account);
 		}
+		
 		
 		listView.setOnItemClickListener(new ListViewClickListener());
 	}

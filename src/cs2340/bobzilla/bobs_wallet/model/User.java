@@ -22,7 +22,7 @@ public class User implements Serializable {
 	private String lastName;
 	private String password;
 	private String email;
-	private Map<String, FinanceAccount> accountMap;
+	private HashMap<String, FinanceAccount> accountMap;
 
 	/**
 	 * 

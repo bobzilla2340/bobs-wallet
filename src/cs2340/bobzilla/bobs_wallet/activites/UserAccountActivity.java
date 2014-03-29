@@ -28,6 +28,8 @@ import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.activites.DatePickerFragment.OnDateChangeListener;
 import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
+import cs2340.bobzilla.bobs_wallet.exceptions.InvalidReportCreationException;
+import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
@@ -58,7 +60,7 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		setContentView(R.layout.activity_user_account);
 		setupActionBar();
 		Log.e("CRITICAL", "UPDATE YOUR SD CARD");
-
+		
 		Intent userAccountIntent = getIntent();
 		userName = userAccountIntent.getStringExtra(LoginActivity.LOGIN_USER_NAME);
 		
@@ -141,6 +143,8 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 						FragmentManager fm = UserAccountActivity.this.getSupportFragmentManager();
 						DatePickerFragment startDateDialog = new DatePickerFragment();
 						
+						// Starts DatePickerDialogs to get user input for the
+						// date range of the report
 						Bundle args = new Bundle();
 						args.putString(EXTRA_DATETYPE, "start");
 						startDateDialog.setArguments(args);
@@ -152,7 +156,6 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Toast.makeText(UserAccountActivity.this, "User exited dialog.", Toast.LENGTH_SHORT).show();
 						dialog.dismiss();
 					}
 				})
@@ -205,15 +208,25 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		return interestRateEditText.getText().toString();
 	}
 	
+	/**
+	 * Creates and displays a fragment that hosts a datepicker dialog
+	 * @param v
+	 */
 	public void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
 	
+	/**
+	 * Implementation of the method from the interface defined in ReportActivity
+	 * The start date is first retrieved from the DatePickerFragment.
+	 * A new DatePickerFragment is started with "end" as an argument for date type.
+	 * When this method is called for the second time, this activity now has
+	 * both dates needed to pass on to the ReportActivity.
+	 */
 	public void onDateChange(Date date, String dateType) {
 		if (dateType.equals("start")) {
 			mReportStartDate = date;
-			Log.e("UserAccountActivity", "startDate: " + mReportStartDate.toString());
 			FragmentManager fm = UserAccountActivity.this.getSupportFragmentManager();
 			DatePickerFragment endDateDialog = new DatePickerFragment();
 			
@@ -224,8 +237,22 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
 		}
 		else {
 			mReportEndDate = date;
-			Log.e("UserAccountActivity", "endDate: " + mReportEndDate.toString());
 			
+			try {
+				startReport();
+			} catch (InvalidReportCreationException e) {
+				String toastMessage = e.getMessage();
+				Toast.makeText(UserAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	private void startReport() throws InvalidReportCreationException {
+		if (!ReportActivityPresenter.isSameDay(mReportStartDate, mReportEndDate)
+				&& mReportStartDate.after(mReportEndDate)) {
+			throw new InvalidReportCreationException("Please enter a valid date range! The end date should not be before the start date.");
+		}
+		else {
 			Intent reportActivityIntent = new Intent(UserAccountActivity.this, ReportActivity.class);
 			reportActivityIntent.putExtra(ReportActivity.EXTRA_TYPE, mReportType);
 			reportActivityIntent.putExtra(ReportActivity.EXTRA_USERNAME, userName);

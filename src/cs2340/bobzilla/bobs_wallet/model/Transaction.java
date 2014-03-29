@@ -1,10 +1,12 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements Serializable {
 
+	private static final long serialVersionUID = 7452030265735708570L;
 	private double amount;
 	private TransactionType type;
 	private String date;

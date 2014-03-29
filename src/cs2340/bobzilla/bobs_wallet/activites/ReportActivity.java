@@ -1,8 +1,6 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map.Entry;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -10,17 +8,22 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.ReportActivityView;
 
+/**
+ * Activity that displays any report the user wants to create.
+ * @author Jennifer
+ *
+ */
 public class ReportActivity extends Activity implements ReportActivityView {
 	private ReportActivityPresenter reportActivityPresenter;
 	public enum ReportType {
@@ -41,6 +44,7 @@ public class ReportActivity extends Activity implements ReportActivityView {
 		setContentView(R.layout.activity_report);
 		setupActionBar();
 		
+		// Retrieves information passed by last activity (usually UserAccountActivity)
 		Intent reportIntent = getIntent();
 		mType = (ReportType) reportIntent.getSerializableExtra(EXTRA_TYPE);
 		mUserName = reportIntent.getStringExtra(EXTRA_USERNAME);
@@ -63,6 +67,7 @@ public class ReportActivity extends Activity implements ReportActivityView {
 		}
 	}
 	
+	// Getters used by ReportActivityPresenter
 	public String getUserName() {
 		return mUserName;
 	}
@@ -77,18 +82,12 @@ public class ReportActivity extends Activity implements ReportActivityView {
 	public Date getEndDate() {
 		return mEndDate;
 	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.report, menu);
-		return true;
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 		case android.R.id.home:
+			Log.e("ReportActivity", "About to navigate up.");
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}

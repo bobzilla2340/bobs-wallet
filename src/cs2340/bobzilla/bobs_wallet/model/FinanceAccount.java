@@ -1,8 +1,11 @@
 package cs2340.bobzilla.bobs_wallet.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FinanceAccount {
+public class FinanceAccount implements Serializable {
+
+	private static final long serialVersionUID = 8934355754572806709L;
 	private String accountName;
 	private double interestRate;
 	private double currentBalance;
@@ -39,13 +42,23 @@ public class FinanceAccount {
 	
 	public void addTransaction(double amount, TransactionType type, String category) {
 		transactions.add(new Transaction(amount, type, category));
-	}
+		switch (type) {
+		case DEPOSIT:
+			addDeposit(amount, category);
+			setCurrentBalance(this.currentBalance + amount);
+			break;
+		case WITHDRAWAL:
+			addWithdrawal(amount, category);
+			setCurrentBalance(this.currentBalance - amount);
+		}
+		
+	} 
 	
-	public void addWithdrawal(double amount, String category) {
+	private void addWithdrawal(double amount, String category) {
 		withdrawals.add(new Transaction(amount, TransactionType.WITHDRAWAL, category));
 	}
 	
-	public void addDeposit(double amount, String category) {
+	private void addDeposit(double amount, String category) {
 		deposits.add(new Transaction(amount, TransactionType.DEPOSIT, category));
 	}
 	

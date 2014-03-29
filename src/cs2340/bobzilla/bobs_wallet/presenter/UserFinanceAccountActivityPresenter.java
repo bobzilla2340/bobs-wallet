@@ -33,50 +33,27 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 	}
 	
 	/**
-	 * Listener that handles when users hit "Deposit".
+	 * Listener that handles when users hit "Create"
 	 */
 	@Override
 	public void onClick() throws InvalidTransactionCreationException {
 		String accountName = view.getAccountName();
 		String transactionAmount = view.getTransactionAmount();
+		double amountNum = Double.parseDouble(transactionAmount);
 		String userName = view.getUsername();
 		User user = UserListSingleton.getInstance().getUserList().getUser(userName);
 		String category = view.getCategory();
+		TransactionType type = view.getTransactionType();
 
 		FinanceAccount account = user.getFinanceAccountList().get(accountName);
 		if (transactionAmount.equals("")) {
 			throw new InvalidTransactionCreationException("Please enter a valid amount!");
-		} else if (Double.parseDouble(transactionAmount) <= 0) {
+		} else if (amountNum <= 0) {
 			throw new InvalidTransactionCreationException("Transaction amounts cannot be negative or zero.");
 		} else {
-			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.DEPOSIT, category);
-			account.addDeposit(Double.parseDouble(transactionAmount), category);
-			account.setCurrentBalance(Double.parseDouble(transactionAmount) + account.getCurrentBalance());
+			account.addTransaction(amountNum, type, category);
 		}
 		
-	}
-	
-	/**
-	 * Listener that runs when user hits "Withdraw".
-	 * 
-	 * @throws InvalidTransactionCreationException
-	 */
-	public void onClickWithdrawal() throws InvalidTransactionCreationException {
-		String accountName = view.getAccountName();
-		String transactionAmount = view.getTransactionAmount();
-		User user = UserListSingleton.getInstance().getUserList().getUser(view.getUsername());
-		String category = view.getCategory();
-		
-		FinanceAccount account = user.getFinanceAccountList().get(accountName);
-		if (transactionAmount.equals("")) {
-			throw new InvalidTransactionCreationException("Please enter a valid amount!");
-		} else if (Double.parseDouble(transactionAmount) <= 0) {
-			throw new InvalidTransactionCreationException("Transaction amounts cannot be negative or zero.");
-		} else {
-			account.addTransaction(Double.parseDouble(transactionAmount), TransactionType.WITHDRAWAL, category);
-			account.addWithdrawal(Double.parseDouble(transactionAmount), category);
-			account.setCurrentBalance(account.getCurrentBalance() - Double.parseDouble(transactionAmount));
-		}
 	}
 
 	/**

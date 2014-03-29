@@ -88,7 +88,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 	/**
 	 * Returns the current account balance from the user, given the account name.
 	 * 
-	 * @param accountName
+	 * @param accountName 
 	 * @return
 	 */
 	public String getFormattedCurrentAccountBalance(String accountName) {

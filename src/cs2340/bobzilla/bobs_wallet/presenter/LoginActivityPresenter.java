@@ -12,6 +12,7 @@ import cs2340.bobzilla.bobs_wallet.view.LoginActivityView;
  * @author jack
  */
 public class LoginActivityPresenter implements ClickListener {
+	
 	private LoginActivityView loginActivityView;
 
     /**
@@ -21,7 +22,7 @@ public class LoginActivityPresenter implements ClickListener {
 	public LoginActivityPresenter(LoginActivityView view) {
 		loginActivityView = view;
 	}
- 
+
 	@Override
 	public void onClick() throws InvalidLoginException {
 		String userName = loginActivityView.getUserName();

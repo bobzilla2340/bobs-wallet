@@ -14,7 +14,6 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
 
 /**
@@ -31,7 +30,6 @@ public class DatePickerFragment extends DialogFragment {
 	
 	/**
 	 * Defines callback interface for hosting activity to implement
-	 * @author Jennifer
 	 *
 	 */
 	public interface OnDateChangeListener {

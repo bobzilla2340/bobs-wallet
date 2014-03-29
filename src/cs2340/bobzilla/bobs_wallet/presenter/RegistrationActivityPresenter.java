@@ -8,9 +8,17 @@ import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.RegistrationActivityView;
 
+/**
+ * A presenter class for the registration activity.
+ * @author jack
+ */
 public class RegistrationActivityPresenter implements ClickListener {
 	private RegistrationActivityView registrationActivityView;
-	
+
+    /**
+     * Constructs the RegistrationActivityPresenter based on the corresponding view.
+     * @param view the corresponding view.
+     */
 	public RegistrationActivityPresenter(RegistrationActivityView view) {
 		registrationActivityView = view;
 	}
@@ -46,10 +54,18 @@ public class RegistrationActivityPresenter implements ClickListener {
 		}
 		else {
 			createUser(userList, userName, firstName, lastName, password, email);
-			return;
 		}
 	}
-	
+
+    /**
+     * Registers a new user
+     * @param userList the userList in which to place the new user
+     * @param userName the desired username
+     * @param firstName the user's first name
+     * @param lastName the user's last name
+     * @param password the desired password
+     * @param email the user's email address
+     */
 	private void createUser(UserList userList, String userName, String firstName,
 			String lastName, String password, String email) {
 		User newUser = new User(userName, firstName, lastName, password, email);

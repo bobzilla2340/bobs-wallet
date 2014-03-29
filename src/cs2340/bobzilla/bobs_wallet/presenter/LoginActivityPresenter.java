@@ -7,9 +7,16 @@ import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.LoginActivityView;
 
+/**
+ * @author jack
+ */
 public class LoginActivityPresenter implements ClickListener {
 	private LoginActivityView loginActivityView;
-	
+
+    /**
+     * Constructs the LoginActivityPresenter based on the corresponding view.
+     * @param view the corresponding LoginActivityView.
+     */
 	public LoginActivityPresenter(LoginActivityView view) {
 		loginActivityView = view;
 	}
@@ -30,9 +37,6 @@ public class LoginActivityPresenter implements ClickListener {
 		}
 		else if (!LoginVerifier.veirfyUserPassword(userList, userName, password)) {
 			throw new InvalidLoginException();
-		}
-		else {
-			return;
 		}
 	}
 }

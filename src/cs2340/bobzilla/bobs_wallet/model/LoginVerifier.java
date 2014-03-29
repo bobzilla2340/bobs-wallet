@@ -2,7 +2,7 @@ package cs2340.bobzilla.bobs_wallet.model;
 
 /**
  * LoginVerifier is used to verify logins.
- * @author Farhan
+ * @author Farhan Khan
  */
 public class LoginVerifier {
 

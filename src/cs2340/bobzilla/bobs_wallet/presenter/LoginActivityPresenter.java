@@ -8,6 +8,7 @@ import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.LoginActivityView;
 
 /**
+ * A presenter class for the login activity.
  * @author jack
  */
 public class LoginActivityPresenter implements ClickListener {

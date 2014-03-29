@@ -3,9 +3,6 @@ package cs2340.bobzilla.bobs_wallet.presenter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
-
-import android.util.Log;
-
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidTransactionCreationException;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.Transaction;
@@ -27,7 +24,10 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 	private UserFinanceAccountActivityView view;
 	private final DecimalFormat df = new DecimalFormat("$###,##0.00");
 
-	
+    /**
+     * Creates a UserFinanceAccountActivityPresenter associated with the corresponding view.
+     * @param view the corresponding view
+     */
 	public UserFinanceAccountActivityPresenter(UserFinanceAccountActivityView view) {
 		this.view = view;
 	}
@@ -60,9 +60,9 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 	 * Returns the total list of transactions currently in the finance account
 	 * found by userName and account name.
 	 * 
-	 * @param userName
-	 * @param financeAccountName
-	 * @return
+	 * @param userName the username for which to find transactions
+	 * @param financeAccountName the finance account for which to find transactions
+	 * @return the list of transactions
 	 */
 	public ArrayList<String> getFormattedTransactions(String userName, String financeAccountName) {
 		UserList userList = UserListSingleton.getInstance().getUserList();
@@ -88,8 +88,8 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
 	/**
 	 * Returns the current account balance from the user, given the account name.
 	 * 
-	 * @param accountName
-	 * @return
+	 * @param accountName the account name for which to find the balance
+	 * @return the current balance for the given account
 	 */
 	public String getFormattedCurrentAccountBalance(String accountName) {
 		User user = UserListSingleton.getInstance().getUserList().getUser(view.getUsername());

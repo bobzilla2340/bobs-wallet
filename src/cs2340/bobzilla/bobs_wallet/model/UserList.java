@@ -6,11 +6,19 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
+/**
+ * The UserList class maps String userNames to User objects with
+ * a HashMap.
+ * @author Farhan
+ */
 public class UserList implements UserListModel, Serializable {
 
 	private static final long serialVersionUID = -2882484650116333101L;
 	private HashMap<String, User> userList;
-	
+
+    /**
+     * Constructs a new UserList object.
+     */
 	public UserList() {
 		userList = new HashMap<String, User>();
 	}
@@ -44,7 +52,11 @@ public class UserList implements UserListModel, Serializable {
 	public int size() {
 		return userList.size();
 	}
-	
+
+    /**
+     * Gets a list of User objects
+     * @return a userList
+     */
 	public List<User> getUserSet() {
 		List<User> returnList = new LinkedList<User>();
 		for(Entry<String, User> entry: userList.entrySet()) {

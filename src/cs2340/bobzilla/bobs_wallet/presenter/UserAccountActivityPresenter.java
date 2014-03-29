@@ -11,13 +11,26 @@ import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
+/**
+ * A presenter class for the user account activity.
+ * @author jack
+ */
 public class UserAccountActivityPresenter implements ClickListener {
 	private UserAccountActivityView userAccountActivityView;
-	
+
+    /**
+     * Constructs a UserAccountActivityPresenter for the corresponding view.
+     * @param view the corresponding view
+     */
 	public UserAccountActivityPresenter(UserAccountActivityView view) {
 		userAccountActivityView = view;
 	}
-	
+
+    /**
+     * Gets the set of finance account names associated with the given username.
+     * @param userName the username for which to find associated accounts
+     * @return the names of all the user's finance accounts
+     */
 	public Set<String> getFinanceAccountNames(String userName) {
 		UserList userList = UserListSingleton.getInstance().getUserList();
 		User user = userList.getUser(userName);

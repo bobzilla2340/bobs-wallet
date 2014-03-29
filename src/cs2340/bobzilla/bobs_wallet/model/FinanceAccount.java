@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 /**
  * FinanceAccount represents an account created by a User. It has an
- * accountName, interestRate, currentBalance, list of withdrawals,
- * list of deposits, and a list of transactions.
+ * accountName, interestRate, currentBalance, list of transactions,
+ * list of deposits, and a list of withdrawals.
  * @author Farhan
  */
 public class FinanceAccount implements Serializable {

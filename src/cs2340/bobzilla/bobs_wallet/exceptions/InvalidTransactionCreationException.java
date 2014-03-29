@@ -17,7 +17,7 @@ public class InvalidTransactionCreationException extends Exception {
 
     /**
      * Throws an InvalidTransactionCreationException with a message
-     * @param detailMessage, a message
+     * @param detailMessage, a String message
      */
 	public InvalidTransactionCreationException(String detailMessage) {
 		super(detailMessage);
@@ -34,7 +34,7 @@ public class InvalidTransactionCreationException extends Exception {
     /**
      * Throws an InvalidTransactionCreationException with a message and
      * Throwable object.
-     * @param detailMessage, a message
+     * @param detailMessage, a String message
      * @param throwable, a Throwable object
      */
 	public InvalidTransactionCreationException(String detailMessage,

@@ -19,7 +19,7 @@ public class InvalidLoginException extends Exception {
 
     /**
      * Throws an InvalidLoginException with a message.
-     * @param message, a message
+     * @param message, a String message
      */
 	public InvalidLoginException(String message) {
 		super(message);
@@ -27,8 +27,8 @@ public class InvalidLoginException extends Exception {
 
     /**
      * Throws an InvalidException with a message and cause
-     * @param message, a message
-     * @param cause, a cause
+     * @param message, a String message
+     * @param cause, a Throwable cause
      */
 	public InvalidLoginException(String message, Throwable cause) {
 		super(message, cause);
@@ -36,7 +36,7 @@ public class InvalidLoginException extends Exception {
 
     /**
      * Throws an InvalidLoginException with a cause
-     * @param cause, a cause
+     * @param cause, a Throwable cause
      */
 	public InvalidLoginException(Throwable cause) {
 		super(cause);

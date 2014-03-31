@@ -8,12 +8,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.activites.ReportActivity;
-import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
+//import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.Transaction;
 import cs2340.bobzilla.bobs_wallet.model.User;
@@ -32,7 +33,7 @@ public class ReportActivityPresenter {
 	
 	private ReportActivityView reportActivityView;
 	private String mUserName;
-	private ReportType mReportType;
+	//private ReportType mReportType;
 	private Date mStartDate;
 	private Date mEndDate;
 	private User mUser;
@@ -45,7 +46,7 @@ public class ReportActivityPresenter {
 	public ReportActivityPresenter(ReportActivityView view) {
 		reportActivityView = view;
 		mUserName = reportActivityView.getUserName();
-		mReportType = reportActivityView.getReportType();
+		//mReportType = reportActivityView.getReportType();
 		mStartDate = reportActivityView.getStartDate();
 		mEndDate = reportActivityView.getEndDate();
 		mUser = UserListSingleton.getInstance().getUserList()
@@ -93,7 +94,7 @@ public class ReportActivityPresenter {
 	 * @return the title of the report.
 	 */
 	public String getTitle() {
-		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy", Locale.getDefault());
 		return "Spending Category Report for " + mUser.getFirstName() + " " + mUser.getLastName() + "\n"
 				+ sdf.format(mStartDate) + " to " + sdf.format(mEndDate);
 	}
@@ -119,7 +120,7 @@ public class ReportActivityPresenter {
 	 * @return returns true if the date is valid or not.
 	 */
 	public boolean isValidDate(String stringDate) {
-		SimpleDateFormat sdf = new SimpleDateFormat(Transaction.DATE_FORMAT_PATTERN);
+		SimpleDateFormat sdf = new SimpleDateFormat(Transaction.DATE_FORMAT_PATTERN, Locale.getDefault());
 		Date date;
 		try {
 			date = sdf.parse(stringDate);

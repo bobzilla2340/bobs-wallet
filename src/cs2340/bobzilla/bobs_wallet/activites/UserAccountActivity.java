@@ -29,8 +29,6 @@ import cs2340.bobzilla.bobs_wallet.activites.DatePickerFragment.OnDateChangeList
 import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidReportCreationException;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;

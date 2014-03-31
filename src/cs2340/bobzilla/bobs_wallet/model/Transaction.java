@@ -3,6 +3,7 @@ package cs2340.bobzilla.bobs_wallet.model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Transaction represents a transaction for a User and contains an amount,
@@ -16,7 +17,7 @@ public class Transaction implements Serializable {
 	private TransactionType type;
 	private String date;
 	public static final String DATE_FORMAT_PATTERN = "MM/dd/yy h:mm a";
-	private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN);
+	private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.getDefault());
 	private String mCategory;
 
 

@@ -108,7 +108,7 @@ public class RegistrationActivity extends Activity implements RegistrationActivi
 	public void handleUserRegistration(View view) {
 		try {
 			registrationActivityPresenter.onClick();
-			Toast.makeText(RegistrationActivity.this, "Registraiton is Successful!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(RegistrationActivity.this, "Registration is Successful!", Toast.LENGTH_SHORT).show();
 		}
 		catch(InvalidRegistrationException e) {
 			String toastMessage = e.getMessage();

@@ -42,7 +42,7 @@ public class TransactionAddingTest extends TestCase {
         assertEquals(1, testAccount.getWithdrawals().size());
         testAccount.addTransaction(1301,TransactionType.DEPOSIT,"fun");
         assertEquals(-31.0, testAccount.getCurrentBalance());
-        assertEquals("testing again", testAccount.getAccountName());
+        assertEquals("testing", testAccount.getAccountName());
         assertEquals(0.0, testAccount.getInterestRate());
         assertEquals(1, testAccount.getDeposits().size());
         testAccount.addTransaction(100, TransactionType.WITHDRAWAL, "fun");

@@ -7,6 +7,11 @@ package cs2340.bobzilla.bobs_wallet.exceptions;
 public class InvalidReportCreationException extends Exception {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6827537851039920508L;
+
+	/**
      * Throws an InvalidReportCreation.
      */
 	public InvalidReportCreationException() {

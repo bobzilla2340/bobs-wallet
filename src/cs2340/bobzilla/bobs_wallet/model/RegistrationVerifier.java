@@ -15,10 +15,7 @@ public class RegistrationVerifier {
 	 * @return true if the user name is valid, false if otherwise
 	 */
 	public static boolean isUserNameValid(UserList userList, String userName) {
-		if(userName.equals("")) {
-			return false;
-		}
-		return true;
+        return !userName.equals("");
 	}
 	
 	/**
@@ -40,11 +37,7 @@ public class RegistrationVerifier {
 	 * @return true if not an empty string, false if otherwise
 	 */
 	public static boolean isfirstNameValid(String firstName) {
-		if(firstName.equals("")) {
-			return false;
-		}
-		
-		return true;
+        return !firstName.equals("");
 	}
 	
 	/**
@@ -54,11 +47,7 @@ public class RegistrationVerifier {
 	 * @return true if not an empty string, false if otherwise
 	 */
 	public static boolean isLastNameValid(String lastName) {
-		if(lastName.equals("")) {
-			return false;
-		}
-		
-		return true;
+        return !lastName.equals("");
 	}
 	
 	/**
@@ -70,10 +59,8 @@ public class RegistrationVerifier {
 	 * @return true if they match & are valid, false if otherwise
 	 */
 	public static boolean checkPasswordMatch(String password, String confirmation) {
-		if(password.equals("") || confirmation.equals("")) {
-			return false;
-		}
-		return password.equals(confirmation);
+        return !(password.equals("") || confirmation.equals(""))
+                && password.equals(confirmation);
 	}
 	
 	/**

@@ -21,7 +21,7 @@ public class LoginPresenterTest extends TestCase {
 	private LoginActivityPresenter presenter0, presenter1, presenter2, presenter3, presenter4;
 	
 	
-	@Override
+	//@Override
 	public void setUp() {
 		userListSingleton = UserListSingleton.getInstance();
 		view0 = new LoginActivityMock("", "");
@@ -97,7 +97,7 @@ public class LoginPresenterTest extends TestCase {
 		}
 	}
 	
-	@Override
+	//@Override
 	public void tearDown() {
 		view1 = null;
 		view2 = null;

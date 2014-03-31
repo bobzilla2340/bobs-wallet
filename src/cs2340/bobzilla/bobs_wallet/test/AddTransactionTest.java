@@ -2,8 +2,6 @@ package cs2340.bobzilla.bobs_wallet.test;
 
 import junit.framework.TestCase;
 
-import org.junit.*;
-
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 
@@ -13,7 +11,6 @@ import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 public class AddTransactionTest extends TestCase{
 
 
-    @Test
     public void testDeposit(){
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
         financeAccount.addTransaction(500, TransactionType.DEPOSIT, "Income");
@@ -21,7 +18,6 @@ public class AddTransactionTest extends TestCase{
         assertEquals(financeAccount.getCurrentBalance(), 500.0);
     }
 
-    @Test
     public void testWithdrawal(){
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
         financeAccount.addTransaction(350, TransactionType.WITHDRAWAL, "Toys");
@@ -29,7 +25,6 @@ public class AddTransactionTest extends TestCase{
         assertEquals(financeAccount.getCurrentBalance(), -350.0);
     }
 
-    @Test
     public void testMultDeposit(){
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
         financeAccount.addTransaction(500, TransactionType.DEPOSIT, "Income");
@@ -39,7 +34,6 @@ public class AddTransactionTest extends TestCase{
         assertEquals(financeAccount.getCurrentBalance(), 650.0);
     }
 
-    @Test
     public void testMultWithdrawal(){
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
         financeAccount.addTransaction(350, TransactionType.WITHDRAWAL, "Toys");
@@ -49,7 +43,6 @@ public class AddTransactionTest extends TestCase{
         assertEquals(financeAccount.getCurrentBalance(), -400.0);
     }
 
-    @Test
     public void testDepositWithdrawal(){
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
         financeAccount.addTransaction(500, TransactionType.DEPOSIT, "Income");

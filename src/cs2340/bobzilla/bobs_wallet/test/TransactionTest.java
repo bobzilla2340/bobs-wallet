@@ -22,7 +22,7 @@ public class TransactionTest extends TestCase {
         testAccount.addTransaction(2340,TransactionType.WITHDRAWAL,"fun");
         assertEquals(-2340.0,testAccount.getCurrentBalance());
         assertEquals("test",testAccount.getAccountName());
-        assertEquals(0,testAccount.getInterestRate());
+        assertEquals(0.0,testAccount.getInterestRate());
         assertEquals(1, testAccount.getWithdrawals().size());
 
     }
@@ -33,7 +33,7 @@ public class TransactionTest extends TestCase {
         testAccount.addTransaction(2340,TransactionType.DEPOSIT,"fun");
         assertEquals(2340.0, testAccount.getCurrentBalance());
         assertEquals("test", testAccount.getAccountName());
-        assertEquals(0, testAccount.getInterestRate());
+        assertEquals(0.0, testAccount.getInterestRate());
         assertEquals(1, testAccount.getDeposits());
 
     }
@@ -54,7 +54,7 @@ public class TransactionTest extends TestCase {
         assertEquals(1, testAccount.getDeposits().size());
         testAccount.addTransaction(5, TransactionType.DEPOSIT, "fun");
         assertEquals(5.0, testAccount.getCurrentBalance());
-        assertEquals(0, testAccount.getInterestRate());
+        assertEquals(0.0, testAccount.getInterestRate());
         assertEquals(2, testAccount.getWithdrawals().size());
         assertEquals(2, testAccount.getDeposits().size());
     }

@@ -3,10 +3,7 @@ package cs2340.bobzilla.bobs_wallet.model;
 public class RegistrationVerifier {
 	
 	public static boolean isUserNameValid(UserList userList, String userName) {
-		if(userName.equals("")) {
-			return false;
-		}
-		return true;
+        return !userName.equals("");
 	}
 	
 	public static boolean isUserNameTaken(UserList userList, String userName) {
@@ -14,26 +11,16 @@ public class RegistrationVerifier {
 	}
 	
 	public static boolean isfirstNameValid(String firstName) {
-		if(firstName.equals("")) {
-			return false;
-		}
-		
-		return true;
+        return !firstName.equals("");
 	}
 	
 	public static boolean isLastNameValid(String lastName) {
-		if(lastName.equals("")) {
-			return false;
-		}
-		
-		return true;
+        return !lastName.equals("");
 	}
 	
 	public static boolean checkPasswordMatch(String password, String confirmation) {
-		if(password.equals("") || confirmation.equals("")) {
-			return false;
-		}
-		return password.equals(confirmation);
+        return !(password.equals("") || confirmation.equals(""))
+                && password.equals(confirmation);
 	}
 	
 	public static boolean verifyEmail(String email) {

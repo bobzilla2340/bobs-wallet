@@ -34,7 +34,7 @@ public class TransactionTest extends TestCase {
         assertEquals(2340.0, testAccount.getCurrentBalance());
         assertEquals("test", testAccount.getAccountName());
         assertEquals(0.0, testAccount.getInterestRate());
-        assertEquals(1, testAccount.getDeposits());
+        assertEquals(1, testAccount.getDeposits().size());
 
     }
 

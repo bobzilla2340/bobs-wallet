@@ -237,32 +237,32 @@ public class CreateUserTest extends TestCase {
 			this.passwordConfirmation = passwordConfirmation;
 			this.email = email;
 		}
-		
+
 		@Override
 		public String getUserName() {
 			return username;
 		}
-		
+
 		@Override
 		public String getFirstName() {
 			return firstname;
 		}
-		
+
 		@Override
 		public String getLastName() {
 			return lastname;
 		}
-		
+
 		@Override
 		public String getPassword() {
 			return password;
 		}
-		
+
 		@Override
 		public String getPasswordConfirmation() {
 			return passwordConfirmation;
 		}
-		
+
 		@Override
 		public String getEmailAddress() {
 			return email;

@@ -136,58 +136,77 @@ public class User implements Serializable {
     /**
      * This method allows you to set the user's first name.
      *
-     * @param firstName
+     * @param inputFirstName
      *            The desired first name for the user.
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public final void setFirstName(final String inputFirstName) {
+        this.firstName = inputFirstName;
     }
 
     /**
      * This method allows you to set the user's last name.
      *
-     * @param lastName
+     * @param inputLastName
      *            The desired last name for the user.
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public final void setLastName(final String inputLastName) {
+        this.lastName = inputLastName;
     }
 
     /**
      * This method allows you to set the user's password.
      *
-     * @param password
+     * @param inputPassword
      *            The desired password for the user.
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public final void setPassword(final String inputPassword) {
+        this.password = inputPassword;
     }
 
     /**
      * This method allows you to set the user's email account.
      *
-     * @param email
+     * @param inputEmail
      *            The desired email for the user.
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public final void setEmail(final String inputEmail) {
+        this.email = inputEmail;
     }
 
-    public void addFinanceAccount(String accountName, double interest) {
+    /**
+     * This method adds a finance account to the user's list
+     * of finance accounts.
+     *
+     * @param accountName
+     *              The name of the account.
+     * @param interest
+     *              The interest the account acrews.
+     */
+    public final void addFinanceAccount(final String accountName,
+            final double interest) {
         accountMap.put(accountName, new FinanceAccount(accountName, interest));
     }
 
-    public void removeFinanceAccount(String accountName) {
+    /**
+     * This method removes a finance account.
+     * @param accountName
+     *              The name of the account to remove
+     */
+    public final void removeFinanceAccount(final String accountName) {
         accountMap.remove(accountName);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return userName.hashCode() + firstName.hashCode() + lastName.hashCode()
                 + email.hashCode();
     }
 
-    public Collection<FinanceAccount> getAccounts() {
+    /**
+     * Gets the collection that stores all of the accounts.
+     * @return Gets a collection of the user's finance accounts.
+     */
+    public final Collection<FinanceAccount> getAccounts() {
         return accountMap.values();
     }
 

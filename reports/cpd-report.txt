@@ -1,0 +1,435 @@
+Found a 28 line (74 tokens) duplication in the following files: 
+Starting at line 57 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/RegistrationActivity.java
+Starting at line 38 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/LoginActivity.java
+
+		getMenuInflater().inflate(R.menu.registration, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This ID represents the Home or Up button. In the case of this
+			// activity, the Up button is shown. Use NavUtils to allow users
+			// to navigate up one level in the application structure. For
+			// more details, see the Navigation pattern on Android Design:
+			//
+			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+			//
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public String getUserName() {
+		return userNameEditText.getText().toString();
+	}
+	
+	@Override
+	public String getFirstName() {
+=====================================================================
+Found a 7 line (70 tokens) duplication in the following files: 
+Starting at line 16 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+Starting at line 36 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+    public void testWithdrawal() {
+        FinanceAccount testAccount = new FinanceAccount("testing",0);
+        testAccount.addTransaction(1332,TransactionType.WITHDRAWAL,"fun");
+        assertEquals(-1332.0,testAccount.getCurrentBalance());
+        assertEquals("testing",testAccount.getAccountName());
+        assertEquals(0.0,testAccount.getInterestRate());
+        assertEquals(1, testAccount.getWithdrawals().size());
+=====================================================================
+Found a 16 line (61 tokens) duplication in the following files: 
+Starting at line 101 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+Starting at line 42 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/RegistrationActivity.java
+
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.user_account, menu);
+=====================================================================
+Found a 12 line (54 tokens) duplication in the following files: 
+Starting at line 84 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserFinanceAccountActivity.java
+Starting at line 82 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/ReportActivity.java
+
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case android.R.id.home:
+			Log.e("ReportActivity", "About to navigate up.");
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+=====================================================================
+Found a 5 line (49 tokens) duplication in the following files: 
+Starting at line 49 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 49 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals(0.0, testAccount.getCurrentBalance());
+        assertEquals(2, testAccount.getWithdrawals().size());
+        assertEquals(1, testAccount.getDeposits().size());
+        testAccount.addTransaction(5, TransactionType.DEPOSIT, "fun");
+        assertEquals(5.0, testAccount.getCurrentBalance());
+=====================================================================
+Found a 6 line (47 tokens) duplication in the following files: 
+Starting at line 53 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 53 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals(5.0, testAccount.getCurrentBalance());
+        assertEquals(0.0, testAccount.getInterestRate());
+        assertEquals(2, testAccount.getWithdrawals().size());
+        assertEquals(2, testAccount.getDeposits().size());
+    }
+}
+=====================================================================
+Found a 16 line (47 tokens) duplication in the following files: 
+Starting at line 72 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserFinanceAccountActivity.java
+Starting at line 98 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+
+			arrayAdapter.add(transactions);
+		}
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+=====================================================================
+Found a 14 line (45 tokens) duplication in the following files: 
+Starting at line 74 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserFinanceAccountActivity.java
+Starting at line 42 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/RegistrationActivity.java
+
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+=====================================================================
+Found a 8 line (44 tokens) duplication in the following files: 
+Starting at line 22 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 20 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals("test",testAccount.getAccountName());
+        assertEquals(0.0,testAccount.getInterestRate());
+        assertEquals(1, testAccount.getWithdrawals().size());
+
+    }
+
+    public void testDeposit() {
+        FinanceAccount testAccount = new FinanceAccount("test",0);
+=====================================================================
+Found a 8 line (44 tokens) duplication in the following files: 
+Starting at line 32 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 30 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals("test", testAccount.getAccountName());
+        assertEquals(0.0, testAccount.getInterestRate());
+        assertEquals(1, testAccount.getDeposits().size());
+
+    }
+
+    public void testBoth() {
+        FinanceAccount testAccount = new FinanceAccount("test",0);
+=====================================================================
+Found a 17 line (42 tokens) duplication in the following files: 
+Starting at line 116 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+Starting at line 57 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/RegistrationActivity.java
+Starting at line 38 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/LoginActivity.java
+
+		getMenuInflater().inflate(R.menu.user_account, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This ID represents the Home or Up button. In the case of this
+			// activity, the Up button is shown. Use NavUtils to allow users
+			// to navigate up one level in the application structure. For
+			// more details, see the Navigation pattern on Android Design:
+			//
+			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+			//
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+=====================================================================
+Found a 12 line (42 tokens) duplication in the following files: 
+Starting at line 92 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/ReportActivity.java
+Starting at line 41 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/RegistrationActivity.java
+
+		return super.onOptionsItemSelected(item);
+	}
+	
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
+=====================================================================
+Found a 11 line (41 tokens) duplication in the following files: 
+Starting at line 74 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserFinanceAccountActivity.java
+Starting at line 101 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+Starting at line 93 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/ReportActivity.java
+
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}, if the API is available.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void setupActionBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+	}
+=====================================================================
+Found a 5 line (38 tokens) duplication in the following files: 
+Starting at line 18 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 38 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+
+    public void testWithdrawal() {
+        FinanceAccount testAccount = new FinanceAccount("test",0);
+        testAccount.addTransaction(2340,TransactionType.WITHDRAWAL,"fun");
+        assertEquals(-2340.0,testAccount.getCurrentBalance());
+        assertEquals("test",testAccount.getAccountName());
+=====================================================================
+Found a 17 line (36 tokens) duplication in the following files: 
+Starting at line 98 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/UserAccountActivityPresenterTest.java
+Starting at line 96 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/LoginPresenterTest.java
+
+					" account with valid information.");
+		}
+	}
+	
+	//@Override
+	public void tearDown() {
+		view1 = null;
+		view2 = null;
+		view3 = null;
+		presenter1 = null;
+		presenter2 = null;
+		presenter3 = null;
+		presenter4 = null;
+		userListSingleton = null;
+	}
+	
+	private class UserAccountActivityMock implements UserAccountActivityView {
+=====================================================================
+Found a 4 line (36 tokens) duplication in the following files: 
+Starting at line 67 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/presenter/UserFinanceAccountActivityPresenter.java
+Starting at line 34 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/presenter/UserAccountActivityPresenter.java
+
+	public ArrayList<String> getFormattedTransactions(String userName, String financeAccountName) {
+		UserList userList = UserListSingleton.getInstance().getUserList();
+		User user = userList.getUser(userName);
+		Map<String, FinanceAccount> financeAccounts = user.getFinanceAccountList();
+=====================================================================
+Found a 6 line (35 tokens) duplication in the following files: 
+Starting at line 59 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/DatePickerFragment.java
+Starting at line 73 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/DatePickerFragment.java
+
+		try {
+			mDate = sdf.parse((month + 1) + "/" + day + "/" + year);
+		} catch (ParseException e) {
+
+			e.printStackTrace();
+		}
+=====================================================================
+Found a 4 line (34 tokens) duplication in the following files: 
+Starting at line 21 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 31 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+
+        assertEquals(-2340.0,testAccount.getCurrentBalance());
+        assertEquals("test",testAccount.getAccountName());
+        assertEquals(0.0,testAccount.getInterestRate());
+        assertEquals(1, testAccount.getWithdrawals().size());
+=====================================================================
+Found a 4 line (33 tokens) duplication in the following files: 
+Starting at line 19 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+Starting at line 39 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+Starting at line 44 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals(-1332.0,testAccount.getCurrentBalance());
+        assertEquals("testing",testAccount.getAccountName());
+        assertEquals(0.0,testAccount.getInterestRate());
+        assertEquals(1, testAccount.getWithdrawals().size());
+=====================================================================
+Found a 6 line (32 tokens) duplication in the following files: 
+Starting at line 193 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+Starting at line 247 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+
+			} catch (InvalidAccountCreationException e) {
+				String toastMessage = e.getMessage();
+				Toast.makeText(UserAccountActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+=====================================================================
+Found a 3 line (31 tokens) duplication in the following files: 
+Starting at line 22 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 40 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals("test",testAccount.getAccountName());
+        assertEquals(0.0,testAccount.getInterestRate());
+        assertEquals(1, testAccount.getWithdrawals().size());
+=====================================================================
+Found a 3 line (31 tokens) duplication in the following files: 
+Starting at line 32 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 30 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+Starting at line 45 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals("test", testAccount.getAccountName());
+        assertEquals(0.0, testAccount.getInterestRate());
+        assertEquals(1, testAccount.getDeposits().size());
+=====================================================================
+Found a 4 line (31 tokens) duplication in the following files: 
+Starting at line 46 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 46 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals(1, testAccount.getWithdrawals().size());
+        assertEquals(1, testAccount.getDeposits().size());
+        testAccount.addTransaction(100, TransactionType.WITHDRAWAL, "fun");
+        assertEquals(0.0, testAccount.getCurrentBalance());
+=====================================================================
+Found a 3 line (29 tokens) duplication in the following files: 
+Starting at line 46 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 50 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionTest.java
+Starting at line 50 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/TransactionAddingTest.java
+
+        assertEquals(1, testAccount.getWithdrawals().size());
+        assertEquals(1, testAccount.getDeposits().size());
+        testAccount.addTransaction(100, TransactionType.WITHDRAWAL, "fun");
+=====================================================================
+Found a 4 line (29 tokens) duplication in the following files: 
+Starting at line 28 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/AddTransactionTest.java
+Starting at line 46 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/AddTransactionTest.java
+
+    public void testMultDeposit(){
+        FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
+        financeAccount.addTransaction(500, TransactionType.DEPOSIT, "Income");
+        financeAccount.addTransaction(150, TransactionType.DEPOSIT, "Grandma");
+=====================================================================
+Found a 6 line (29 tokens) duplication in the following files: 
+Starting at line 84 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserFinanceAccountActivity.java
+Starting at line 118 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+Starting at line 82 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/ReportActivity.java
+Starting at line 59 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/RegistrationActivity.java
+Starting at line 40 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/LoginActivity.java
+
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case android.R.id.home:
+=====================================================================
+Found a 5 line (28 tokens) duplication in the following files: 
+Starting at line 54 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/WelcomeActivity.java
+Starting at line 66 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/WelcomeActivity.java
+
+		mSigninButton.setOnClickListener(new View.OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(WelcomeActivity.this, "Sign In", Toast.LENGTH_SHORT).show();
+=====================================================================
+Found a 7 line (28 tokens) duplication in the following files: 
+Starting at line 90 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/RegistrationActivity.java
+Starting at line 54 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/LoginActivity.java
+
+		return lastNameEditText.getText().toString();
+	}
+	
+	@Override
+	public String getPassword() {
+		return passwordEditText.getText().toString();
+	}
+=====================================================================
+Found a 4 line (27 tokens) duplication in the following files: 
+Starting at line 68 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserFinanceAccountActivity.java
+Starting at line 59 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/ReportActivity.java
+
+		arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.user_finance_account_list_text_view);
+		listView.setAdapter(arrayAdapter);
+		
+		for (String transactions : financeAccountPresenter.getFormattedTransactions(userName, financeAccountName)) {
+=====================================================================
+Found a 7 line (25 tokens) duplication in the following files: 
+Starting at line 22 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/UserAccountActivityPresenterTest.java
+Starting at line 21 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/LoginPresenterTest.java
+
+	private UserAccountActivityPresenter presenter0, presenter1, presenter2, presenter3, presenter4;
+	
+	
+	//@Override
+	public void setUp() {
+		userListSingleton = UserListSingleton.getInstance();
+		view0 = new UserAccountActivityMock("joolz", "", "5");
+=====================================================================
+Found a 3 line (25 tokens) duplication in the following files: 
+Starting at line 14 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/AddTransactionTest.java
+Starting at line 28 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/AddTransactionTest.java
+Starting at line 46 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/AddTransactionTest.java
+
+    public void testDeposit(){
+        FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
+        financeAccount.addTransaction(500, TransactionType.DEPOSIT, "Income");
+=====================================================================
+Found a 3 line (25 tokens) duplication in the following files: 
+Starting at line 21 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/AddTransactionTest.java
+Starting at line 37 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/test/AddTransactionTest.java
+
+    public void testWithdrawal(){
+        FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
+        financeAccount.addTransaction(350, TransactionType.WITHDRAWAL, "Toys");
+=====================================================================
+Found a 4 line (25 tokens) duplication in the following files: 
+Starting at line 66 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserFinanceAccountActivity.java
+Starting at line 71 of /Users/sai/Documents/AndroidWorkspace/bobs-wallet/src/cs2340/bobzilla/bobs_wallet/activites/UserAccountActivity.java
+
+				.getFormattedCurrentAccountBalance(financeAccountName));
+
+		arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.user_finance_account_list_text_view);
+		listView.setAdapter(arrayAdapter);

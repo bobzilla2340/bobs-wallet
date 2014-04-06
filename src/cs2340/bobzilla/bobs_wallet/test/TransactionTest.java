@@ -1,33 +1,31 @@
 package cs2340.bobzilla.bobs_wallet.test;
 
-
 import junit.framework.TestCase;
-
 
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 
-
 /**
  * This class will test the addTransaction method in FinanceAccount.
+ * 
  * @author dale
- *
+ * 
  */
 public class TransactionTest extends TestCase {
 
     public void testWithdrawal() {
-        FinanceAccount testAccount = new FinanceAccount("test",0);
-        testAccount.addTransaction(2340,TransactionType.WITHDRAWAL,"fun");
-        assertEquals(-2340.0,testAccount.getCurrentBalance());
-        assertEquals("test",testAccount.getAccountName());
-        assertEquals(0.0,testAccount.getInterestRate());
+        FinanceAccount testAccount = new FinanceAccount("test", 0);
+        testAccount.addTransaction(2340, TransactionType.WITHDRAWAL, "fun");
+        assertEquals(-2340.0, testAccount.getCurrentBalance());
+        assertEquals("test", testAccount.getAccountName());
+        assertEquals(0.0, testAccount.getInterestRate());
         assertEquals(1, testAccount.getWithdrawals().size());
 
     }
 
     public void testDeposit() {
-        FinanceAccount testAccount = new FinanceAccount("test",0);
-        testAccount.addTransaction(2340,TransactionType.DEPOSIT,"fun");
+        FinanceAccount testAccount = new FinanceAccount("test", 0);
+        testAccount.addTransaction(2340, TransactionType.DEPOSIT, "fun");
         assertEquals(2340.0, testAccount.getCurrentBalance());
         assertEquals("test", testAccount.getAccountName());
         assertEquals(0.0, testAccount.getInterestRate());
@@ -36,8 +34,8 @@ public class TransactionTest extends TestCase {
     }
 
     public void testBoth() {
-        FinanceAccount testAccount = new FinanceAccount("test",0);
-        testAccount.addTransaction(2340,TransactionType.WITHDRAWAL,"fun");
+        FinanceAccount testAccount = new FinanceAccount("test", 0);
+        testAccount.addTransaction(2340, TransactionType.WITHDRAWAL, "fun");
         assertEquals(-2340.0, testAccount.getCurrentBalance());
         assertEquals(1, testAccount.getWithdrawals().size());
         assertEquals(0, testAccount.getDeposits().size());

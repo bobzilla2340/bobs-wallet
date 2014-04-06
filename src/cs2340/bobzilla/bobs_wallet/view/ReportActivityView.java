@@ -6,31 +6,36 @@ import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 
 /**
  * Declares the interface for a report activity.
+ *
  * @author jack
  */
 public interface ReportActivityView {
 
     /**
      * Gets the username for the current user.
+     *
      * @return th user's username
      */
-    public String getUserName();
+    String getUserName();
 
     /**
      * Gets the type of the report selected.
+     *
      * @return the ReportType of the report
      */
-	public ReportType getReportType();
+    ReportType getReportType();
 
     /**
      * Gets the start date of the selected report.
+     *
      * @return the start date of the report
      */
-	public Date getStartDate();
+    Date getStartDate();
 
     /**
      * Gets the end date of the selected report.
+     *
      * @return the end date of the report
      */
-	public Date getEndDate();
+    Date getEndDate();
 }

@@ -187,7 +187,7 @@ public class User implements Serializable {
     /**
      * This method removes the finance account.
      * @param accountName
-     *          The name of the account to remove.
+     *      
      */
     public void removeFinanceAccount(String accountName) {
         accountMap.remove(accountName);
@@ -199,11 +199,6 @@ public class User implements Serializable {
                 + email.hashCode();
     }
 
-    /**
-     * This method returns a collection of the accounts.
-     * @return
-     *          A collection of the finance accounts.
-     */
     public Collection<FinanceAccount> getAccounts() {
         return accountMap.values();
     }

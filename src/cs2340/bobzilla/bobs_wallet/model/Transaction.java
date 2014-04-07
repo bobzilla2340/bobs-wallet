@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Transaction represents a transaction for a User and contains an amount, a
  * type, a date, and a category.
- * 
+ *
  * @author Farhan
  */
 public class Transaction implements Serializable {

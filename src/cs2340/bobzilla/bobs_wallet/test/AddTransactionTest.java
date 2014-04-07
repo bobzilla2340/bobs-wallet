@@ -11,33 +11,32 @@ import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 public class AddTransactionTest extends TestCase {
 
     /**
-     * This is the interest rate that is used in
-     * the finance account.
+     * This is the interest rate that is used in the finance account.
      */
     public static final double INTEREST_RATE = 3.2;
     /**
-     * This is an amount that is used to test deposits
-     * in the testDeposit() method.
+     * This is an amount that is used to test deposits in the testDeposit()
+     * method.
      */
     public static final double TEST_DEPOSIT_AMOUNT1 = 500;
     /**
-     * This is is the balance of the finance account
-     * that is used in the testDeposit() method.
+     * This is is the balance of the finance account that is used in the
+     * testDeposit() method.
      */
     public static final double TEST_DEPOSIT_BALANCE1 = 500;
     /**
-     * This is the amount that is withdrawn from the
-     * finance account in the testWithdrawal() method.
+     * This is the amount that is withdrawn from the finance account in the
+     * testWithdrawal() method.
      */
     public static final double TEST_WITHDRAWAL_AMOUNT1 = 350;
     /**
-     * This is the amount that is in the finance account
-     * after withdrawal in the testWithdrawal() method.
+     * This is the amount that is in the finance account after withdrawal in the
+     * testWithdrawal() method.
      */
     public static final double TEST_WITHDRAWAL_BALANCE1 = -350;
+
     /**
-     * This method tests the deposit for the finance
-     * account.
+     * This method tests the deposit for the finance account.
      */
     public final void testDeposit() {
         FinanceAccount financeAccount = new FinanceAccount("test account",
@@ -46,13 +45,11 @@ public class AddTransactionTest extends TestCase {
                 TransactionType.DEPOSIT, "Income");
         assertEquals(financeAccount.getDeposits().get(0).getCategory(),
                 "Income");
-        assertEquals(financeAccount.getCurrentBalance(),
-                TEST_DEPOSIT_BALANCE1);
+        assertEquals(financeAccount.getCurrentBalance(), TEST_DEPOSIT_BALANCE1);
     }
 
     /**
-     * This method tests the withdrawal for the
-     * finance account.
+     * This method tests the withdrawal for the finance account.
      */
     public final void testWithdrawal() {
         FinanceAccount financeAccount = new FinanceAccount("test account",
@@ -66,8 +63,7 @@ public class AddTransactionTest extends TestCase {
     }
 
     /**
-     * This method tests multiple deposits of the
-     * finance account.
+     * This method tests multiple deposits of the finance account.
      */
     public final void testMultDeposit() {
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
@@ -80,8 +76,7 @@ public class AddTransactionTest extends TestCase {
     }
 
     /**
-     * This method tests multiple withdrawals of the
-     * finance account.
+     * This method tests multiple withdrawals of the finance account.
      */
     public final void testMultWithdrawal() {
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
@@ -94,8 +89,8 @@ public class AddTransactionTest extends TestCase {
     }
 
     /**
-     * This method tests multiple deposits and
-     * withdrawals on the finance account.
+     * This method tests multiple deposits and withdrawals on the finance
+     * account.
      */
     public final void testDepositWithdrawal() {
         FinanceAccount financeAccount = new FinanceAccount("test account", 3.2);
@@ -111,4 +106,3 @@ public class AddTransactionTest extends TestCase {
     }
 
 }
-

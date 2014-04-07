@@ -17,24 +17,47 @@ import android.widget.DatePicker;
 import cs2340.bobzilla.bobs_wallet.R;
 
 /**
- * Custom fragment hosting a DatePicker dialog
+ * Custom fragment hosting a DatePicker dialog.
  * 
  * @author Jennifer
  * 
  */
 public class DatePickerFragment extends DialogFragment {
+    /**
+     * This is the listener that checks to see if the user
+     * has picked a date on the dial or not.
+     */
     private OnDateChangeListener mCallback;
+    /**
+     * This is the date.
+     */
     private String mDateType;
-    public final String DATE_FORMAT_PATTERN = "MM/dd/yyyy";
+    /**
+     * This is the format for the date.
+     */
+    private final String DATE_FORMAT_PATTERN = "MM/dd/yyyy";
+    /**
+     * This is the date formatter object.
+     */
     private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_PATTERN);
+    /**
+     * This is the date.
+     */
     private Date mDate;
 
     /**
-     * Defines callback interface for hosting activity to implement
+     * Defines callback interface for hosting activity to implement.
      * 
      */
     public interface OnDateChangeListener {
-        public void onDateChange(Date date, String dateType);
+        /**
+         * This method is used to react to changes in the date.
+         * @param date
+         *          The date the user has selected.
+         * @param dateType
+         *          The format for the date that has been selected.
+         */
+        void onDateChange(Date date, String dateType);
     }
 
     @Override
@@ -109,10 +132,12 @@ public class DatePickerFragment extends DialogFragment {
         // The title of the dialog differs based on whether the user is
         // selecting the
         // start date of the report or the end date.
-        if (mDateType.equals("start"))
+        if (mDateType.equals("start")) {
             result.setTitle(R.string.date_picker_start_date_title);
-        else
+        }
+        else {
             result.setTitle(R.string.date_picker_end_date_title);
+        }
         return result.create();
     }
 }

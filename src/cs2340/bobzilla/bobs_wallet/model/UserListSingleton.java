@@ -2,7 +2,7 @@ package cs2340.bobzilla.bobs_wallet.model;
 
 /**
  * The UserListSingleton class is used to access the UserList data structure.
- *
+ * 
  * @author Farhan
  */
 public class UserListSingleton {
@@ -12,8 +12,7 @@ public class UserListSingleton {
      */
     private static UserListSingleton userListSingleton;
     /**
-     * This is the data structure that this singleton
-     * keeps track of.
+     * This is the data structure that this singleton keeps track of.
      */
     private UserList userList;
 
@@ -26,7 +25,7 @@ public class UserListSingleton {
 
     /**
      * Gets the userListSingleton.
-     *
+     * 
      * @return userListSingleton
      */
     public static UserListSingleton getInstance() {
@@ -38,7 +37,7 @@ public class UserListSingleton {
 
     /**
      * Gets the user list.
-     *
+     * 
      * @return userList
      */
     public final UserList getUserList() {

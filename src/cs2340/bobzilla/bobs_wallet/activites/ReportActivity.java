@@ -24,19 +24,50 @@ import cs2340.bobzilla.bobs_wallet.view.ReportActivityView;
  * 
  */
 public class ReportActivity extends Activity implements ReportActivityView {
+    /**
+     * This is the presenter this activity is tied to.
+     */
     private ReportActivityPresenter reportActivityPresenter;
 
     public enum ReportType {
         SPENDINGCATEGORY
     };
 
+    /**
+     * This is the type of the report specified by
+     * the previous activity.
+     */
     public static final String EXTRA_TYPE = "type";
+    /**
+     * This is the user name associated with the
+     * previous activity.
+     */
     public static final String EXTRA_USERNAME = "username";
+    /**
+     * Start date for the report, from the previous
+     * activity.
+     */
     public static final String EXTRA_STARTDATE = "startdate";
+    /**
+     * Ending date for the report, from the previous
+     * activity.
+     */
     public static final String EXTRA_ENDDATE = "enddate";
+    /**
+     * This is the report type.
+     */
     private ReportType mType;
+    /**
+     * User name associated with the report.
+     */
     private String mUserName;
+    /**
+     * Start date of the report.
+     */
     private Date mStartDate;
+    /**
+     * Ending date of the report.
+     */
     private Date mEndDate;
 
     @Override
@@ -71,18 +102,23 @@ public class ReportActivity extends Activity implements ReportActivityView {
     }
 
     // Getters used by ReportActivityPresenter
+    
+    @Override
     public String getUserName() {
         return mUserName;
     }
 
+    @Override
     public ReportType getReportType() {
         return mType;
     }
 
+    @Override
     public Date getStartDate() {
         return mStartDate;
     }
 
+    @Override
     public Date getEndDate() {
         return mEndDate;
     }
@@ -90,10 +126,10 @@ public class ReportActivity extends Activity implements ReportActivityView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            Log.e("ReportActivity", "About to navigate up.");
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
+            case android.R.id.home:
+                Log.e("ReportActivity", "About to navigate up.");
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
-  <local-check-config name="CS 2340 Checkstyle Rules" location="/Users/sai/Downloads/CS2340.checkstyle.rules" type="external" description="This is the CS 2340 checkstyle rules.">
+  <local-check-config name="CS 2340 Checkstyle" location="/Users/sai/Documents/AndroidWorkspace/bobs-wallet/CS2340Checkstyle.xml" type="external" description="This is the checkstyle rule to use for CS 2340.">
     <additional-data name="protect-config-file" value="false"/>
   </local-check-config>
-  <fileset name="all" enabled="true" check-config-name="Sun Checks" local="false">
+  <fileset name="all" enabled="true" check-config-name="CS 2340 Checkstyle" local="true">
     <file-match-pattern match-pattern="." include-pattern="true"/>
   </fileset>
 </fileset-config>

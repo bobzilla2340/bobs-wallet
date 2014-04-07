@@ -27,25 +27,67 @@ import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 import cs2340.bobzilla.bobs_wallet.presenter.UserFinanceAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserFinanceAccountActivityView;
 
+/**
+ * This activity allows the user to view all of the deposits
+ * and transactions for a particular finance account.
+ * @author sai
+ *
+ */
 public class UserFinanceAccountActivity extends Activity implements
         UserFinanceAccountActivityView {
 
+    /**
+     * This is the name of the account.
+     */
     private TextView accountNameTextView;
+    /**
+     * This is the balance of the account balance.
+     */
     private TextView accountBalanceTextView;
+    /**
+     * This is the amount of transactions in the
+     * account.
+     */
     private EditText transactionAmountEditText;
-
+    /**
+     * This is the reference to the presenter for this activity.
+     */
     private UserFinanceAccountActivityPresenter financeAccountPresenter;
+    /**
+     * This is used to disipaly the list of transactions.
+     */
     private ListView listView;
+    /**
+     * This stores the actual transactions.
+     */
     private ArrayAdapter<String> arrayAdapter;
-
+    /**
+     * This is the name of the finance account.
+     */
     private String financeAccountName;
+    /**
+     * This is the username.
+     */
     private String userName;
-
+    /**
+     * This is the transaction type.
+     */
     private TransactionType mTransactionType;
+    /**
+     * This is the spinner.
+     */
     private Spinner mSpinner;
+    /**
+     * This is the category.
+     */
     private String mSelectedCategory;
-
+    /**
+     * Start date of the report.
+     */
     public Date startDate;
+    /**
+     * End date of the report.
+     */
     public Date endDate;
 
     @Override
@@ -92,14 +134,21 @@ public class UserFinanceAccountActivity extends Activity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            Log.e("ReportActivity", "About to navigate up.");
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
+            case android.R.id.home:
+                Log.e("ReportActivity", "About to navigate up.");
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method reacts to when the user wants to make a
+     * new transaction.
+     * @param view
+     *          The view to be modified when the user
+     *          wants to add a transaction.
+     */
     public void onClick(View view) {
         LayoutInflater inflater = UserFinanceAccountActivity.this
                 .getLayoutInflater();
@@ -134,66 +183,72 @@ public class UserFinanceAccountActivity extends Activity implements
      * spinner) is changed.
      * 
      * @param view
+     *          The view that is changed when a transaction is chosen.
      */
     public void onTransactionTypeClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
 
         switch (view.getId()) {
-        case R.id.createDepositRadioButton:
-            if (checked) {
-                mTransactionType = TransactionType.DEPOSIT;
-                mSpinner.setAdapter(createAdapter(TransactionType.DEPOSIT));
-            }
-            break;
-        case R.id.createWithdrawalRadioButton:
-            if (checked) {
-                mTransactionType = TransactionType.WITHDRAWAL;
-                mSpinner.setAdapter(createAdapter(TransactionType.WITHDRAWAL));
-            }
-            break;
+            case R.id.createDepositRadioButton:
+                if (checked) {
+                    mTransactionType = TransactionType.DEPOSIT;
+                    mSpinner.setAdapter(createAdapter(TransactionType.DEPOSIT));
+                }
+                break;
+            case R.id.createWithdrawalRadioButton:
+                if (checked) {
+                    mTransactionType = TransactionType.WITHDRAWAL;
+                    mSpinner.setAdapter(createAdapter(TransactionType.WITHDRAWAL));
+                }
+                break;
         }
     }
 
     /**
-     * ArrayAdapter created based on the transaction type Used in
+     * ArrayAdapter created based on the transaction type Used in.
      * onTransactionTypeClicked method
      * 
      * @param type
+     *          The type of the transaction.
      * @return
+     *          The adapter to be displayed in the list view.
      */
     public ArrayAdapter<CharSequence> createAdapter(TransactionType type) {
         ArrayAdapter<CharSequence> adapter = null;
         switch (type) {
-        case DEPOSIT:
-            adapter = ArrayAdapter.createFromResource(this,
-                    R.array.deposit_categories,
-                    android.R.layout.simple_spinner_item);
-            break;
-        case WITHDRAWAL:
-            adapter = ArrayAdapter.createFromResource(this,
-                    R.array.withdrawal_categories,
-                    android.R.layout.simple_spinner_item);
-            break;
+            case DEPOSIT:
+                adapter = ArrayAdapter.createFromResource(this,
+                        R.array.deposit_categories,
+                        android.R.layout.simple_spinner_item);
+                break;
+            case WITHDRAWAL:
+                adapter = ArrayAdapter.createFromResource(this,
+                        R.array.withdrawal_categories,
+                        android.R.layout.simple_spinner_item);
+                break;
         }
         return adapter;
     }
 
-    /*
+    /**
      * Adds a transaction based on the type (Withdrawal/Deposit) passed in.
+     * 
+     * @param type
+     *          The type of the transaction.
      */
     public void createTransaction(TransactionType type) {
         String typeSymbol = "";
         String transactionName = "";
 
         switch (type) {
-        case DEPOSIT:
-            typeSymbol = "D";
-            transactionName = "Deposit";
-            break;
-        case WITHDRAWAL:
-            typeSymbol = "W";
-            transactionName = "Withdrawal";
-            break;
+            case DEPOSIT:
+                typeSymbol = "D";
+                transactionName = "Deposit";
+                break;
+            case WITHDRAWAL:
+                typeSymbol = "W";
+                transactionName = "Withdrawal";
+                break;
         }
         try {
             // Calls presenter's onClick method to make proper changes to model

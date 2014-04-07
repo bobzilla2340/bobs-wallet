@@ -10,7 +10,7 @@ import cs2340.bobzilla.bobs_wallet.view.RegistrationActivityView;
 
 /**
  * A presenter class for the registration activity.
- *
+ * 
  * @author jack
  */
 public class RegistrationActivityPresenter implements ClickListener {
@@ -22,7 +22,7 @@ public class RegistrationActivityPresenter implements ClickListener {
     /**
      * Constructs the RegistrationActivityPresenter based on the corresponding
      * view.
-     *
+     * 
      * @param view
      *            the corresponding view.
      */
@@ -47,8 +47,7 @@ public class RegistrationActivityPresenter implements ClickListener {
         } else if (RegistrationVerifier.isUserNameTaken(userList, userName)) {
             throw new InvalidRegistrationException("That username is taken!");
         } else if (!RegistrationVerifier.isfirstNameValid(firstName)) {
-            throw new
-                InvalidRegistrationException("Please enter a first name!");
+            throw new InvalidRegistrationException("Please enter a first name!");
         } else if (!RegistrationVerifier.isLastNameValid(lastName)) {
             throw new InvalidRegistrationException("Please enter a last name!");
         } else if (!RegistrationVerifier.checkPasswordMatch(password,
@@ -56,17 +55,15 @@ public class RegistrationActivityPresenter implements ClickListener {
             throw new InvalidRegistrationException(
                     "Password and Confirmation do not match!");
         } else if (!RegistrationVerifier.verifyEmail(email)) {
-            throw new
-                InvalidRegistrationException("Please enter a vaid email!");
+            throw new InvalidRegistrationException("Please enter a vaid email!");
         } else {
-            createUser(userList, userName, firstName,
-                    lastName, password, email);
+            createUser(userList, userName, firstName, lastName, password, email);
         }
     }
 
     /**
      * Registers a new user.
-     *
+     * 
      * @param userList
      *            the userList in which to place the new user
      * @param userName

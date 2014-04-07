@@ -9,5 +9,10 @@ import java.io.Serializable;
  * @author Farhan
  */
 public enum TransactionType implements Serializable {
+    /**
+     * DEPOSIT indicates that the transaction added money.
+     * WITHDRAWAL indicates that the transaction removed
+     * money.
+     */
     DEPOSIT, WITHDRAWAL
 }

@@ -33,24 +33,76 @@ import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
-public class UserAccountActivity extends FragmentActivity implements
-        UserAccountActivityView, OnDateChangeListener {
+/**
+ * This is the user account activity that is associated with the
+ * user's account.
+ * 
+ * @author sai
+ *
+ */
+public class UserAccountActivity extends FragmentActivity implements UserAccountActivityView, OnDateChangeListener {
 
+    /**
+     * The test to display on login.
+     */
     private TextView welcomeTextView;
+    /**
+     * The name of the account.
+     */
     private EditText accountNameEditText;
+    /**
+     * The interest rate on the account.
+     */
     private EditText interestRateEditText;
+    /**
+     * The user name that owns the account.
+     */
     private String userName;
+    /**
+     * The presenter that is tied with the account.
+     */
     private UserAccountActivityPresenter userAccountActivityPresenter;
 
+    /**
+     * The list view that is implemented in this activity.
+     */
     private ListView listView;
+    /**
+     * This is used to store the values that go into the list view.
+     */
     private ArrayAdapter<String> arrayAdapter;
-    public static final String USER_FINANCE_ACCOUNT_NAME = "cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserFinanceAccountName";
-    public static final String USER_NAME = "cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserName";
+    /**
+     * This is a reference to the account name, can be used
+     * if an intent from this activity is broadcast.
+     */
+    public static final String USER_FINANCE_ACCOUNT_NAME = 
+               "cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserFinanceAccountName";
+    /**
+     * This is a reference to the user name, can be used if
+     * an intent from this activity is broadcast.
+     */
+    public static final String USER_NAME = 
+            "cs2340.bobzilla.bobs_wallet.activities.UserAccountActivity.UserName";
 
+    /**
+     * This is a reference to the date choose dialog.
+     */
     private static final String DIALOG_DATE = "date";
+    /**
+     * This is a reference to the date type.
+     */
     public static final String EXTRA_DATETYPE = "dateType";
+    /**
+     * This is the report type that is chosen.
+     */
     private ReportType mReportType;
+    /**
+     * This is the starting date of the report.
+     */
     private Date mReportStartDate;
+    /**
+     * This is the ending date of the report.
+     */
     private Date mReportEndDate;
 
     @Override
@@ -126,7 +178,7 @@ public class UserAccountActivity extends FragmentActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
+            case android.R.id.home:
             // This ID represents the Home or Up button. In the case of this
             // activity, the Up button is shown. Use NavUtils to allow users
             // to navigate up one level in the application structure. For
@@ -134,19 +186,19 @@ public class UserAccountActivity extends FragmentActivity implements
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        case R.id.create_report:
-            Toast.makeText(UserAccountActivity.this,
-                    "Clicked on create report.", Toast.LENGTH_SHORT).show();
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.create_report:
+                Toast.makeText(UserAccountActivity.this,
+                        "Clicked on create report.", Toast.LENGTH_SHORT).show();
 
             /*
              * Dialog to select report type
              */
-            AlertDialog.Builder reportTypeBuilder = new AlertDialog.Builder(
-                    UserAccountActivity.this);
+                AlertDialog.Builder reportTypeBuilder = new AlertDialog.Builder(
+                        UserAccountActivity.this);
             // Add list options
-            reportTypeBuilder
+                reportTypeBuilder
                     .setTitle(R.string.report_type_prompt)
                     .setItems(R.array.report_types,
                             new DialogInterface.OnClickListener() {
@@ -154,8 +206,9 @@ public class UserAccountActivity extends FragmentActivity implements
                                 @Override
                                 public void onClick(DialogInterface dialog,
                                         int which) {
-                                    if (which == 0)
+                                    if (which == 0) {
                                         mReportType = ReportType.SPENDINGCATEGORY;
+                                    }
                                     FragmentManager fm = UserAccountActivity.this
                                             .getSupportFragmentManager();
                                     DatePickerFragment startDateDialog = new DatePickerFragment();
@@ -184,6 +237,13 @@ public class UserAccountActivity extends FragmentActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method reacts to when the user wants to make a
+     * new finance account.
+     * @param view
+     *          The view to modify after reacting to the
+     *          UI event.
+     */
     public void onClick(View view) {
         LayoutInflater inflater = UserAccountActivity.this.getLayoutInflater();
         final View alertDialogView = inflater
@@ -203,6 +263,13 @@ public class UserAccountActivity extends FragmentActivity implements
                 .findViewById(R.id.alertDialogUserFinanceAccountIntrestRateEditText);
     }
 
+    /**
+     * This is the alert dialog box listener, this class
+     * is used to handle UI events for when the user wants
+     * to create a finance account.
+     * @author sai
+     *
+     */
     private class AlertDialogClickListener implements
             DialogInterface.OnClickListener {
 
@@ -238,9 +305,10 @@ public class UserAccountActivity extends FragmentActivity implements
     }
 
     /**
-     * Creates and displays a fragment that hosts a datepicker dialog
+     * Creates and displays a fragment that hosts a date picker dialog.
      * 
      * @param v
+     *          The view that the date picker dialog is shown on.
      */
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
@@ -253,6 +321,11 @@ public class UserAccountActivity extends FragmentActivity implements
      * DatePickerFragment is started with "end" as an argument for date type.
      * When this method is called for the second time, this activity now has
      * both dates needed to pass on to the ReportActivity.
+     * 
+     * @param date
+     *          The date of the report.
+     * @param dateType
+     *          The format of the date.
      */
     public void onDateChange(Date date, String dateType) {
         if (dateType.equals("start")) {
@@ -278,6 +351,13 @@ public class UserAccountActivity extends FragmentActivity implements
         }
     }
 
+    /**
+     * This method starts the creation of the report and finally
+     * calls the report view.
+     * @throws InvalidReportCreationException
+     *          Thrown when the user selects invalid parameters
+     *          to generate the report.
+     */
     private void startReport() throws InvalidReportCreationException {
         if (!ReportActivityPresenter
                 .isSameDay(mReportStartDate, mReportEndDate)

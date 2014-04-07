@@ -25,9 +25,9 @@ import cs2340.bobzilla.bobs_wallet.view.ReportActivityView;
  * This is the presenter that interfaces between the ReportActivity and the
  * applicaition model. It contains various methods that are invoked by
  * interfaces to the android activities.
- *
+ * 
  * @author sai
- *
+ * 
  */
 public class ReportActivityPresenter {
 
@@ -36,8 +36,7 @@ public class ReportActivityPresenter {
      */
     private ReportActivityView reportActivityView;
     /**
-     * This is the user name that is associated with
-     * the current session.
+     * This is the user name that is associated with the current session.
      */
     private String mUserName;
     /**
@@ -49,14 +48,13 @@ public class ReportActivityPresenter {
      */
     private Date mEndDate;
     /**
-     * This is the user object for the current
-     * session.
+     * This is the user object for the current session.
      */
     private User mUser;
 
     /**
      * Retrieves all the needed information from the view.
-     *
+     * 
      * @param inputView
      *            the class that implements the ReportActivityView
      */
@@ -73,7 +71,7 @@ public class ReportActivityPresenter {
     /**
      * Returns a map containing category names as keys and the category amounts
      * as values.
-     *
+     * 
      * @return a mapping between the category names and the amounts.
      */
     private Map<String, Double> getCategoryTotals() {
@@ -110,7 +108,7 @@ public class ReportActivityPresenter {
 
     /**
      * Constructs a customized title for the user.
-     *
+     * 
      * @return the title of the report.
      */
     public final String getTitle() {
@@ -123,7 +121,7 @@ public class ReportActivityPresenter {
 
     /**
      * Returns a list of formatted categories and category totals.
-     *
+     * 
      * @return a list of totals in string format.
      */
     public final List<String> getFormattedTotals() {
@@ -140,9 +138,9 @@ public class ReportActivityPresenter {
     /**
      * Helper method used to determine whether a transaction is within a date
      * range.
-     *
+     * 
      * @param stringDate
-     *              a date to be checked
+     *            a date to be checked
      * @return returns true if the date is valid or not.
      */
     public final boolean isValidDate(final String stringDate) {
@@ -167,7 +165,7 @@ public class ReportActivityPresenter {
     /**
      * Helper method to determine whether 2 dates of (Date type) have the same
      * day.
-     *
+     * 
      * @param date1
      *            This is the beginning date of the report.
      * @param date2

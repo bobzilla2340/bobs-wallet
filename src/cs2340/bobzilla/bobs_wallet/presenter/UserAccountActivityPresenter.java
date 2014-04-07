@@ -13,7 +13,7 @@ import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
 /**
  * A presenter class for the user account activity.
- *
+ * 
  * @author jack
  */
 public class UserAccountActivityPresenter implements ClickListener {
@@ -24,18 +24,17 @@ public class UserAccountActivityPresenter implements ClickListener {
 
     /**
      * Constructs a UserAccountActivityPresenter for the corresponding view.
-     *
+     * 
      * @param inputView
      *            the corresponding view
      */
-    public UserAccountActivityPresenter(
-            final UserAccountActivityView inputView) {
+    public UserAccountActivityPresenter(final UserAccountActivityView inputView) {
         userAccountActivityView = inputView;
     }
 
     /**
      * Gets the set of finance account names associated with the given username.
-     *
+     * 
      * @param userName
      *            the username for which to find associated accounts
      * @return the names of all the user's finance accounts

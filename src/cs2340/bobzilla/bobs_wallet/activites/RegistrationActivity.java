@@ -15,15 +15,50 @@ import cs2340.bobzilla.bobs_wallet.exceptions.InvalidRegistrationException;
 import cs2340.bobzilla.bobs_wallet.presenter.RegistrationActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.RegistrationActivityView;
 
+/**
+ * This activity is presented when a user wants to 
+ * register with the application.
+ * 
+ * @author sai
+ *
+ */
 public class RegistrationActivity extends Activity implements
         RegistrationActivityView {
 
+    /**
+     * This is a reference to where the user enters their
+     * user name.
+     */
     private EditText userNameEditText;
+    /**
+     * This is a reference to where the user enters their
+     * first name.
+     */
     private EditText firstNameEditText;
+    /**
+     * This is a reference to where the user enters their
+     * last name.
+     */
     private EditText lastNameEditText;
+    /**
+     * This is a reference to where the user enters their
+     * password.
+     */
     private EditText passwordEditText;
+    /**
+     * This is a reference to where the user enters their
+     * password confirmation.
+     */
     private EditText passwordConfirmationEditText;
+    /**
+     * This is a reference to where the user enters their
+     * email address.
+     */
     private EditText emailEditText;
+    /**
+     * This is a reference to the presenter that is associated
+     * with this activity.
+     */
     private RegistrationActivityPresenter registrationActivityPresenter;
 
     @Override
@@ -62,7 +97,7 @@ public class RegistrationActivity extends Activity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
+            case android.R.id.home:
             // This ID represents the Home or Up button. In the case of this
             // activity, the Up button is shown. Use NavUtils to allow users
             // to navigate up one level in the application structure. For
@@ -70,8 +105,8 @@ public class RegistrationActivity extends Activity implements
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -106,6 +141,12 @@ public class RegistrationActivity extends Activity implements
         return emailEditText.getText().toString();
     }
 
+    /**
+     * This method handles the registration when the user
+     * clicks the "register" button.
+     * @param view
+     *          The view this method interacts with.
+     */
     public void handleUserRegistration(View view) {
         try {
             registrationActivityPresenter.onClick();

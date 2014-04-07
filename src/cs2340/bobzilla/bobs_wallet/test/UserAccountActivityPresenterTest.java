@@ -17,19 +17,67 @@ import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
  */
 public class UserAccountActivityPresenterTest extends TestCase {
 
+    /**
+     * This is the link to the singleton.
+     */
     private UserListSingleton userListSingleton;
-    private UserAccountActivityView view0, view1, view2, view3, view4;
-    private UserAccountActivityPresenter presenter0, presenter1, presenter2,
-            presenter3, presenter4;
+    /**
+     * View test case 1.
+     */
+    private UserAccountActivityView view0;
+    /**
+     * View test case 2.
+     */
+    private UserAccountActivityView view1;
+    /**
+     * View test case 3.
+     */
+    private UserAccountActivityView view2;
+    /**
+     * View test case 4.
+     */
+    private UserAccountActivityView view3;
+    /**
+     * View Test case 5.
+     */
+    private UserAccountActivityView view4;
+    /**
+     * Presenter test case 1.
+     */
+    private UserAccountActivityPresenter presenter0;
+    /**
+     * Presenter test case 2.
+     */
+    private UserAccountActivityPresenter presenter1;
+    /**
+     * Presenter test case 3.
+     */
+    private UserAccountActivityPresenter presenter2;
+    /**
+     * Presenter test case 4.
+     */
+    private UserAccountActivityPresenter presenter3;
+    /**
+     * Presenter test case 5.
+     */
+    private UserAccountActivityPresenter presenter4;
+    /**
+     * The username used in test cases.
+     */
+    private String userName = "joolz";
+    /**
+     * Account name.
+     */
+    private String accountName = "whee";
 
-    // @Override
+    @Override
     public void setUp() {
         userListSingleton = UserListSingleton.getInstance();
-        view0 = new UserAccountActivityMock("joolz", "", "5");
-        view1 = new UserAccountActivityMock("joolz", "empty", "");
-        view2 = new UserAccountActivityMock("joolz", "whee", "-1000");
-        view3 = new UserAccountActivityMock("joolz", "whee", "0");
-        view4 = new UserAccountActivityMock("joolz", "valid", "10");
+        view0 = new UserAccountActivityMock(userName, "", "5");
+        view1 = new UserAccountActivityMock(userName, "empty", "");
+        view2 = new UserAccountActivityMock(userName, accountName, "-1000");
+        view3 = new UserAccountActivityMock(userName, accountName, "0");
+        view4 = new UserAccountActivityMock(userName, "valid", "10");
         presenter0 = new UserAccountActivityPresenter(view0);
         presenter1 = new UserAccountActivityPresenter(view1);
         presenter2 = new UserAccountActivityPresenter(view2);
@@ -37,11 +85,14 @@ public class UserAccountActivityPresenterTest extends TestCase {
         presenter4 = new UserAccountActivityPresenter(view4);
 
         UserList list = userListSingleton.getUserList();
-        User user1 = new User("joolz", "julia", "ting", "12345",
+        User user1 = new User(userName, "julia", "ting", "12345",
                 "julia.ting@gatech.edu");
         list.addUser(user1);
     }
 
+    /**
+     * This tests to see if an account is created with an empty name.
+     */
     public void testFailedAccountCreationEmptyName() {
         try {
             presenter0.onClick();
@@ -52,7 +103,10 @@ public class UserAccountActivityPresenterTest extends TestCase {
             // catches the exception.
         }
     }
-
+    
+    /**
+     * This test to see if an account is created without an interest rate.
+     */
     public void testFailedAccountCreationEmptyInterest() {
         try {
             presenter1.onClick();
@@ -64,6 +118,9 @@ public class UserAccountActivityPresenterTest extends TestCase {
         }
     }
 
+    /**
+     * This test to see if an account is created with a negative interest.
+     */
     public void testFailedAccountCreationNegativeInterest() {
         try {
             presenter2.onClick();
@@ -75,6 +132,9 @@ public class UserAccountActivityPresenterTest extends TestCase {
         }
     }
 
+    /**
+     * This tests to see if an account is created with a zero interest.
+     */
     public void testFailedAccountCreationZeroInterest() {
         try {
             presenter3.onClick();
@@ -86,6 +146,9 @@ public class UserAccountActivityPresenterTest extends TestCase {
         }
     }
 
+    /**
+     * This tests to see if the account creation is successful.
+     */
     public void testAccountCreationIsSuccessful() {
         try {
             presenter4.onClick();
@@ -95,7 +158,7 @@ public class UserAccountActivityPresenterTest extends TestCase {
         }
     }
 
-    // @Override
+    @Override
     public void tearDown() {
         view1 = null;
         view2 = null;
@@ -107,16 +170,40 @@ public class UserAccountActivityPresenterTest extends TestCase {
         userListSingleton = null;
     }
 
+    /**
+     * This is a mock class that test the user account activity view.
+     * 
+     * @author sai
+     *
+     */
     private class UserAccountActivityMock implements UserAccountActivityView {
+        /**
+         * The name of the account.
+         */
         private String accountName;
+        /**
+         * The user name.
+         */
         private String userName;
+        /**
+         * The interest rate.
+         */
         private String interestRate;
 
-        public UserAccountActivityMock(String userName, String accountName,
-                String interestRate) {
-            this.userName = userName;
-            this.accountName = accountName;
-            this.interestRate = interestRate;
+        /**
+         * This makes the mock object.
+         * @param inputUserName
+         *          The name of the user.
+         * @param inputAccountName
+         *          The name of the account.
+         * @param inputIterestRate
+         *          The interest rate of the account.
+         */
+        public UserAccountActivityMock(String inputUserName, String inputAccountName,
+                String inputIterestRate) {
+            this.userName = inputUserName;
+            this.accountName = inputAccountName;
+            this.interestRate = inputIterestRate;
         }
 
         @Override

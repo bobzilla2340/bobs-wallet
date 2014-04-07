@@ -8,14 +8,14 @@ import java.util.Map.Entry;
 
 /**
  * The UserList class maps String userNames to User objects with a HashMap.
- *
+ * 
  * @author Farhan
  */
 public class UserList implements UserListModel, Serializable {
 
     /**
-     * This is the serial version ID for when the application
-     * is being saved to the disk.
+     * This is the serial version ID for when the application is being saved to
+     * the disk.
      */
     private static final long serialVersionUID = -2882484650116333101L;
     /**
@@ -62,7 +62,7 @@ public class UserList implements UserListModel, Serializable {
 
     /**
      * Gets a list of User objects.
-     *
+     * 
      * @return a userList
      */
     public final List<User> getUserSet() {

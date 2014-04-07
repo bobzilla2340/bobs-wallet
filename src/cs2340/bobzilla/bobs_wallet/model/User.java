@@ -9,15 +9,14 @@ import java.util.Map;
  * This class provides a template for any user of Bob's Wallet. It allows you to
  * query and set for basic information about a user, namely, user name, first
  * name, last name, password, and e-mail.
- *
+ * 
  * @author Sai
- *
+ * 
  */
 public class User implements Serializable {
 
     /**
-     * This is the serial version ID for when the object
-     * is written to the disk.
+     * This is the serial version ID for when the object is written to the disk.
      */
     private static final long serialVersionUID = -2202715094107986888L;
     /**
@@ -47,6 +46,7 @@ public class User implements Serializable {
 
     /**
      * This is the constructor for the user object.
+     * 
      * @param inputUserName
      *            The user's user name.
      * @param inputFirstName
@@ -71,7 +71,7 @@ public class User implements Serializable {
 
     /**
      * This method returns the user's user name.
-     *
+     * 
      * @return userName The user's user name.
      */
     public final String getUserName() {
@@ -80,7 +80,7 @@ public class User implements Serializable {
 
     /**
      * This method returns the user's first name.
-     *
+     * 
      * @return firstName The user's first name.
      */
     public final String getFirstName() {
@@ -89,7 +89,7 @@ public class User implements Serializable {
 
     /**
      * This method returns the user's last name.
-     *
+     * 
      * @return lastName The user's last name.
      */
     public final String getLastName() {
@@ -98,7 +98,7 @@ public class User implements Serializable {
 
     /**
      * This method returns the user's password.
-     *
+     * 
      * @return password The user's password.
      */
     public final String getPassword() {
@@ -107,7 +107,7 @@ public class User implements Serializable {
 
     /**
      * This method returns the user's email address.
-     *
+     * 
      * @return email The user's email address.
      */
     public final String getEmail() {
@@ -115,8 +115,8 @@ public class User implements Serializable {
     }
 
     /**
-     * This method gets the map of all the accounts
-     * that the user has created.
+     * This method gets the map of all the accounts that the user has created.
+     * 
      * @return The list of finance accounts.
      */
     public final Map<String, FinanceAccount> getFinanceAccountList() {
@@ -125,7 +125,7 @@ public class User implements Serializable {
 
     /**
      * This method allows you to set the user's user name.
-     *
+     * 
      * @param inputUserName
      *            The desired user name for the user.
      */
@@ -135,48 +135,60 @@ public class User implements Serializable {
 
     /**
      * This method allows you to set the user's first name.
-     *
-     * @param firstName
+     * 
+     * @param inputFirstName
      *            The desired first name for the user.
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String inputFirstName) {
+        this.firstName = inputFirstName;
     }
 
     /**
      * This method allows you to set the user's last name.
-     *
-     * @param lastName
+     * 
+     * @param inputLastName
      *            The desired last name for the user.
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String inputLastName) {
+        this.lastName = inputLastName;
     }
 
     /**
      * This method allows you to set the user's password.
-     *
-     * @param password
+     * 
+     * @param inputPassword
      *            The desired password for the user.
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String inputPassword) {
+        this.password = inputPassword;
     }
 
     /**
      * This method allows you to set the user's email account.
-     *
-     * @param email
+     * 
+     * @param inputEmail
      *            The desired email for the user.
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String inputEmail) {
+        this.email = inputEmail;
     }
 
+    /**
+     * This method adds a finance account to the user.
+     * @param accountName
+     *          The name of the account the user wants to add.
+     * @param interest
+     *          The interest rate that the account acrews.
+     */
     public void addFinanceAccount(String accountName, double interest) {
         accountMap.put(accountName, new FinanceAccount(accountName, interest));
     }
-
+    
+    /**
+     * This method removes the finance account.
+     * @param accountName
+     *          The name of the account to remove.
+     */
     public void removeFinanceAccount(String accountName) {
         accountMap.remove(accountName);
     }
@@ -187,6 +199,11 @@ public class User implements Serializable {
                 + email.hashCode();
     }
 
+    /**
+     * This method returns a collection of the accounts.
+     * @return
+     *          A collection of the finance accounts.
+     */
     public Collection<FinanceAccount> getAccounts() {
         return accountMap.values();
     }

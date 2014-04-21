@@ -10,6 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidRegistrationException;
 import cs2340.bobzilla.bobs_wallet.presenter.RegistrationActivityPresenter;
@@ -75,6 +79,12 @@ public class RegistrationActivity extends Activity implements
         emailEditText = (EditText) findViewById(R.id.emailRegistrationEditText);
 
         registrationActivityPresenter = new RegistrationActivityPresenter(this);
+        
+        // Set application id and client key.
+        Parse.initialize(this, "zFAu7f8ISe6ckU2AYWtAfT59NwQe0UWeUOEfmMFs", "ZWhvBgdeRKmUe5wugS8HfmjDXYXTNNSTnULwf6hA");
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
     }
 
     /**

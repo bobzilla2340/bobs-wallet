@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.activites.DatePickerFragment.OnDateChangeListener;
-import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
+import cs2340.bobzilla.bobs_wallet.activites.ReportFragment.ReportType;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidReportCreationException;
 import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
@@ -367,13 +367,13 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
         } else {
             Intent reportActivityIntent = new Intent(UserAccountActivity.this,
                     ReportActivity.class);
-            reportActivityIntent.putExtra(ReportActivity.EXTRA_TYPE,
+            reportActivityIntent.putExtra(ReportFragment.EXTRA_TYPE,
                     mReportType);
-            reportActivityIntent.putExtra(ReportActivity.EXTRA_USERNAME,
+            reportActivityIntent.putExtra(ReportFragment.EXTRA_USERNAME,
                     userName);
-            reportActivityIntent.putExtra(ReportActivity.EXTRA_STARTDATE,
+            reportActivityIntent.putExtra(ReportFragment.EXTRA_STARTDATE,
                     mReportStartDate);
-            reportActivityIntent.putExtra(ReportActivity.EXTRA_ENDDATE,
+            reportActivityIntent.putExtra(ReportFragment.EXTRA_ENDDATE,
                     mReportEndDate);
             startActivity(reportActivityIntent);
         }

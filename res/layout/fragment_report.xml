@@ -8,10 +8,12 @@
         android:id="@+id/report_title" 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Spending Category Report" />
+        android:text="Spending Category Report"
+        android:textSize="22sp" />
    
     <ListView 
 	        android:id="@+id/report_category_list"
+	        android:minHeight="48dp"
 	        android:layout_height="fill_parent"
 	        android:layout_width="fill_parent" />
 

@@ -2,7 +2,7 @@ package cs2340.bobzilla.bobs_wallet.view;
 
 import java.util.Date;
 
-import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
+import cs2340.bobzilla.bobs_wallet.activites.ReportFragment.ReportType;
 
 /**
  * Declares the interface for a report activity.

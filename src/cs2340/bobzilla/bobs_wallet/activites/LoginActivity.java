@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
 import cs2340.bobzilla.bobs_wallet.R;
-import cs2340.bobzilla.bobs_wallet.exceptions.InvalidLoginException;
 import cs2340.bobzilla.bobs_wallet.presenter.LoginActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.LoginActivityView;
 
@@ -89,18 +94,41 @@ public class LoginActivity extends Activity implements LoginActivityView {
      *          method interacts with.
      */
     public void handleUserLogin(View view) {
-        try {
-            loginActivityPresenter.onClick();
-            String userName = getUserName();
-            Intent userAccountActivityIntent = new Intent(LoginActivity.this,
-                    UserAccountActivity.class);
-            userAccountActivityIntent.putExtra(LoginActivity.LOGIN_USER_NAME,
-                    userName);
-            startActivity(userAccountActivityIntent);
-        } catch (InvalidLoginException e) {
-            Toast.makeText(LoginActivity.this,
-                    "Please enter a valid Username or Password!",
-                    Toast.LENGTH_SHORT).show();
-        }
+//        try {
+//            loginActivityPresenter.onClick();
+            final String userName = getUserName();
+            final String password = getPassword();
+            ParseUser.logInInBackground(userName, password, new LogInCallback() {
+                public void done(ParseUser user, ParseException e) {
+                    if (user != null) {
+                        Log.e("LoginActivity", "user is not null");
+                        Intent userAccountActivityIntent = new Intent(LoginActivity.this,
+                                UserAccountActivity.class);
+                        userAccountActivityIntent.putExtra(LoginActivity.LOGIN_USER_NAME,
+                                userName);
+                        startActivity(userAccountActivityIntent);
+
+                    }
+                    else {
+                        // TODO: handle error case.
+                        // TODO: handle current user
+                        Log.e("LoginActivity", "username: " + userName + " password: " + password);
+                        Log.e("LoginActivity", e.getMessage());
+                        switch(e.getCode()) {
+                        case ParseException.USERNAME_MISSING:
+                        case ParseException.PASSWORD_MISSING:
+                        case ParseException.OBJECT_NOT_FOUND:
+                            Toast.makeText(getApplicationContext(), "Please enter a valid Username or Password!", Toast.LENGTH_SHORT).show();
+                        case ParseException.CONNECTION_FAILED:
+                            Toast.makeText(getApplicationContext(), "Please connect to the internet.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+//        } catch (InvalidLoginException e) {
+//            Toast.makeText(LoginActivity.this,
+//                    "Please enter a valid Username or Password!",
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 }

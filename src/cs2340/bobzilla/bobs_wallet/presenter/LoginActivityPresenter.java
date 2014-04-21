@@ -1,5 +1,11 @@
 package cs2340.bobzilla.bobs_wallet.presenter;
 
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidLoginException;
 import cs2340.bobzilla.bobs_wallet.model.LoginVerifier;
 import cs2340.bobzilla.bobs_wallet.model.UserList;
@@ -35,6 +41,25 @@ public class LoginActivityPresenter implements ClickListener {
         String password = loginActivityView.getPassword();
 
         UserList userList = UserListSingleton.getInstance().getUserList();
+        
+//        ParseUser.logInInBackground(userName, password, new LogInCallback() {
+//            public void done(ParseUser user, ParseException e) {
+//                if (user != null) {
+//                    System.out.println("user is not null");
+//                    return;
+//                }
+//                else {
+//                    // TODO: handle error case.
+//                    // TODO: handle current user
+//                    switch(e.getCode()) {
+//                    case USERNAME_MISSING:
+//                    case PASSWORD_MISSING:
+//                    case OBJECT_NOT_FOUND:
+//                        Toast.makeText(getActivity(), "Please enter a valid Username or Password!", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+//        });
 
         if (userName.equals("") || password.equals((""))) {
             throw new InvalidLoginException();

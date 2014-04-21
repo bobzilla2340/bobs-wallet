@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.parse.Parse;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -110,6 +112,8 @@ public class WelcomeActivity extends Activity {
                 startActivity(registerIntent);
             }
         });
+     // Set application id and client key.
+        Parse.initialize(this, "zFAu7f8ISe6ckU2AYWtAfT59NwQe0UWeUOEfmMFs", "ZWhvBgdeRKmUe5wugS8HfmjDXYXTNNSTnULwf6hA");
     }
 
     @Override

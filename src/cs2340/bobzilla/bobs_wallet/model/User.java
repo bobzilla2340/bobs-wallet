@@ -43,6 +43,10 @@ public class User implements Serializable {
      * This keeps a map for all the accounts the user has.
      */
     private HashMap<String, FinanceAccount> accountMap;
+    /**
+     * This string is the object id of the user in the server.
+     */
+    private String parseObjectId;
 
     /**
      * This is the constructor for the user object.
@@ -202,5 +206,12 @@ public class User implements Serializable {
     public Collection<FinanceAccount> getAccounts() {
         return accountMap.values();
     }
-
+    
+    public String getObjectId() {
+        return parseObjectId;
+    }
+    
+    public void setObjectId(String objectId) {
+        parseObjectId = objectId;
+    }
 }

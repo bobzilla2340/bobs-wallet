@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cs2340.bobzilla.bobs_wallet.R;
-import cs2340.bobzilla.bobs_wallet.activites.ReportActivity;
+import cs2340.bobzilla.bobs_wallet.activites.ReportFragment;
 //import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.Transaction;
@@ -76,7 +76,7 @@ public class ReportActivityPresenter {
      */
     private Map<String, Double> getCategoryTotals() {
         Collection<FinanceAccount> accounts = mUser.getAccounts();
-        String[] categories = ((ReportActivity) reportActivityView)
+        String[] categories = ((ReportFragment) reportActivityView)
                 .getResources().getStringArray(R.array.withdrawal_categories);
 
         Map<String, Double> totals = new LinkedHashMap<String, Double>();

@@ -5,10 +5,9 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidRegistrationException;
+import cs2340.bobzilla.bobs_wallet.model.CurrentUser;
 import cs2340.bobzilla.bobs_wallet.model.RegistrationVerifier;
 import cs2340.bobzilla.bobs_wallet.model.User;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.RegistrationActivityView;
 
@@ -44,12 +43,8 @@ public class RegistrationActivityPresenter implements ClickListener {
                 .getPasswordConfirmation();
         String email = registrationActivityView.getEmailAddress();
 
-        UserList userList = UserListSingleton.getInstance().getUserList();
-
-        if (!RegistrationVerifier.isUserNameValid(userList, userName)) {
+        if (!RegistrationVerifier.isUserNameValid(userName)) {
             throw new InvalidRegistrationException("Please enter a user name!");
-        } else if (RegistrationVerifier.isUserNameTaken(userList, userName)) {
-            throw new InvalidRegistrationException("That username is taken!");
         } else if (!RegistrationVerifier.isfirstNameValid(firstName)) {
             throw new InvalidRegistrationException("Please enter a first name!");
         } else if (!RegistrationVerifier.isLastNameValid(lastName)) {
@@ -59,9 +54,9 @@ public class RegistrationActivityPresenter implements ClickListener {
             throw new InvalidRegistrationException(
                     "Password and Confirmation do not match!");
         } else if (!RegistrationVerifier.verifyEmail(email)) {
-            throw new InvalidRegistrationException("Please enter a vaid email!");
+            throw new InvalidRegistrationException("Please enter a valid email!");
         } else {
-            createUser(userList, userName, firstName, lastName, password, email);
+            createUser(userName, firstName, lastName, password, email);
         }
     }
 
@@ -81,28 +76,26 @@ public class RegistrationActivityPresenter implements ClickListener {
      * @param email
      *            the user's email address
      */
-    private void createUser(final UserList userList, final String userName,
-            final String firstName, final String lastName,
-            final String password, final String email) {
-        //TODO: cloud-based everything. No more local storage.
+    private void createUser(String userName,
+            String firstName, String lastName,
+            String password, String email) {
         
-        // Add user to local list
-        User newUser = new User(userName, firstName, lastName, password, email);
-        userList.addUser(newUser);
+        // Creates local user and makes it accessible to the application
+        CurrentUser.createCurrentUser(userName, firstName, lastName, email);
         
         // Add user to cloud
-        createParseUser(newUser);
+        createParseUser(CurrentUser.getCurrentUser(), password);
         
     }
     
-    private void createParseUser(final User localUser) {
+    private void createParseUser(final User localUser, String password) {
         // Create ParseUser object
         final ParseUser user = new ParseUser();
         user.setEmail(localUser.getEmail());
         user.setUsername(localUser.getUserName());
-        user.setPassword(localUser.getPassword());
-        user.put("firstName", localUser.getFirstName());
-        user.put("lastName", localUser.getLastName());
+        user.setPassword(password);
+        user.put(User.parseFirstNameKey, localUser.getFirstName());
+        user.put(User.parseLastNameKey, localUser.getLastName());
         
      // Sign user up in non-blocking manner
         user.signUpInBackground(new SignUpCallback() {

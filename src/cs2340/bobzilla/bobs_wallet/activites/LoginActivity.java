@@ -16,6 +16,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import cs2340.bobzilla.bobs_wallet.R;
+import cs2340.bobzilla.bobs_wallet.model.CurrentUser;
 import cs2340.bobzilla.bobs_wallet.view.LoginActivityView;
 
 /**
@@ -93,6 +94,8 @@ public class LoginActivity extends Activity implements LoginActivityView {
         ParseUser.logInInBackground(userName, password, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
+                    // Create local user
+                    CurrentUser.createCurrentUser();
                     
                     // Start the Account Activity if login is successful
                     startAccountActivity(userName);
@@ -133,7 +136,7 @@ public class LoginActivity extends Activity implements LoginActivityView {
             Toast.makeText(LoginActivity.this, "Please enter a valid Username or Password!", Toast.LENGTH_SHORT).show();
             break;
         case ParseException.CONNECTION_FAILED:
-            Toast.makeText(getApplicationContext(), "Please connect to the internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Please connect to the internet.", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -32,10 +32,6 @@ public class User implements Serializable {
      */
     private String lastName;
     /**
-     * This is the user's password.
-     */
-    private String password;
-    /**
      * This is the user's email address.
      */
     private String email;
@@ -47,6 +43,9 @@ public class User implements Serializable {
      * This string is the object id of the user in the server.
      */
     private String parseObjectId;
+    
+    public static final String parseFirstNameKey = "firstName";
+    public static final String parseLastNameKey = "lastName";
 
     /**
      * This is the constructor for the user object.
@@ -63,12 +62,10 @@ public class User implements Serializable {
      *            The user's email address.
      */
     public User(final String inputUserName, final String inputFirstName,
-            final String inputLastName, final String inputPassword,
-            final String inputEmail) {
+            final String inputLastName, final String inputEmail) {
         this.userName = inputUserName;
         this.firstName = inputFirstName;
         this.lastName = inputLastName;
-        this.password = inputPassword;
         this.email = inputEmail;
         this.accountMap = new HashMap<String, FinanceAccount>();
     }
@@ -98,15 +95,6 @@ public class User implements Serializable {
      */
     public final String getLastName() {
         return lastName;
-    }
-
-    /**
-     * This method returns the user's password.
-     * 
-     * @return password The user's password.
-     */
-    public final String getPassword() {
-        return password;
     }
 
     /**
@@ -155,16 +143,6 @@ public class User implements Serializable {
      */
     public void setLastName(String inputLastName) {
         this.lastName = inputLastName;
-    }
-
-    /**
-     * This method allows you to set the user's password.
-     * 
-     * @param inputPassword
-     *            The desired password for the user.
-     */
-    public void setPassword(String inputPassword) {
-        this.password = inputPassword;
     }
 
     /**

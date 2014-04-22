@@ -3,11 +3,14 @@ package cs2340.bobzilla.bobs_wallet.presenter;
 import java.util.Map;
 import java.util.Set;
 
+import com.parse.ParseObject;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
+
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
+import cs2340.bobzilla.bobs_wallet.model.CurrentUser;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.User;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
@@ -40,36 +43,79 @@ public class UserAccountActivityPresenter implements ClickListener {
      * @return the names of all the user's finance accounts
      */
     public final Set<String> getFinanceAccountNames(final String userName) {
-        UserList userList = UserListSingleton.getInstance().getUserList();
-        User user = userList.getUser(userName);
+        User user = CurrentUser.getCurrentUser();
         Map<String, FinanceAccount> financeAccounts = user
                 .getFinanceAccountList();
         return financeAccounts.keySet();
+//        ParseUser user = ParseUser.getCurrentUser();
+//        ParseRelation<ParseObject> relation = user.getRelation("accounts");
+//        relation.getQuery().findInBackground(new FindCallback<ParseObject>() {
+//            public void done(List<ParseObject> results, ParseException e) {
+//                if (e != null) {
+//                    
+//                }
+//                else {
+//                    // TODO: handle error cases
+//                }
+//            }
+//        });
     }
 
     @Override
     public final void onClick() throws InvalidAccountCreationException {
-        String account = userAccountActivityView.getAccountName();
+        // Get user input values
+        String accountName = userAccountActivityView.getAccountName();
         String interestRate = userAccountActivityView.getInterestRate();
         String userName = userAccountActivityView.getUserName();
 
-        UserList userList = UserListSingleton.getInstance().getUserList();
-        User user = userList.getUser(userName);
-
-        double interest;
-        if (account.equals("")) {
-            throw new InvalidAccountCreationException(
-                    "Please enter a valid account name!");
-        } else if (interestRate.equals("")) {
-            throw new InvalidAccountCreationException(
-                    "Please enter a valid interest rate!");
-        } else if (Double.parseDouble(interestRate) <= 0) {
-            throw new InvalidAccountCreationException(
-                    "Please enter a valid interest rate!");
-        } else {
-            interest = Double.parseDouble(interestRate);
-            user.addFinanceAccount(account, interest);
-        }
+//        UserList userList = UserListSingleton.getInstance().getUserList();
+//        User user = userList.getUser(userName);
+//
+//        double interest;
+//        if (account.equals("")) {
+//            throw new InvalidAccountCreationException(
+//                    "Please enter a valid account name!");
+//        } else if (interestRate.equals("")) {
+//            throw new InvalidAccountCreationException(
+//                    "Please enter a valid interest rate!");
+//        } else if (Double.parseDouble(interestRate) <= 0) {
+//            throw new InvalidAccountCreationException(
+//                    "Please enter a valid interest rate!");
+//        } else {
+//            interest = Double.parseDouble(interestRate);
+//            user.addFinanceAccount(account, interest);
+//        }
+        ParseObject account = createParseAccount(accountName, interestRate, userName);
+        ParseUser user = ParseUser.getCurrentUser();
+        addAccountToUser(user, account);
+        user.saveInBackground();
     }
-
+    
+    
+    private ParseObject createParseAccount(String accountName, String interestRate, String userName) {
+        // Create the account with default parameters
+        ParseObject account = new ParseObject("account");
+        account.put("Balance", 0);
+        //TODO: Do I have to make withdrawals, deposits, transactions now?
+        
+        // Set given parameters
+        account.put("name", accountName);
+        account.put("interest rate", interestRate);
+        account.put("user username", userName);
+        
+        return account;
+    }
+    
+    private void addAccountToUser(ParseUser user, ParseObject account) {
+        ParseRelation<ParseObject> relation = user.getRelation("accounts");
+        relation.add(account);
+    }
+    
+//    private Set<String> getAccountNames(List<ParseObject> accounts) {
+//        
+//        for (ParseObject account: accounts) {
+//            
+//        }
+//    }
+    
 }

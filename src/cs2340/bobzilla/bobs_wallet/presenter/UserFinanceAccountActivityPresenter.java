@@ -3,13 +3,13 @@ package cs2340.bobzilla.bobs_wallet.presenter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
+
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidTransactionCreationException;
+import cs2340.bobzilla.bobs_wallet.model.CurrentUser;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.Transaction;
 import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 import cs2340.bobzilla.bobs_wallet.model.User;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ClickListener;
 import cs2340.bobzilla.bobs_wallet.view.UserFinanceAccountActivityView;
 
@@ -59,8 +59,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
         String transactionAmount = view.getTransactionAmount();
         double amountNum = Double.parseDouble(transactionAmount);
         String userName = view.getUsername();
-        User user = UserListSingleton.getInstance().getUserList()
-                .getUser(userName);
+        User user = CurrentUser.getCurrentUser();
         String category = view.getCategory();
         TransactionType type = view.getTransactionType();
 
@@ -90,8 +89,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
     public final ArrayList<String> getFormattedTransactions(
             final String userName, final String financeAccountName) {
 
-        UserList userList = UserListSingleton.getInstance().getUserList();
-        User user = userList.getUser(userName);
+        User user = CurrentUser.getCurrentUser();
         Map<String, FinanceAccount> financeAccounts = user
                 .getFinanceAccountList();
         FinanceAccount account = financeAccounts.get(financeAccountName);
@@ -124,8 +122,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
      */
     public final String getFormattedCurrentAccountBalance(
             final String accountName) {
-        User user = UserListSingleton.getInstance().getUserList()
-                .getUser(view.getUsername());
+        User user = CurrentUser.getCurrentUser();
         return df.format(user.getFinanceAccountList().get(accountName)
                 .getCurrentBalance());
     }

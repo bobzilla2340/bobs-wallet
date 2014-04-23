@@ -40,7 +40,12 @@ public class FinanceAccount implements Serializable {
      * List of transactions.
      */
     private ArrayList<Transaction> transactions;
-
+    
+    public static final String PARSE_ACCOUNT_NAME_KEY = "name";
+    public static final String PARSE_BALANCE_KEY = "balance";
+    public static final String PARSE_INTEREST_RATE_KEY = "interest_rate";
+    public static final String PARSE_ASSOCIATED_USER_USERNAME = "user_username";
+    
     /**
      * Constructs a FinanceAccount with an accountName and an interest rate.
      * 

@@ -46,6 +46,7 @@ public class User implements Serializable {
     
     public static final String parseFirstNameKey = "firstName";
     public static final String parseLastNameKey = "lastName";
+    public static final String parseAccountsKey = "accounts";
 
     /**
      * This is the constructor for the user object.
@@ -166,6 +167,10 @@ public class User implements Serializable {
         accountMap.put(accountName, new FinanceAccount(accountName, interest));
     }
     
+    public void addExistingFinanceAccount(FinanceAccount account) {
+        accountMap.put(account.getAccountName(), account);
+    }
+    
     /**
      * This method removes the finance account.
      * @param accountName
@@ -191,5 +196,9 @@ public class User implements Serializable {
     
     public void setObjectId(String objectId) {
         parseObjectId = objectId;
+    }
+    
+    public void setAccounts(Map<String, FinanceAccount> accounts) {
+        accountMap = (HashMap<String, FinanceAccount>) accounts;
     }
 }

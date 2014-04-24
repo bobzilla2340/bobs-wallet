@@ -42,6 +42,13 @@ public class Transaction implements Serializable {
      * The transaction category.
      */
     private String mCategory;
+    
+    public static final String PARSE_AMOUNT_KEY = "amount";
+    public static final String PARSE_TRANSACTION_TYPE_KEY = "transaction_type";
+    public static final String PARSE_DATE_KEY = "date";
+    public static final String PARSE_CATEGORY_KEY = "category";
+    public static final String PARSE_ASSOCIATED_ACCOUNT_NAME_KEY = "account_name";
+    public static final String PARSE_ASSOCIATED_USER_KEY = "user";
 
     /**
      * Creates a Transaction object given an amount, a type, and a category.

@@ -115,6 +115,10 @@ public class User implements Serializable {
     public final Map<String, FinanceAccount> getFinanceAccountList() {
         return accountMap;
     }
+    
+    public FinanceAccount getAccount(String accountName) {
+        return accountMap.get(accountName);
+    }
 
     /**
      * This method allows you to set the user's user name.

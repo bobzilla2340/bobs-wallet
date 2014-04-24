@@ -12,7 +12,6 @@ import com.parse.ParseObject;
 
 public class ParseAccountHelper {
     public static void addParseAccountsToUser(List<ParseObject> parseAccounts) {
-//        HashMap<String, FinanceAccount> accounts = new HashMap<String, FinanceAccount>();
         FinanceAccount account;
         String accountName;
         User user = CurrentUser.getCurrentUser();
@@ -23,11 +22,9 @@ public class ParseAccountHelper {
         for (ParseObject parseAccount : parseAccounts) {
             accountName = parseAccount.getString(FinanceAccount.PARSE_ACCOUNT_NAME_KEY);
             account = transformToFinanceAccount(parseAccount);
-            user.addExistingFinanceAccount(account);
-//            accounts.put(accountName, account);        
+            user.addExistingFinanceAccount(account);    
         }
         
-//        return accounts;
     }
     
     private static FinanceAccount transformToFinanceAccount(ParseObject parseAccount) {
@@ -39,8 +36,21 @@ public class ParseAccountHelper {
         FinanceAccount account = new FinanceAccount(accountName, interestRate);
         account.setCurrentBalance(balance);
         
-        // TODO: Transactions
+        // Transactions loaded from server when accounts were retrieved.
+        // 
+        // Get transaction object IDs
+        
+        // Load transactions from server
         
         return account;
     }
+    
+//    private static void addParseTransactionsToFinanceAccount() {
+//        
+//    }
+//    
+//    private static Map<String, Transaction> transformToTransactions(List<ParseObject> parseTransactions) {
+//        // retrieve the values from parse objects
+//        
+//    }
 }

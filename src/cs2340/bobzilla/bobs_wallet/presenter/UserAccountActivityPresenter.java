@@ -34,6 +34,8 @@ public class UserAccountActivityPresenter implements ClickListener {
      * This is the view that is tied to this activity.
      */
     private UserAccountActivityView userAccountActivityView;
+    
+    public static final String TAG = "UserAccountActivityPresenter";
 
     /**
      * Constructs a UserAccountActivityPresenter for the corresponding view.
@@ -54,6 +56,7 @@ public class UserAccountActivityPresenter implements ClickListener {
      */
     public final Set<String> getFinanceAccountNames(final String userName) {
         User user = CurrentUser.getCurrentUser();
+        Log.d(TAG, "user is :" + user);
         Map<String, FinanceAccount> financeAccounts = user
                 .getFinanceAccountList();
         Log.i("UserAccountPresenter", financeAccounts.toString());
@@ -92,8 +95,9 @@ public class UserAccountActivityPresenter implements ClickListener {
         } else {
             interest = Double.parseDouble(interestRate);
         }
-        final ParseUser user = ParseUser.getCurrentUser();
-        final ParseObject account = createParseAccount(accountName, interest, userName);
+        
+        ParseUser user = ParseUser.getCurrentUser();
+        ParseObject account = createParseAccount(accountName, interest, userName);
         addAccountToUser(account);
         user.saveInBackground(new SaveCallback() {
 
@@ -101,6 +105,7 @@ public class UserAccountActivityPresenter implements ClickListener {
             public void done(ParseException e) {
                 // TODO Auto-generated method stub
                 if (e == null) {
+                    // If successful save on server, add to local user
                     CurrentUser.getCurrentUser().addFinanceAccount(accountName, interest);
                 }
                 else {
@@ -119,12 +124,15 @@ public class UserAccountActivityPresenter implements ClickListener {
         // Create the account with default parameters
         ParseObject account = new ParseObject("Account");
         account.put(FinanceAccount.PARSE_BALANCE_KEY, 0);
-        //TODO: Do I have to make withdrawals, deposits, transactions now?
         
         // Set given parameters
         account.put(FinanceAccount.PARSE_ACCOUNT_NAME_KEY, accountName);
         account.put(FinanceAccount.PARSE_INTEREST_RATE_KEY, interestRate);
         account.put(FinanceAccount.PARSE_ASSOCIATED_USER_USERNAME, userName);
+        
+        // Add empty transactions list
+        ArrayList<ParseObject> transactions = new ArrayList<ParseObject>();
+        account.put(FinanceAccount.PARSE_TRANSACTIONS_KEY, transactions);
         
         return account;
     }
@@ -152,6 +160,7 @@ public class UserAccountActivityPresenter implements ClickListener {
         // Get accounts from Parse
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Account");
         query.whereEqualTo(FinanceAccount.PARSE_ASSOCIATED_USER_USERNAME, user.getUserName());
+        query.include(FinanceAccount.PARSE_TRANSACTIONS_KEY);
         query.findInBackground(new FindCallback<ParseObject>() {
 
             @Override

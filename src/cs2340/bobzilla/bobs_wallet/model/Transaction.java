@@ -102,4 +102,8 @@ public class Transaction implements Serializable {
     public String getCategory() {
         return mCategory;
     }
+    
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

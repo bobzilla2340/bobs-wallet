@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import android.util.Log;
-
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -16,6 +14,7 @@ import com.parse.ParseUser;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidTransactionCreationException;
 import cs2340.bobzilla.bobs_wallet.model.CurrentUser;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
+import cs2340.bobzilla.bobs_wallet.model.ParseAccountHelper;
 import cs2340.bobzilla.bobs_wallet.model.Transaction;
 import cs2340.bobzilla.bobs_wallet.model.TransactionType;
 import cs2340.bobzilla.bobs_wallet.model.User;
@@ -147,7 +146,7 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
         transactions.add(parseTransaction);
         
         // Change current balance
-        TransactionType type = getParseTransactionType(parseTransaction);
+        TransactionType type = ParseAccountHelper.getParseTransactionType(parseTransaction);
         double amount = parseTransaction.getDouble(Transaction.PARSE_AMOUNT_KEY);
         
         switch(type) {
@@ -161,10 +160,6 @@ public class UserFinanceAccountActivityPresenter implements ClickListener {
         
         parseAccount.saveInBackground();
         
-    }
-    
-    private TransactionType getParseTransactionType(ParseObject transaction) {
-        return TransactionType.valueOf(transaction.getString(Transaction.PARSE_TRANSACTION_TYPE_KEY));
     }
 
     /**

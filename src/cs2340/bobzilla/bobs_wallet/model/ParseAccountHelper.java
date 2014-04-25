@@ -13,8 +13,6 @@ public class ParseAccountHelper {
         String accountName;
         User user = CurrentUser.getCurrentUser();
         
-        Log.i("ParseAccountHelper", parseAccounts.toString() + FinanceAccount.PARSE_ACCOUNT_NAME_KEY);
-        
         // Add each account in the parseAccounts list to the hashmap
         for (ParseObject parseAccount : parseAccounts) {
             accountName = parseAccount.getString(FinanceAccount.PARSE_ACCOUNT_NAME_KEY);
@@ -31,7 +29,6 @@ public class ParseAccountHelper {
         double balance = parseAccount.getDouble(FinanceAccount.PARSE_BALANCE_KEY);
         
         FinanceAccount account = new FinanceAccount(accountName, interestRate);
-//        account.setCurrentBalance(balance); Adding transactions should set correct balance
         
         // Add transactions to account
         // Note: Transactions loaded from server when accounts were retrieved.

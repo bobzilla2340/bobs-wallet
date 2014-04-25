@@ -61,18 +61,6 @@ public class UserAccountActivityPresenter implements ClickListener {
                 .getFinanceAccountList();
         Log.i("UserAccountPresenter", financeAccounts.toString());
         return financeAccounts.keySet();
-//        ParseUser user = ParseUser.getCurrentUser();
-//        ParseRelation<ParseObject> relation = user.getRelation("accounts");
-//        relation.getQuery().findInBackground(new FindCallback<ParseObject>() {
-//            public void done(List<ParseObject> results, ParseException e) {
-//                if (e != null) {
-//                    
-//                }
-//                else {
-//                    // TODO: handle error cases
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -103,13 +91,12 @@ public class UserAccountActivityPresenter implements ClickListener {
 
             @Override
             public void done(ParseException e) {
-                // TODO Auto-generated method stub
                 if (e == null) {
                     // If successful save on server, add to local user
                     CurrentUser.getCurrentUser().addFinanceAccount(accountName, interest);
                 }
                 else {
-                    Log.i("AccountActivityPresenter", e.getCode() + ": " + e.getMessage());
+                    Log.i(TAG, e.getCode() + ": " + e.getMessage());
                 }
             }
             
@@ -142,11 +129,9 @@ public class UserAccountActivityPresenter implements ClickListener {
         ArrayList<ParseObject> accounts;
         if (CurrentUser.getCurrentUser().getAccounts().isEmpty()) {
             accounts = new ArrayList<ParseObject>();
-            Log.i("AccountActivityPresenter", "new arraylist of accounts created.");
         }
         else {
             accounts = (ArrayList<ParseObject>) user.get(User.parseAccountsKey);
-            Log.i("AccountActivityPresenter", "accounts retrieved.");
         }
         
         accounts.add(account);
@@ -173,11 +158,9 @@ public class UserAccountActivityPresenter implements ClickListener {
                             .getFinanceAccountList().keySet()) {
                         adapter.add(account);
                     }
-//                    Log.i("UserAccountActivityPresenter", accounts.toString());
-//                    user.setAccounts(accounts);
                 }
                 else {
-                    Log.e("UserAccountActivityPresenter", e.getCode() + ": " + e.getMessage());
+                    Log.e(TAG, e.getCode() + ": " + e.getMessage());
                 }
                 
             }

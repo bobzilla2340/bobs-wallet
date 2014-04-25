@@ -32,10 +32,6 @@ public class User implements Serializable {
      */
     private String lastName;
     /**
-     * This is the user's password.
-     */
-    private String password;
-    /**
      * This is the user's email address.
      */
     private String email;
@@ -43,6 +39,14 @@ public class User implements Serializable {
      * This keeps a map for all the accounts the user has.
      */
     private HashMap<String, FinanceAccount> accountMap;
+    /**
+     * This string is the object id of the user in the server.
+     */
+    private String parseObjectId;
+    
+    public static final String parseFirstNameKey = "firstName";
+    public static final String parseLastNameKey = "lastName";
+    public static final String parseAccountsKey = "accounts";
 
     /**
      * This is the constructor for the user object.
@@ -59,12 +63,10 @@ public class User implements Serializable {
      *            The user's email address.
      */
     public User(final String inputUserName, final String inputFirstName,
-            final String inputLastName, final String inputPassword,
-            final String inputEmail) {
+            final String inputLastName, final String inputEmail) {
         this.userName = inputUserName;
         this.firstName = inputFirstName;
         this.lastName = inputLastName;
-        this.password = inputPassword;
         this.email = inputEmail;
         this.accountMap = new HashMap<String, FinanceAccount>();
     }
@@ -97,15 +99,6 @@ public class User implements Serializable {
     }
 
     /**
-     * This method returns the user's password.
-     * 
-     * @return password The user's password.
-     */
-    public final String getPassword() {
-        return password;
-    }
-
-    /**
      * This method returns the user's email address.
      * 
      * @return email The user's email address.
@@ -121,6 +114,10 @@ public class User implements Serializable {
      */
     public final Map<String, FinanceAccount> getFinanceAccountList() {
         return accountMap;
+    }
+    
+    public FinanceAccount getAccount(String accountName) {
+        return accountMap.get(accountName);
     }
 
     /**
@@ -154,16 +151,6 @@ public class User implements Serializable {
     }
 
     /**
-     * This method allows you to set the user's password.
-     * 
-     * @param inputPassword
-     *            The desired password for the user.
-     */
-    public void setPassword(String inputPassword) {
-        this.password = inputPassword;
-    }
-
-    /**
      * This method allows you to set the user's email account.
      * 
      * @param inputEmail
@@ -184,6 +171,10 @@ public class User implements Serializable {
         accountMap.put(accountName, new FinanceAccount(accountName, interest));
     }
     
+    public void addExistingFinanceAccount(FinanceAccount account) {
+        accountMap.put(account.getAccountName(), account);
+    }
+    
     /**
      * This method removes the finance account.
      * @param accountName
@@ -202,5 +193,16 @@ public class User implements Serializable {
     public Collection<FinanceAccount> getAccounts() {
         return accountMap.values();
     }
-
+    
+    public String getObjectId() {
+        return parseObjectId;
+    }
+    
+    public void setObjectId(String objectId) {
+        parseObjectId = objectId;
+    }
+    
+    public void setAccounts(Map<String, FinanceAccount> accounts) {
+        accountMap = (HashMap<String, FinanceAccount>) accounts;
+    }
 }

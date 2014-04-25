@@ -14,11 +14,11 @@ import java.util.Set;
 
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.activites.ReportFragment;
+import cs2340.bobzilla.bobs_wallet.model.CurrentUser;
 //import cs2340.bobzilla.bobs_wallet.activites.ReportActivity.ReportType;
 import cs2340.bobzilla.bobs_wallet.model.FinanceAccount;
 import cs2340.bobzilla.bobs_wallet.model.Transaction;
 import cs2340.bobzilla.bobs_wallet.model.User;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.view.ReportActivityView;
 
 /**
@@ -64,8 +64,7 @@ public class ReportActivityPresenter {
         // mReportType = reportActivityView.getReportType();
         mStartDate = reportActivityView.getStartDate();
         mEndDate = reportActivityView.getEndDate();
-        mUser = UserListSingleton.getInstance().getUserList()
-                .getUser(mUserName);
+        mUser = CurrentUser.getCurrentUser();
     }
 
     /**

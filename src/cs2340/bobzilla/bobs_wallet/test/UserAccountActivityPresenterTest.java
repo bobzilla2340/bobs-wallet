@@ -2,9 +2,6 @@ package cs2340.bobzilla.bobs_wallet.test;
 
 import junit.framework.TestCase;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
-import cs2340.bobzilla.bobs_wallet.model.User;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
 
@@ -17,10 +14,6 @@ import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
  */
 public class UserAccountActivityPresenterTest extends TestCase {
 
-    /**
-     * This is the link to the singleton.
-     */
-    private UserListSingleton userListSingleton;
     /**
      * View test case 1.
      */
@@ -72,7 +65,6 @@ public class UserAccountActivityPresenterTest extends TestCase {
 
     @Override
     public void setUp() {
-        userListSingleton = UserListSingleton.getInstance();
         view0 = new UserAccountActivityMock(userName, "", "5");
         view1 = new UserAccountActivityMock(userName, "empty", "");
         view2 = new UserAccountActivityMock(userName, accountName, "-1000");
@@ -84,10 +76,9 @@ public class UserAccountActivityPresenterTest extends TestCase {
         presenter3 = new UserAccountActivityPresenter(view3);
         presenter4 = new UserAccountActivityPresenter(view4);
 
-        UserList list = userListSingleton.getUserList();
-        User user1 = new User(userName, "julia", "ting", "12345",
-                "julia.ting@gatech.edu");
-        list.addUser(user1);
+//        User user1 = new User(userName, "julia", "ting", "12345",
+//                "julia.ting@gatech.edu");
+//        list.addUser(user1);
     }
 
     /**
@@ -167,7 +158,6 @@ public class UserAccountActivityPresenterTest extends TestCase {
         presenter2 = null;
         presenter3 = null;
         presenter4 = null;
-        userListSingleton = null;
     }
 
     /**

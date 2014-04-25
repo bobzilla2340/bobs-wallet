@@ -40,7 +40,13 @@ public class FinanceAccount implements Serializable {
      * List of transactions.
      */
     private ArrayList<Transaction> transactions;
-
+    
+    public static final String PARSE_ACCOUNT_NAME_KEY = "name";
+    public static final String PARSE_BALANCE_KEY = "balance";
+    public static final String PARSE_INTEREST_RATE_KEY = "interest_rate";
+    public static final String PARSE_ASSOCIATED_USER_USERNAME = "user_username";
+    public static final String PARSE_TRANSACTIONS_KEY = "transactions";
+    
     /**
      * Constructs a FinanceAccount with an accountName and an interest rate.
      * 
@@ -112,8 +118,24 @@ public class FinanceAccount implements Serializable {
             case WITHDRAWAL:
                 addWithdrawal(amount, category);
                 setCurrentBalance(this.currentBalance - amount);
+                break;
         }
 
+    }
+    
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+        
+        switch(transaction.getTransactionType()) {
+        case DEPOSIT:
+            addDeposit(transaction);
+            setCurrentBalance(this.currentBalance + transaction.getAmount());
+            break;
+        case WITHDRAWAL:
+            addWithdrawal(transaction);
+            setCurrentBalance(this.currentBalance - transaction.getAmount());
+            break;
+        }
     }
 
     /**
@@ -128,7 +150,11 @@ public class FinanceAccount implements Serializable {
         withdrawals.add(new Transaction(amount, TransactionType.WITHDRAWAL,
                 category));
     }
-
+    
+    private void addWithdrawal(Transaction withdrawal) {
+        withdrawals.add(withdrawal);
+    }
+    
     /**
      * Adds a deposit to the deposit list given an amount and category.
      * 
@@ -139,6 +165,10 @@ public class FinanceAccount implements Serializable {
      */
     private void addDeposit(double amount, String category) {
         deposits.add(new Transaction(amount, TransactionType.DEPOSIT, category));
+    }
+    
+    private void addDeposit(Transaction deposit) {
+        deposits.add(deposit);
     }
 
     /**

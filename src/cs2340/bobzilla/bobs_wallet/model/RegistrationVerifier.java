@@ -17,21 +17,8 @@ public class RegistrationVerifier {
      *          The user name to search for.
      * @return true if the user name is valid, false if otherwise
      */
-    public static boolean isUserNameValid(UserList userList, String userName) {
+    public static boolean isUserNameValid(String userName) {
         return !userName.equals("");
-    }
-
-    /**
-     * Ensures the entered user name is not already taken as a username.
-     * 
-     * @param userList
-     *          The list of users.
-     * @param userName
-     *          The user to search for.
-     * @return true if userName is taken, false if otherwise
-     */
-    public static boolean isUserNameTaken(UserList userList, String userName) {
-        return userList.isInUserListByUserName(userName);
     }
 
     /**

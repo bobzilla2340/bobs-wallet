@@ -1,24 +1,17 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.parse.Parse;
+
 import cs2340.bobzilla.bobs_wallet.R;
-import cs2340.bobzilla.bobs_wallet.model.User;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 
 /**
  * This is the first screen that the user encounters when
@@ -35,55 +28,12 @@ public class WelcomeActivity extends Activity {
      * This button takes the user to the registration screen.
      */
     private Button mRegisterButton;
-    /**
-     * This is the admin string.
-     */
-    private String adminString = "admin";
-    /**
-     * This is the log message type.
-     */
-    private String onCreateMessage = "in on create";
-    /**
-     * This is the on pause message.
-     */
-    private String onPauseMessage = "in on pause";
-    /**
-     * The save file of the appliaction.
-     */
-    private String saveFile = "save.ser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         mSigninButton = (Button) findViewById(R.id.loginButtonWelcomeActivity);
-
-        UserList list = UserListSingleton.getInstance().getUserList();
-        User admin = new User(adminString, adminString, adminString, "pass123",
-                "user@verylolz.com");
-        list.addUser(admin);
-
-        // // Read in the user list ////
-        try {
-            Log.e(onCreateMessage, "trying to load in object");
-            FileInputStream fileIn = this.getApplicationContext()
-                    .openFileInput(saveFile);
-            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-            UserList serialized = (UserList) objectIn.readObject();
-            objectIn.close();
-            fileIn.close();
-            for (User u : serialized.getUserSet()) {
-                if (!u.getFirstName().equals(adminString)) {
-                    list.addUser(u);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            Log.e(onCreateMessage, "getting exception when I load in object");
-        } catch (IOException e) {
-            Log.e(onCreateMessage, "got an error performing IO");
-        } catch (ClassNotFoundException e) {
-            Log.e(onCreateMessage, "got an error creating the class");
-        }
 
         mSigninButton.setOnClickListener(new View.OnClickListener() {
 
@@ -93,7 +43,6 @@ public class WelcomeActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
                 Intent loginIntent = new Intent(WelcomeActivity.this,
                         LoginActivity.class);
-                // loginIntent.putExtra(USER_LIST_MESSAGE, userList);
                 startActivity(loginIntent);
             }
         });
@@ -110,30 +59,20 @@ public class WelcomeActivity extends Activity {
                 startActivity(registerIntent);
             }
         });
+        
+        // Set application id and client key.
+        // Had to wrap it as an AsyncTask, because re-initializing Parse
+        // causes a NetworkOnMainThreadException - hopefully will be fixed by Parse
+        // in the future.
+        new initializeParseTask().execute(this);
+        
     }
+    private class initializeParseTask extends AsyncTask<Context, Void, Void> {
 
-    @Override
-    protected void onPause() {
-        // // Save the user list ////
-        super.onDestroy();
-        UserList list = UserListSingleton.getInstance().getUserList();
-
-        FileOutputStream fileOut;
-        ObjectOutputStream objectOut;
-
-        try {
-            Log.e(onPauseMessage, "trying to save object");
-            fileOut = this.getApplicationContext().openFileOutput(saveFile,
-                    Context.MODE_PRIVATE);
-            objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(list);
-            objectOut.close();
-            fileOut.close();
-        } catch (FileNotFoundException e) {
-            Log.e(onPauseMessage,
-                    "got an exception when trying to save" + e.toString());
-        } catch (IOException e) {
-            Log.e(onPauseMessage, "got an exception with IO");
+        @Override
+        protected Void doInBackground(Context... params) {
+            Parse.initialize(params[0], "zFAu7f8ISe6ckU2AYWtAfT59NwQe0UWeUOEfmMFs", "ZWhvBgdeRKmUe5wugS8HfmjDXYXTNNSTnULwf6hA");
+            return null;
         }
 
     }

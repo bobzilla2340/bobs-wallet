@@ -2,9 +2,6 @@ package cs2340.bobzilla.bobs_wallet.test;
 
 import junit.framework.TestCase;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidLoginException;
-import cs2340.bobzilla.bobs_wallet.model.User;
-import cs2340.bobzilla.bobs_wallet.model.UserList;
-import cs2340.bobzilla.bobs_wallet.model.UserListSingleton;
 import cs2340.bobzilla.bobs_wallet.presenter.LoginActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.LoginActivityView;
 
@@ -16,10 +13,6 @@ import cs2340.bobzilla.bobs_wallet.view.LoginActivityView;
  */
 public class LoginPresenterTest extends TestCase {
 
-    /**
-     * The singleton that is used in this test.
-     */
-    private UserListSingleton userListSingleton;
     /**
      * Test view 1.
      */
@@ -83,7 +76,6 @@ public class LoginPresenterTest extends TestCase {
 
     @Override
     public void setUp() {
-        userListSingleton = UserListSingleton.getInstance();
         view0 = new LoginActivityMock("", "");
         view1 = new LoginActivityMock(username1, "1234");
         view2 = new LoginActivityMock(username2, password1);
@@ -95,16 +87,15 @@ public class LoginPresenterTest extends TestCase {
         presenter3 = new LoginActivityPresenter(view3);
         presenter4 = new LoginActivityPresenter(view4);
 
-        UserList list = userListSingleton.getUserList();
-        User user1 = new User(username1, username1, "paladugu", "12345",
-                "spaladugu3@gatech.edu");
-        User user2 = new User("lumberjack", username2, "jack", password1,
-                "lumberjack@tree.com");
-        User user3 = new User(username4, username4, username4, username4,
-                "awesome@awesome.com");
-        list.addUser(user1);
-        list.addUser(user2);
-        list.addUser(user3);
+//        User user1 = new User(username1, username1, "paladugu", "12345",
+//                "spaladugu3@gatech.edu");
+//        User user2 = new User("lumberjack", username2, "jack", password1,
+//                "lumberjack@tree.com");
+//        User user3 = new User(username4, username4, username4, username4,
+//                "awesome@awesome.com");
+//        list.addUser(user1);
+//        list.addUser(user2);
+//        list.addUser(user3);
     }
 
     /**
@@ -179,7 +170,6 @@ public class LoginPresenterTest extends TestCase {
         presenter2 = null;
         presenter3 = null;
         presenter4 = null;
-        userListSingleton = null;
     }
 
     /**

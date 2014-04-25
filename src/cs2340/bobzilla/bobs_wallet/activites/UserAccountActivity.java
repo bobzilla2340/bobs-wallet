@@ -1,5 +1,6 @@
 package cs2340.bobzilla.bobs_wallet.activites;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.annotation.TargetApi;
@@ -24,11 +25,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
 import cs2340.bobzilla.bobs_wallet.R;
 import cs2340.bobzilla.bobs_wallet.activites.DatePickerFragment.OnDateChangeListener;
 import cs2340.bobzilla.bobs_wallet.activites.ReportFragment.ReportType;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidAccountCreationException;
 import cs2340.bobzilla.bobs_wallet.exceptions.InvalidReportCreationException;
+import cs2340.bobzilla.bobs_wallet.model.User;
 import cs2340.bobzilla.bobs_wallet.presenter.ReportActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.presenter.UserAccountActivityPresenter;
 import cs2340.bobzilla.bobs_wallet.view.UserAccountActivityView;
@@ -119,7 +125,7 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
         welcomeTextView = (TextView) findViewById(R.id.userAccountWelcomeMessage);
         listView = (ListView) findViewById(R.id.userFinanceAccountList);
         welcomeTextView.append(" " + userName + "!");
-
+        
         arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 R.layout.user_finance_account_list_text_view);
         listView.setAdapter(arrayAdapter);
@@ -129,10 +135,11 @@ public class UserAccountActivity extends FragmentActivity implements UserAccount
         Log.e("in user account activity", "size of account set is "
                 + userAccountActivityPresenter.getFinanceAccountNames(userName)
                         .size());
-        for (String account : userAccountActivityPresenter
-                .getFinanceAccountNames(userName)) {
-            arrayAdapter.add(account);
-        }
+        
+        // Get accounts of user from Parse and set them to local user
+        userAccountActivityPresenter.loadAccountsFromParse(arrayAdapter);
+        
+        // Set accounts from Parse to local user's accounts.
 
         listView.setOnItemClickListener(new ListViewClickListener());
     }
